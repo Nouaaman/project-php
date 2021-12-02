@@ -1,0 +1,21 @@
+{
+    "name": "boris/framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boris CERATI",
+            "email": "contact@boris-cerati.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Core",
+            "App\\": "src/App"
+        }
+    },
+    "require": {
+        "nikic/fast-route": "^1.3",
+        "twig/twig": "^3.0"
+    }
+}

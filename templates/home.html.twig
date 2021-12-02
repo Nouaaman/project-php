@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+        <h1>Bonjour {{ firstName }}</h1>
+
+        <ul>
+                {% for i in 1..loopUntil %}
+                        <li>{{ i }}</li>
+                {% endfor %}
+        </ul>
+
+        <ul>
+                {% for user in users %}
+                        <li>{{ user }}</li>
+                {% else %}
+                    <li>Aucun users</li>
+                {% endfor %}
+        </ul>
+{% endblock %}
+

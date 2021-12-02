@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <title>{% block title %}Mon Micro Framework{% endblock %}</title>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/assets/css/app.css" />
+
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+    {% block bottom_js %}{% endblock %}
+</body>
+</html>
