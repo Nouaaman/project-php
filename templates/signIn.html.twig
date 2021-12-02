@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet/less" href="../public/assets/css/sign.less">
+
+    <title>Sign In | Sign Up</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="sign-in">
+                <div class="form-container">
+                    <form action="">
+                        <h2>Connexion</h2>
+                        <div class="field">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username">
+                        </div>
+                        <div class="field">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+                        <div class="buttons">
+                            <input type="submit" value="Se connecter" class="btn fill">
+                            <a class="btn outline toggle">S'inscrire</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="img-container">
+                    <img src="assets/login.png" alt="">
+                </div>
+            </div>
+
+            <div class="sign-up">
+                <div class="img-container">
+                    <img src="assets/signup.png" alt="">
+                </div>
+                <div class="form-container">
+                    <form action="">
+                        <h2>Creer un compte</h2>
+                        <div class="field">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="field">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+                        <div class="field">
+                            <label for="passwordConfirmation">Confirmer mot de passe</label>
+                            <input type="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation">
+                        </div>
+                        <div class="buttons">
+                            <a  class="btn outline toggle">Se connecter</a>
+                            <input class="btn fill" type="submit" value="S'inscrire">
+                            
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="back">
+                <a href="index.html"><img src="assets/back-100.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
+    <script>
+        console.log(document.querySelectorAll('.toggle'))
+        document.querySelectorAll('a.toggle').forEach(
+            element => {
+                element.addEventListener('click', toggle)
+            }
+        )
+
+        function toggle() {
+            document.querySelector('.content').classList.toggle('signing-up')
+        }
+    </script>
+</body>
+
+</html>
