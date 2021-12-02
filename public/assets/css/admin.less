@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin : 0;
+    padding: 0;
+}
+body{
+    background-image: url('/assets/image_processing20201203-22790-sed99q.png');
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;    
+    font-family: 'Roboto', sans-serif;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.allpage{
+    display: flex;
+}
+.sidebar{
+    height: 100vh;
+    width: 20%;
+    background-color: rgb(255, 255, 255);
+    .back {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        z-index: 5;
+        width: 42px;
+        height: 42px;
+        
+        img {
+            height: 100%;
+            width: 100%;
+            
+        }
+    }
+    .admin{
+        display: flex;
+        margin-left: 20px;
+        padding-top: 100px;
+        align-items: center;
+        padding-bottom: 40px;
+        img{
+            width: 40px;
+            height: auto;
+            margin-right: 20px;
+        }
+        h4{
+            font-size: 20px;
+        }
+    }
+    .users, .question, .answers{
+        display: flex;
+        margin-left: 50px;
+        align-content: space-around;
+        align-items: center;
+        padding: 10px;
+        transition: 0.4s;
+        margin-right: 10px;
+        border-radius: 10px;
+        &:hover{
+            background-color: rgb(235, 235, 235);
+        }
+        h4{
+            font-weight: lighter;
+        }
+        img{
+            width: 35px;
+            height: auto;
+            margin-right: 20px;
+        }
+    }
+}
+.gestion{
+    h3{
+        margin-top: 50px;
+        margin-left: 50px;
+        font-size: 30px;
+        color: white;
+        margin-bottom: 30px;
+    }
+    .add{
+        width: 50px;
+        height: auto;
+        margin-bottom: 30px;
+        margin-left: 50px;
+        transition: 0.4s;
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+    .users {
+        box-shadow: 10px 10px 20px black;
+        border-collapse: collapse;
+        margin-top:5%; 
+        margin-left: 2%;
+        width: 1100px;
+      }
+      
+      .users td, .users th {
+        border-bottom: 1px solid white;
+        padding: 8px;
+        padding: 15px;
+        font-weight: lighter;
+      }
+      
+      .users tr{
+          background-color: #ffffff;
+          transition: 0.4s;
+        }
+      
+      .users tr:hover {
+          background-color: rgb(241, 241, 241);
+        }
+      
+      .users th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #2e1c5f;
+        color: white;
+      }
+      .tache{
+          display: flex;
+          justify-content: space-around;
+          .update, .delete{
+              width: 35px;
+              height: auto;
+              transition: 0.3s;
+              &:hover{
+                  transform: scale(1.1);
+              }
+          }
+      }
+
+}

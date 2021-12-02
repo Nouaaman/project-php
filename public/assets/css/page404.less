@@ -1,0 +1,85 @@
+@primary-color: #14112c;
+@secondary-color: #4e45ab;
+@third-color: #235ec5;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+
+    background-image: url('../assets/image_processing20201203-22790-sed99q.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    padding: 8px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    
+    flex-wrap: wrap-reverse;
+    gap: 4px;
+    backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.content {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 570px;
+
+
+
+    p {
+        margin-bottom: 24px;
+    }
+
+    .btn {
+        text-align: center;
+        padding: 12px 22px;
+        border: 2px solid @secondary-color;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: .5s;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn.fill {
+        color: #fff;
+        background-color: @secondary-color;
+    }
+
+    .btn.fill:hover {
+        background-color: @third-color;
+        border-color: @third-color;
+    }
+}
+
+.illustration {
+  
+    max-width: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    img {
+        width: 100%;
+    }
+}
