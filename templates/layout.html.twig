@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
-    <title>{% block title %}Mon Micro Framework{% endblock %}</title>
+    <title>{% block title %}BOARD GAME - {% endblock %}</title>
     <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="/assets/css/app.css" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block css %}{% endblock %}
     {% block js %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
 </head>
+
 <body>
-    <div class="container">
-        {% block body %}{% endblock %}
-    </div>
+    {% block body %}{% endblock %}
     {% block bottom_js %}{% endblock %}
 </body>
+
 </html>

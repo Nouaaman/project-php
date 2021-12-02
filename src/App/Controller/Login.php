@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Framework\Controller\AbstractController;
 
-class SignIn extends AbstractController
+class Login extends AbstractController
 {
     public function __invoke(): string
     {

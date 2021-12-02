@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }}404{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet/less" href="assets/css/404.less">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="content">
+        <h2>Cette page n'existe pas</h2>
+        <p>La page que vous recherchez semble introuvable. Retournez à la page d'accueil.</p>
+        <a href="/" class="btn fill">Retour à l'accueil</a>
+    </div>
+    <div class="illustration">
+        <img src="assets/img/404.png" alt="">
+    </div>
+</div>
+{% endblock %}
+
+
