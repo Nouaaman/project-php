@@ -13,6 +13,6 @@ return [
     new Route('GET', '/', Homepage::class),
     new Route('GET', '/question/{id}', Question::class),
     new Route('GET', '/page', Page::class),
-    new Route('GET', '/signIn', SignIn::class),
+    new Route('GET', '/login', SignIn::class),
     new Route(['GET', 'POST'], '/register', Register::class),
 ];
