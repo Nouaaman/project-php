@@ -9,15 +9,19 @@
 
 
 {% block body %}
+<!-- messages -->
+
+<p> {{ dump(errors) }}</p>
 <div class="container">
     <div class="content">
         <div class="sign-in">
             <div class="form-container">
-                <form action="">
+                <form method="POST">
+                    <input type="hidden" name="action" value="login">
                     <h2>Connexion</h2>
                     <div class="field">
                         <label for="username">Username</label>
-                        <input type="te xt" name="username" id="username">
+                        <input type="text" name="username" id="username">
                     </div>
                     <div class="field">
                         <label for="password">Mot de passe</label>
@@ -39,7 +43,8 @@
                 <img src="assets/img/signup.png" alt="">
             </div>
             <div class="form-container">
-                <form action="">
+                <form method="POST">
+                    <input type="hidden" name="action" value="signUp">
                     <h2>Creer un compte</h2>
                     <div class="field">
                         <label for="username">Username</label>
@@ -59,8 +64,7 @@
                     </div>
                     <div class="buttons">
                         <a class="btn outline toggle">Se connecter</a>
-                        <input class="btn fill" type="submit" value="S'inscrire">
-
+                        <button type="submit" class="btn fill">S'inscrire</button>
                     </div>
                 </form>
             </div>

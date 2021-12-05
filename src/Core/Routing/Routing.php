@@ -5,7 +5,7 @@ namespace Framework\Routing;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
-use App\Controller\Homepage;
+
 
 class Routing
 {
@@ -29,7 +29,7 @@ class Routing
         switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 // echo 'Route non trouvée';die;
-                header("Location: /404");die;
+                header("Location: /404");
                 die;
                 break;
             case Dispatcher::METHOD_NOT_ALLOWED:

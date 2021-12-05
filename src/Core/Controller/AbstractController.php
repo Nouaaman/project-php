@@ -6,21 +6,22 @@ use Framework\Templating\Twig;
 
 abstract class AbstractController
 {
-    public function render(string $template, array $args = []): string
-    {
-        $twig = new Twig();
+  public function render(string $template, array $args = []): string
+  {
 
-        return $twig->render($template, $args);
-    }
+    $twig = new Twig();
 
-    public function isPost(): bool
-    {
-      return strtoupper($_SERVER['REQUEST_METHOD']) === 'POST';
-    }
+    return $twig->render($template, $args);
+  }
 
-    public function redirect(string $uri): void
-    {
-      header("Location: $uri");
-      die;
-    }
+  public function isPost(): bool
+  {
+    return strtoupper($_SERVER['REQUEST_METHOD']) === 'POST';
+  }
+
+  public function redirect(string $uri): void
+  {
+    header("Location: $uri");
+    die;
+  }
 }

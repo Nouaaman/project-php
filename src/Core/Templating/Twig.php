@@ -16,13 +16,14 @@ class Twig
 
         $loader = new FilesystemLoader($basePath . '/templates');
 
-        $params = [];
+        $params = ['debug' => true];/*enable debug for dump */
 
         if (Config::get('APP_ENV') === 'prod') {
             $params['cache'] = $basePath . '/var/cache/templates';
         }
 
         $this->templating = new Environment($loader, $params);
+        $this->templating->addExtension(new \Twig\Extension\DebugExtension());/*enable debug for dump */
     }
 
     public function render(string $template, array $args = []): string
