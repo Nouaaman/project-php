@@ -19,7 +19,7 @@ class DatabaseConnect
         $this->database = $configs['DB_NAME'];
     }
 
-    public function db_connect()
+    public function GetConnection()
     {
         try {
             $connection = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database . '', $this->user, $this->pwd);

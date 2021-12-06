@@ -29,7 +29,6 @@ class ComposerStaticInit67f9de48df1e4b5432c9f834f0695a2a
         ),
         'A' => 
         array (
-            'App\\Database\\' => 13,
             'App\\' => 4,
         ),
     );
@@ -54,10 +53,6 @@ class ComposerStaticInit67f9de48df1e4b5432c9f834f0695a2a
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
-        ),
-        'App\\Database\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/App/Conroller/Database',
         ),
         'App\\' => 
         array (

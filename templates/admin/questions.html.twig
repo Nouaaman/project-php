@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	{{ parent() }}Admin - Questions
+{% endblock %}
+
+
+{% block css %}
+	<link rel="stylesheet/less" href="assets/css/admin.less">
+{% endblock %}
+
+
+{% block body %}
+	<div class="allpage">
+		<div class="sidebar">
+			<div class="back">
+				<a href="index.html"><img src="assets/img/back-100.png" alt=""></a>
+			</div>
+			<div class="admin">
+				<img src="https://img.icons8.com/external-tulpahn-flat-tulpahn/64/000000/external-astronaut-space-tulpahn-flat-tulpahn.png"/>
+				<h4>Bienvenue Admin</h4>
+			</div>
+			<div class="items">
+				<div class="users active">
+					<img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-user-management-kiranshastry-lineal-color-kiranshastry-9.png"/>
+					<h4>Utilisateurs</h4>
+				</div>
+				<div class="question">
+					<img src="/assets/img/icon-question.png"/>
+					<h4>Questions</h4>
+				</div>
+				<div class="answers">
+					<img src="/assets/img/icon-answer.png"/>
+					<h4>Réponses</h4>
+				</div>
+			</div>
+		</div>
+		<div class="gestion">
+			<div class="titleadd">
+				<h3>Gestion des Utilisateurs</h3>
+				<img src="assets/img/icon-add.png" class="add">
+			</div>
+			<table class="users">
+				<tr class="sticky">
+					<th>ID</th>
+					<th>Nom d'utilisateur</th>
+					<th>Email</th>
+					<th>Rôle</th>
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th>Date de création</th>
+					<th>Opération</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>AlexyCha</td>
+					<td>alexycha@gmail.com</td>
+					<td>Admin</td>
+					<td>Alexy</td>
+					<td>Chalopin</td>
+					<td>30/11/2021</td>
+					<td>
+						<div class="tache">
+							<img src="assets/img/icon-update.png" class="update">
+							<img src="assets/img/icone-delete.png" class="delete">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Nouaam</td>
+					<td>Nouaaman@gmail.com</td>
+					<td>Admin</td>
+					<td>Nouaaman</td>
+					<td>Roudane</td>
+					<td>30/11/2021</td>
+					<td>
+						<div class="tache">
+							<img src="assets/img/icon-update.png" class="update">
+							<img src="assets/img/icone-delete.png" class="delete">
+						</div>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block bottom_js %}{% endblock %}

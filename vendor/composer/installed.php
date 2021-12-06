@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b8f09934bbe755be9da65fb00a219d59f627bff5',
+        'reference' => '615bbf8b05103207979e44af976dad2c31824531',
         'name' => 'boris/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b8f09934bbe755be9da65fb00a219d59f627bff5',
+            'reference' => '615bbf8b05103207979e44af976dad2c31824531',
             'dev_requirement' => false,
         ),
         'nikic/fast-route' => array(

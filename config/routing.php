@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\Admin\Questions;
+use App\Controller\Admin\Users;
 use App\Controller\Homepage;
 use App\Controller\Page;
 use App\Controller\Question;
@@ -14,6 +16,9 @@ return [
     new Route('GET', '/question/{id}', Question::class),
     new Route('GET', '/page', Page::class),
     new Route(['GET', 'POST'], '/login', Login::class),
+    new Route(['GET', 'POST'], '/admin/users', Users::class),
+    new Route(['GET', 'POST'], '/admin/questions', Questions::class),
+
     new Route('GET', '/404', Page404::class),
 
 ];
