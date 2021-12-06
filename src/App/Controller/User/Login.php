@@ -2,7 +2,7 @@
 
 namespace App\Controller\User;
 
-use App\Controller\Database\DatabaseConnect;
+// use App\Controller\Database\DatabaseConnect;
 use Framework\Controller\AbstractController;
 
 
@@ -33,7 +33,7 @@ class Login extends AbstractController
 
             // $sql = "SELECT count(*) FROM User WHERE username = :username";
             $sql = "SELECT COUNT(*) FROM User";
-            $db = new DatabaseConnect();
+            // $db = new App\Controller\Database\DatabaseConnect();
             $connection = $db->db_connect();
             $stmt = $connection->prepare($sql);
             // $stmt->bindParam(':username', $username);
