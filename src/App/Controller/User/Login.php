@@ -2,9 +2,9 @@
 
 namespace App\Controller\User;
 
+use App\Controller\Database\DatabaseConnect;
 use Framework\Controller\AbstractController;
 
-use App\Controller\Database\DB;
 
 class Login extends AbstractController
 {
@@ -27,13 +27,14 @@ class Login extends AbstractController
     }
 
     /* check if user exists in db*/
-    public function userExits($username): bool
+    public function userExits(): bool
     {
         try {
 
             // $sql = "SELECT count(*) FROM User WHERE username = :username";
             $sql = "SELECT COUNT(*) FROM User";
-            $connection = DB::db_connect();
+            $db = new DatabaseConnect();
+            $connection = $db->db_connect();
             $stmt = $connection->prepare($sql);
             // $stmt->bindParam(':username', $username);
             $stmt->execute();
@@ -46,7 +47,8 @@ class Login extends AbstractController
             array_push($this->errors, $e->getMessage());
             return false;
         }
-        return false;
+        // return false;
+        return true;
     }
 
     public function insertUser()

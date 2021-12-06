@@ -11,5 +11,6 @@ return array(
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Framework\\' => array($baseDir . '/src/Core'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'App\\Database\\' => array($baseDir . '/src/App/Conroller/Database'),
     'App\\' => array($baseDir . '/src/App'),
 );
