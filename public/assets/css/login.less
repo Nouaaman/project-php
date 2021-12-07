@@ -14,7 +14,7 @@ body {
     height: 100vh;
     width: 100vw;
 
-    // background-image: url('../img/land.png');
+    background-image: url('../img/land.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -34,7 +34,7 @@ body {
 
 .content {
     width: 800px;
-    height: 600px;
+    height: 95vh;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.6);
     background-color: transparent;
     overflow: hidden;
@@ -71,6 +71,7 @@ body {
         visibility: hidden;
     }
 
+
     .sign-in,
     .sign-up {
         transition: transform 1s, visibility 1s;
@@ -82,9 +83,11 @@ body {
         align-items: center;
         height: 100%;
 
+
         .form-container {
             width: 50%;
             height: 100%;
+            
             padding: 20px;
             display: flex;
             justify-content: center;
@@ -93,7 +96,8 @@ body {
 
             form {
                 width: 90%;
-
+                height: 100%;
+                overflow-y: auto;
                 .field {
                     padding: 12px 0;
                     display: flex;
@@ -190,6 +194,13 @@ body {
         }
     }
 
+
+    .sign-up{
+        h2{
+         margin-bottom: 15px;
+        }
+    }
+
     .back {
         position: absolute;
         left: 8px;
@@ -197,11 +208,11 @@ body {
         z-index: 5;
         width: 42px;
         height: 42px;
-        
+
         img {
             height: 100%;
             width: 100%;
-            
+
         }
     }
 

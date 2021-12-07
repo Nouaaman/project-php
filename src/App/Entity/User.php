@@ -4,18 +4,64 @@ namespace App\Entity;
 
 class User
 {
-  protected $name = 'Boris';
+  private string $firstName;
+  private string $lastName;
+  private string $username;
+  private string $email;
+  private string $password;
 
-
-  public function getName(): string
+  public function __construct()
   {
-    return $this->name;
+  }
+  /*set */
+  public function setFirstName(string $firstName)
+  {
+    $this->firstName = $firstName;
   }
 
-
-  public function __toString(): string
+  public function setLastName(string $lastName)
   {
-    return 'toto';
+    $this->lastName = $lastName;
+  }
+
+  public function setUsername(string $username)
+  {
+    $this->username = $username;
+  }
+
+  public function setEmail(string $email)
+  {
+    $this->email = $email;
+  }
+
+  public function setPassword(string $password)
+  {
+    $this->password = $password;
+  }
+
+  /*get */
+  public function getFirstName(): string
+  {
+    return $this->firstName;
+  }
+
+  public function getLastName(): string
+  {
+    return $this->lastName;
+  }
+
+  public function getUsername(): string
+  {
+    return $this->username;
+  }
+
+  public function getEmail(): string
+  {
+    return $this->email;
+  }
+
+  public function getPassword(): string
+  {
+    return $this->password;
   }
 }
-
