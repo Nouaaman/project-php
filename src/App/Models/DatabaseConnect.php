@@ -23,7 +23,6 @@ class DatabaseConnect
     {
         try {
             $connection = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database . '', $this->user, $this->pwd);
-
             return $connection;
         } catch (\Exception $ex) {
             die($ex->getMessage());

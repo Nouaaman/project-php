@@ -27,15 +27,15 @@ class Login extends AbstractController
     }
 
     /* check if user exists in db*/
-    public function userExits(): bool
+    public function userExits(string $username): bool
     {
         try {
 
-            // $sql = "SELECT count(*) FROM User WHERE username = :username";
-            $sql = "SELECT COUNT(*) FROM User";
-            $connection = new DatabaseConnect();
-            $stmt = $connection->GetConnection($sql);
-            // $stmt->bindParam(':username', $username);
+            $sql = "SELECT count(*) FROM User WHERE username = :username";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->bindParam(':username', $username);
             $stmt->execute();
             $results = $stmt->fetchColumn();
             return $results > 0;
@@ -46,8 +46,7 @@ class Login extends AbstractController
             array_push($this->errors, $e->getMessage());
             return false;
         }
-        // return false;
-        return true;
+        return false;
     }
 
     public function insertUser()
