@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Database;
+namespace App\Models;
 
 class DatabaseConnect
 {
@@ -11,7 +11,7 @@ class DatabaseConnect
 
     function __construct()
     {
-        $configs = require(__DIR__ . '../../../../../config/app.local.php');
+        $configs = require(__DIR__ . '../../../../config/app.local.php');
 
         $this->host = $configs['DB_HOST'];
         $this->user = $configs['DB_USER'];

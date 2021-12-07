@@ -1,96 +1,95 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Connexion | Inscription
+	{{ parent() }}Connexion | Inscription
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="assets/css/login.less">
+	<link rel="stylesheet/less" href="/assets/css/login.less">
 {% endblock %}
 
 
 {% block body %}
-<!-- messages -->
+	<!-- messages -->
 
-<p> {{ dump(errors) }}</p>
-<div class="container">
-    <div class="content">
-        <div class="sign-in">
-            <div class="form-container">
-                <form method="POST">
-                    <input type="hidden" name="action" value="login">
-                    <h2>Connexion</h2>
-                    <div class="field">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username">
-                    </div>
-                    <div class="field">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password">
-                    </div>
-                    <div class="buttons">
-                        <input type="submit" value="Se connecter" class="btn fill">
-                        <a class="btn outline toggle">S'inscrire</a>
-                    </div>
-                </form>
-            </div>
-            <div class="img-container">
-                <img src="assets/img/login.png" alt="">
-            </div>
-        </div>
+	<p>
+		{{ dump(errors) }}</p>
+	<div class="container">
+		<div class="content">
+			<div class="sign-in">
+				<div class="form-container">
+					<form method="POST">
+						<input type="hidden" name="action" value="login">
+						<h2>Connexion</h2>
+						<div class="field">
+							<label for="username">Username</label>
+							<input type="text" name="username" id="username">
+						</div>
+						<div class="field">
+							<label for="password">Mot de passe</label>
+							<input type="password" name="password" id="password">
+						</div>
+						<div class="buttons">
+							<input type="submit" value="Se connecter" class="btn fill">
+							<a class="btn outline toggle">S'inscrire</a>
+						</div>
+					</form>
+				</div>
+				<div class="img-container">
+					<img src="assets/img/login.png" alt="">
+				</div>
+			</div>
 
-        <div class="sign-up">
-            <div class="img-container">
-                <img src="assets/img/signup.png" alt="">
-            </div>
-            <div class="form-container">
-                <form method="POST">
-                    <input type="hidden" name="action" value="signUp">
-                    <h2>Creer un compte</h2>
-                    <div class="field">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username">
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="email">
-                    </div>
-                    <div class="field">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password">
-                    </div>
-                    <div class="field">
-                        <label for="passwordConfirmation">Confirmer mot de passe</label>
-                        <input type="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation">
-                    </div>
-                    <div class="buttons">
-                        <a class="btn outline toggle">Se connecter</a>
-                        <button type="submit" class="btn fill">S'inscrire</button>
-                    </div>
-                </form>
-            </div>
+			<div class="sign-up">
+				<div class="img-container">
+					<img src="assets/img/signup.png" alt="">
+				</div>
+				<div class="form-container">
+					<form method="POST">
+						<input type="hidden" name="action" value="signUp">
+						<h2>Creer un compte</h2>
+						<div class="field">
+							<label for="username">Username</label>
+							<input type="text" name="username" id="username">
+						</div>
+						<div class="field">
+							<label for="email">Email</label>
+							<input type="email" name="email" id="email">
+						</div>
+						<div class="field">
+							<label for="password">Mot de passe</label>
+							<input type="password" name="password" id="password">
+						</div>
+						<div class="field">
+							<label for="passwordConfirmation">Confirmer mot de passe</label>
+							<input type="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation">
+						</div>
+						<div class="buttons">
+							<a class="btn outline toggle">Se connecter</a>
+							<button type="submit" class="btn fill">S'inscrire</button>
+						</div>
+					</form>
+				</div>
 
-        </div>
-        <div class="back">
-            <a href="/"><img src="assets/img/back-100.png" alt=""></a>
-        </div>
-    </div>
-</div>
+			</div>
+			<div class="back">
+				<a href="/"><img src="assets/img/back-100.png" alt=""></a>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 
 {% block bottom_js %}
-<script>
-    console.log(document.querySelectorAll('.toggle'))
-    document.querySelectorAll('a.toggle').forEach(
-        element => {
-            element.addEventListener('click', toggle)
-        }
-    )
+	<script>
+		console.log(document.querySelectorAll('.toggle'))
+document.querySelectorAll('a.toggle').forEach(element => {
+element.addEventListener('click', toggle)
+})
 
-    function toggle() {
-        document.querySelector('.content').classList.toggle('signing-up')
-    }
-</script>
+function toggle() {
+document.querySelector('.content').classList.toggle('signing-up')
+}
+	</script>
 {% endblock %}
