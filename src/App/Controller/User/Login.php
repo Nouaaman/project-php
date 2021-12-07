@@ -34,7 +34,7 @@ class Login extends AbstractController
             // $sql = "SELECT count(*) FROM User WHERE username = :username";
             $sql = "SELECT COUNT(*) FROM User";
             $connection = new DatabaseConnect();
-            $stmt = $connection->prepare($sql);
+            $stmt = $connection->GetConnection($sql);
             // $stmt->bindParam(':username', $username);
             $stmt->execute();
             $results = $stmt->fetchColumn();
