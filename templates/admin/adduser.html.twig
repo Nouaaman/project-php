@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+	{{ parent() }}Admin - Add Users
+{% endblock %}
+{% block css %}
+	<link rel="stylesheet/less" href="/assets/css/adduser.less">
+{% endblock %}
+{% block body %}
+	<!-- messages -->
+	<div class="form-container">
+		<div class="containter">
+			<form method="POST">
+				<input type="hidden" name="action" value="signUp">
+				<h2>Creer un compte</h2>
+				<div class="field">
+					<label for="lastName">Nom</label>
+					<input type="text" name="lastName" id="lastName">
+				</div>
+				<div class="field">
+					<label for="firstName">Prenom</label>
+					<input type="text" name="firstName" id="firstName">
+				</div>
+				<div class="field">
+					<label for="username">Username</label>
+					<input type="text" name="username" id="username">
+				</div>
+				<div class="field">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email">
+				</div>
+				<div class="field">
+					<label for="password">Mot de passe</label>
+					<input type="password" name="password" id="password">
+				</div>
+				<div class="field">
+					<label for="passwordConfirmation">Confirmer mot de passe</label>
+					<input type="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation">
+				</div>
+				<div class="buttons">
+					<button type="submit" class="btn fill">S'inscrire</button>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+	<div class="back">
+		<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+	</div>
+</div></div>{% endblock %}

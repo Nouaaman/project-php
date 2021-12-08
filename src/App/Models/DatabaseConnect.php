@@ -15,14 +15,14 @@ class DatabaseConnect
 
         $this->host = $configs['DB_HOST'];
         $this->user = $configs['DB_USER'];
-        $this->pw = $configs['DB_PASSWORD'];
+        $this->pwd = $configs['DB_PASSWORD'];
         $this->database = $configs['DB_NAME'];
     }
 
     public function GetConnection()
     {
         try {
-            $connection = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database . '', $this->user, $this->pwd);
+            $connection = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->database, $this->user, $this->pwd);
             return $connection;
         } catch (\Exception $ex) {
             die($ex->getMessage());

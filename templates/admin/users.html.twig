@@ -14,7 +14,7 @@
 	<div class="allpage">
 		<div class="sidebar">
 			<div class="back">
-				<a href="index.html"><img src="assets/img/back-100.png" alt=""></a>
+				<a href="index.html"><img src="/assets/img/back-100.png" alt=""></a>
 			</div>
 			<div class="admin">
 				<img src="https://img.icons8.com/external-tulpahn-flat-tulpahn/64/000000/external-astronaut-space-tulpahn-flat-tulpahn.png"/>
@@ -51,38 +51,32 @@
 					<th>Date de création</th>
 					<th>Opération</th>
 				</tr>
-				<tr>
-					<td>1</td>
-					<td>AlexyCha</td>
-					<td>alexycha@gmail.com</td>
-					<td>Admin</td>
-					<td>Alexy</td>
-					<td>Chalopin</td>
-					<td>30/11/2021</td>
-					<td>
-						<div class="tache">
-							<img src="/assets/img/icon-update.png" class="update">
-							<img src="/assets/img/icone-delete.png" class="delete">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>Nouaam</td>
-					<td>Nouaaman@gmail.com</td>
-					<td>Admin</td>
-					<td>Nouaaman</td>
-					<td>Roudane</td>
-					<td>30/11/2021</td>
-					<td>
-						<div class="tache">
-							<img src="/assets/img/icon-update.png" class="update">
-							<img src="/assets/img/icone-delete.png" class="delete">
-						</div>
-					</td>
-				</tr>
-
+				{% for user in users %}
+					<tr>
+						<td>{{user.id}}</td>
+						<td>{{user.username}}</td>
+						<td>{{user.email}}</td>
+						<td>{{user.roles}}</td>
+						<td>{{user.firstName}}</td>
+						<td>{{user.lastName}}</td>
+						<td>{{user.createdAt}}</td>
+						<td>
+							<div class="tache">
+								<img src="/assets/img/icon-update.png" class="update">
+								<a href="/admin/users/delete/{{user.id}}"><img src="/assets/img/icone-delete.png" class="delete"></a>
+							</td>
+						</td>
+					</tr>
+				{% endfor %}
 			</table>
 		</div>
 	</div>
+	<p>
+		{% for user in users %}
+			<ul>
+				<li>{{user.username}}</li>
+			</ul>
+		{% endfor %}
+	</p>
+
 {% endblock %}
