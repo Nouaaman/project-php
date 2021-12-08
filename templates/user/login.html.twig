@@ -13,7 +13,7 @@
 {% block body %}
 <!-- messages -->
 <div class="container">
-	<div class="content">
+	<div class="content {{ classCss }}">
 		<div class="sign-in">
 			<div class="form-container">
 				<form method="POST">
@@ -21,12 +21,14 @@
 					<h2>Connexion</h2>
 					<div class="field">
 						<label for="username">Username</label>
-						<input type="text" name="username" id="username">
+						<input type="text" name="username" id="username" value="{{ post.username }}">
 					</div>
 					<div class="field">
 						<label for="password">Mot de passe</label>
 						<input type="password" name="password" id="password">
 					</div>
+
+					<p class="message warning">{{loginMessages.username}}</p>
 					<div class="buttons">
 						<input type="submit" value="Se connecter" class="btn fill">
 						<a class="btn outline toggle">S'inscrire</a>
@@ -48,36 +50,36 @@
 					<h2>Creer un compte</h2>
 					<div class="field">
 						<label for="lastName">Nom</label>
-						<input type="text" name="lastName" id="lastName">
+						<input type="text" name="lastName" id="lastName" value="{{post.lastName}}">
+						<p class="message warning">{{registerMessages.lastName}}</p>
 					</div>
 					<div class="field">
 						<label for="firstName">Prenom</label>
-						<input type="text" name="firstName" id="firstName">
+						<input type="text" name="firstName" id="firstName" value="{{post.firstName}}">
+						<p class="message warning">{{registerMessages.firstName}}</p>
 					</div>
 					<div class="field">
 						<label for="username">Username</label>
-						<input type="text" name="username" id="username">
+						<input type="text" name="username" id="username" value="{{post.username}}">
+						<p class="message warning">{{registerMessages.username}}</p>
 					</div>
 					<div class="field">
 						<label for="email">Email</label>
-						<input type="email" name="email" id="email">
+						<input type="email" name="email" id="email" value="{{post.email}}">
+						<p class="message warning">{{registerMessages.email}}</p>
 					</div>
 					<div class="field">
 						<label for="password">Mot de passe</label>
 						<input type="password" name="password" id="password">
+						<p class="message warning">{{registerMessages.password}}</p>
 					</div>
 					<div class="field">
 						<label for="passwordConfirmation">Confirmer mot de passe</label>
-						<input type="passwordConfirmation" name="passwordConfirmation" id="passwordConfirmation">
+						<input type="password" name="passwordConfirmation" id="passwordConfirmation">
 					</div>
 					<div class="buttons">
 						<a class="btn outline toggle">Se connecter</a>
 						<button type="submit" class="btn fill">S'inscrire</button>
-					</div>
-					<div class="message">
-						<p>
-							{{ dump(registerMessages) }}
-						</p>
 					</div>
 				</form>
 			</div>
