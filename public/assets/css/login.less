@@ -87,7 +87,7 @@ body {
         .form-container {
             width: 50%;
             height: 100%;
-            
+
             padding: 20px;
             display: flex;
             justify-content: center;
@@ -98,8 +98,10 @@ body {
                 width: 90%;
                 height: 100%;
                 overflow-y: auto;
+
                 .field {
                     padding: 12px 0;
+                    width: 98%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -113,7 +115,7 @@ body {
 
                     input {
                         width: 100%;
-                        padding: 12px;
+                        padding: 8px 12px;
                         border-radius: 8px;
                         border: 2px solid #d2e2e7;
                         font-size: 16px;
@@ -195,9 +197,25 @@ body {
     }
 
 
-    .sign-up{
-        h2{
-         margin-bottom: 15px;
+    .sign-in {
+        .form-container {
+
+            form {
+                height: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .field{
+                    width: 85%;
+                }
+            }
+        }
+
+        h2 {
+            margin-bottom: 15px;
         }
     }
 
@@ -214,6 +232,11 @@ body {
             width: 100%;
 
         }
+    }
+
+    .warning {
+        color: rgb(255, 51, 0);
+        font-size: 14px;
     }
 
 }
