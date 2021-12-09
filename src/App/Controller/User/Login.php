@@ -14,7 +14,7 @@ class Login extends AbstractController
     private $loginMessages = [];
     private $classCss;
 
-    private function __invoke()
+    public function __invoke()
     {
         session_start();
 
