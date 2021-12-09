@@ -35,6 +35,7 @@ class Routing
             case Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
                 echo 'Route trouvée mais méthode non autorisée !';
+                echo var_dump($allowedMethods);
                 die;
                 break;
             case Dispatcher::FOUND:

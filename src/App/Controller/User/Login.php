@@ -10,13 +10,18 @@ use Framework\Controller\AbstractController;
 class Login extends AbstractController
 {
 
-    public $registerMessages = [];
-    public $loginMessages = [];
-    public $classCss;
-    public function __invoke()
+    private $registerMessages = [];
+    private $loginMessages = [];
+    private $classCss;
+
+    private function __invoke()
     {
         session_start();
 
+        //redirect to homepage in case session exists
+        if (array_key_exists('username', $_SESSION) && !empty($_SESSION['username'])) {
+            $this->redirect('/');
+        }
 
         $this->classCss = '';
         $this->registerMessages;
@@ -72,8 +77,10 @@ class Login extends AbstractController
                 } else {
 
                     if ($this->checkUserCredentials($username, $password)) {
-                        /*code*/
-                        $this->loginMessages['username'] = "Connected nice";
+                        //redirect to home page if connected
+                        $_SESSION['username'] = $username;
+                        $this->redirect('/');
+
                     } else {
                         $this->loginMessages['username'] = "Username ou mot de passe incorrect.";
                     }
