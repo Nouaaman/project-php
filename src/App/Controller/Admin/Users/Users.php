@@ -7,11 +7,12 @@ use Framework\Controller\AbstractController;
 
 class Users extends AbstractController
 {
-    public function __invoke(/* string $operation, int $id */): string
+    public function __invoke(int $id = null): string
     {
-        /*         if ($operation === 'delete') {
+
+        if ($id != null) {
             $this->delete($id);
-        } */
+        }
         return $this->render(
             'admin/users.html.twig',
             ['users' =>  $this->displayUsers()]

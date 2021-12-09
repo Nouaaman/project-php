@@ -14,8 +14,6 @@ class Adduser extends AbstractController
 
     public function __invoke()
     {
-        session_start();
-
         $this->registerMessages;
 
         if ($this->isPost()) {
@@ -46,7 +44,7 @@ class Adduser extends AbstractController
                         $this->registerUser($user);
 
                         $_SESSION['username'] = $formData['username'];
-                        $this->redirect('/login');
+                        $this->redirect('/admin/users');
                     }
                 }
             }
