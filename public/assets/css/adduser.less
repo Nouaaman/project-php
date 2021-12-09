@@ -1,3 +1,7 @@
+@primary-color: #14112c;
+@secondary-color: #4e45ab;
+@third-color: #235ec5;
+
 * {
     padding: 0;
     margin: 0;
@@ -9,7 +13,7 @@ body {
     height: 100vh;
     width: 100vw;
 
-    background-image: url('../img/land.png');
+    background-color: rgb(241, 241, 241);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -23,13 +27,106 @@ body {
     backdrop-filter: blur(45px);
     -webkit-backdrop-filter: blur(45px);
     background-color: rgba(0, 0, 0, 0.151);
+    .container {
+        width: 700px;
+        height: 90vh;
+        padding: 40px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.178);
+        background-color: white;
+        overflow: hidden;
+        position: relative;
+        border-radius: 20px;
+        h2 {
+            color: @secondary-color;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+        .field{
+            padding: 12px 0;
+            width: 98%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 6px;
+            label {
+                font-size: 14px;
+                color: rgb(124, 124, 124);
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            input {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 70%;
+                padding: 8px 12px;
+                border-radius: 8px;
+                border: 2px solid #d2e2e7;
+                font-size: 16px;
+                background-color: #f7f8f9;
+                color: @primary-color;
+            }
+            input:focus {
+                outline: none;
+                border-color: @third-color;
+            }
+            .warning {
+                color: rgb(255, 51, 0);
+                font-size: 14px;
+                margin-left: 100px;
+            }
+        }
+
+        .buttons {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            width: 70%;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+
+            .btn {
+                text-align: center;
+                padding: 12px;
+                border: 2px solid @secondary-color;
+                border-radius: 8px;
+                font-size: 16px;
+                width: 46%;
+                transition: .5s;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                border-color: @third-color;
+            }
+
+            .btn.fill {
+                color: #fff;
+                background-color: @secondary-color;
+            }
+
+            .btn.fill:hover {
+                background-color: @third-color;
+            }
+
+            .btn.outline {
+                color: @secondary-color;
+                background-color: transparent;
+            }
+
+            .btn.outline:hover {
+                color: @third-color;
+            }
+        }
+
+        
+    }
+    
 }
 
-.content {
-    width: 800px;
-    height: 95vh;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.178);
-    background-color: transparent;
-    overflow: hidden;
-    position: relative;
-}
