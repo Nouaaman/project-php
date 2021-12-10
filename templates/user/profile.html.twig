@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Profile
+{{ parent() }}Profil
 {% endblock %}
 
 
@@ -11,73 +11,104 @@
 
 
 {% block body %}
-<!-- messages -->
-<div class="container">
+<div class="page">
+	<div class="container">
+		<h1>Paramètres du compte</h1>
+		<div class="content">
+			<div class="navigation-container">
+				<div class="fullname-container">
+					<img src="/assets/img/user-black.png" alt="">
+					<h2>Nouaaman Roudane</h2>
+				</div>
+				<nav>
+					<ul>
+						<li class="active" data-panel='account'>
+							<div class="img">
+								<img src="/assets/img/icon-edit-profile.png" alt="">
+							</div>
+							<p>Compte</p>
+						</li>
+						<li id='navPassword' data-panel='password'>
+							<div class="img">
+								<img src="/assets/img/icon-password.png" alt="">
+							</div>
+							<p>Mot de passe</p>
+						</li>
+					</ul>
+				</nav>
+			</div>
 
-	<div class="left-content">
-		<div class="fullname-container">
-			<img src="/assets/img/user.png" alt="">
-			<h2>full name</h2>
+			<div class="main-content">
+
+				<div class="panel activePanel" id="account-container" data-panel='account'>
+
+					<h2>Informations personnelles</h2>
+
+					<form method="POST">
+						<input type="hidden" name="action" value="updateAccount">
+
+						<div class="field">
+							<label for="lastName">Nom</label>
+							<input type="text" name="lastName" id="lastName" value="{{userInfo.lastName}}" class="disabled" disabled>
+							<p class="message warning">{{registerMessages.lastName}}</p>
+						</div>
+						<div class="field">
+							<label for="firstName">Prenom</label>
+							<input type="text" name="firstName" id="firstName" value="{{userInfo.firstName}}" class="disabled" disabled>
+							<p class="message warning">{{registerMessages.firstName}}</p>
+						</div>
+						<div class="field">
+							<label for="username">Username</label>
+							<input type="text" name="username" id="username" value="{{userInfo.username}}" class="disabled" disabled>
+							<p class="message warning">{{registerMessages.username}}</p>
+						</div>
+						<div class="field">
+							<label for="email">Email</label>
+							<input type="email" name="email" id="email" value="{{userInfo.email}}" class="disabled" disabled>
+							<p class="message warning">{{registerMessages.email}}</p>
+						</div>
+
+						<div class="buttons">
+
+							<button type="button" class="btn outline" onclick="enableInputs()">Modifier</button>
+							<button type="submit" id="saveButton" class="btn fill disabled" disabled>Enregistrer</button>
+						</div>
+					</form>
+				</div>
+
+
+				<div class="panel password-container hiddenPanel" data-panel='password'>
+
+					<h2>Changez votre mot de passe</h2>
+
+					<form method="POST">
+						<input type="hidden" name="action" value="updatePassword">
+						<div class="field">
+							<label for="oldPassword">Mot de passe actuel</label>
+							<input type="password" name="oldPassword" id="oldPassword">
+							<p class="message warning">{{pwdUpdateMessages.oldPwd}}</p>
+						</div>
+
+						<div class="field">
+							<label for="password">Nouveau mot de passe</label>
+							<input type="password" name="password" id="password">
+							<p class="message warning">{{pwdUpdateMessages.newPwd}}</p>
+						</div>
+						<div class="field">
+							<label for="passwordConfirmation">Confirmer mot de passe</label>
+							<input type="password" name="passwordConfirmation" id="passwordConfirmation">
+							<p class="message warning">{{pwdUpdateMessages.newPwd}}</p>
+						</div>
+
+						<p class="message warning">{{registerMessages.password}}</p>
+						<div class="buttons">
+
+							<button type="submit" class="btn fill">Enregistrer</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		<nav>
-			<ul>
-				<li>
-					<img src="/assets/img/icon-edit-profile.png" alt="">
-					<p>Compte</p>
-				</li>
-				<li>
-					<img src="/assets/img/icon-password.png" alt="">
-					<p>Mot de passe</p>
-				</li>
-			</ul>
-		</nav>
-	</div>
-
-	<div class="main-content">
-		<div class="img-container">
-			<img src="assets/img/signup.png" alt="">
-		</div>
-		<div class="form-container">
-			<form method="POST">
-				<input type="hidden" name="action" value="signUp">
-				<h2>Creer un compte</h2>
-				<div class="field">
-					<label for="lastName">Nom</label>
-					<input type="text" name="lastName" id="lastName" value="{{post.lastName}}">
-					<p class="message warning">{{registerMessages.lastName}}</p>
-				</div>
-				<div class="field">
-					<label for="firstName">Prenom</label>
-					<input type="text" name="firstName" id="firstName" value="{{post.firstName}}">
-					<p class="message warning">{{registerMessages.firstName}}</p>
-				</div>
-				<div class="field">
-					<label for="username">Username</label>
-					<input type="text" name="username" id="username" value="{{post.username}}">
-					<p class="message warning">{{registerMessages.username}}</p>
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" value="{{post.email}}">
-					<p class="message warning">{{registerMessages.email}}</p>
-				</div>
-				<div class="field">
-					<label for="password">Mot de passe</label>
-					<input type="password" name="password" id="password">
-					<p class="message warning">{{registerMessages.password}}</p>
-				</div>
-				<div class="field">
-					<label for="passwordConfirmation">Confirmer mot de passe</label>
-					<input type="password" name="passwordConfirmation" id="passwordConfirmation">
-				</div>
-				<div class="buttons">
-					<a class="btn outline toggle">Se connecter</a>
-					<button type="submit" class="btn fill">S'inscrire</button>
-				</div>
-			</form>
-		</div>
-
-
 	</div>
 </div>
 {% endblock %}
@@ -85,13 +116,38 @@
 
 {% block bottom_js %}
 <script>
-	console.log(document.querySelectorAll('.toggle'))
-	document.querySelectorAll('a.toggle').forEach(element => {
-		element.addEventListener('click', toggle)
+	let navs = document.querySelectorAll('nav li')
+	let panels = document.querySelectorAll('.panel')
+
+	navs.forEach(element => {
+		element.addEventListener('click', (e) => {
+			navs.forEach(element => {
+				element.classList.remove('active')
+			})
+			let clickedNav = e.currentTarget
+			clickedNav.classList.add('active')
+			panels.forEach(panel => {
+				panel.classList.remove('activePanel')
+			})
+			panels.forEach(panel => {
+				if (clickedNav.dataset.panel === panel.dataset.panel) {
+					panel.classList.add('activePanel')
+				}
+			})
+
+		})
 	})
 
-	function toggle() {
-		document.querySelector('.content').classList.toggle('signing-up')
+	function enableInputs() {
+
+		let inputs = document.querySelectorAll("#account-container .field input")
+		inputs.forEach(input => {
+			input.disabled = false;
+			input.classList.remove('disabled')
+		})
+		let saveButton = document.getElementById('saveButton')
+		saveButton.disabled = false
+		saveButton.classList.remove('disabled')
 	}
 </script>
 {% endblock %}

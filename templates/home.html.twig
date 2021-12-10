@@ -6,7 +6,7 @@
 
 
 {% block css %}
-<link rel="stylesheet/less" href="assets/css/home.less">
+<link rel="stylesheet/less" href="/assets/css/home.less">
 {% endblock %}
 
 
@@ -14,7 +14,7 @@
 <div class="land">
 	<div class="nav">
 		<div class="logo">
-			<h4><img src="assets/img/logo.png"></h4>
+			<h4><img src="/assets/img/logo.png"></h4>
 		</div>
 		<ul>
 			{% if userIsConnected == true %}
@@ -25,7 +25,7 @@
 						<p>{{username}}</p>
 					</div>
 					<div class="user-actions">
-						<a href="profile/settings" class="action">Paramètres</a>
+						<a href="/user/profile" class="action">Profil</a>
 						<form action="" method="POST">
 							<input type="submit" value="Déconnexion" name="signOut" class="action">
 						</form>
