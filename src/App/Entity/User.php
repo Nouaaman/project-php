@@ -13,7 +13,6 @@ class User
 
   public function __construct()
   {
-   
   }
   /*set */
   public function setId(int $id)
@@ -24,11 +23,6 @@ class User
   public function setFirstName(string $firstName)
   {
     $this->firstName = $firstName;
-  }
-
-  public function setId(int $id)
-  {
-    $this->id = $id;
   }
 
   public function setLastName(string $lastName)
@@ -52,11 +46,6 @@ class User
   }
 
   /*get */
-
-  public function getId(): string
-  {
-    return $this->id;
-  }
   public function getFirstName(): string
   {
     return $this->firstName;
@@ -66,7 +55,6 @@ class User
   {
     return $this->id;
   }
-
 
   public function getLastName(): string
   {

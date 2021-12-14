@@ -85,8 +85,6 @@ class Edituser extends AbstractController
             $stmt->bindParam(':username', $user->getUsername(), \PDO::PARAM_STR);
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
             $stmt->execute();
-            echo 'Test';
-            die;
             $this->redirect('/admin/users');
         } catch (\Exception $ex) {
             echo $ex->getMessage();
