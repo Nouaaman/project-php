@@ -19,13 +19,9 @@ use Framework\Routing\Route;
 
 return [
     new Route(['GET', 'POST'], '/', Homepage::class),
-<<<<<<< HEAD
-    new Route(['GET', 'POST'], 'user/profile', Profile::class),
     new Route('GET', '/admin/users/delete/{id}', Users::class),
-=======
-    
+
     new Route('GET', '/admin/users/{operation}/{id}', Users::class),
->>>>>>> 0171e57514406026622c571a081427a273db8058
     new Route(['GET', 'POST'], '/login', Login::class),
     new Route(['GET', 'POST'], '/admin/users', Users::class),
     new Route(['GET', 'POST'], '/admin/question/questions', Questions::class),
@@ -35,12 +31,9 @@ return [
     new Route(['GET', 'POST'], '/admin/reponse/addreponse', AddReponse::class),
     new Route(['GET', 'POST'], '/admin/reponse/editreponse', EditReponse::class),
     new Route(['GET', 'POST'], '/admin/adduser', Adduser::class),
-<<<<<<< HEAD
     new Route(['GET', 'POST'], '/admin/edituser/{id}', Edituser::class),
 
-=======
     new Route(['GET', 'POST'], '/user/profile', Profile::class),
->>>>>>> 0171e57514406026622c571a081427a273db8058
     new Route('GET', '/404', Page404::class),
 
 ];
