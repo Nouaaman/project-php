@@ -13,8 +13,14 @@ class User
 
   public function __construct()
   {
+   
   }
   /*set */
+  public function setId(int $id)
+  {
+    $this->id = $id;
+  }
+
   public function setFirstName(string $firstName)
   {
     $this->firstName = $firstName;
@@ -46,6 +52,11 @@ class User
   }
 
   /*get */
+
+  public function getId(): string
+  {
+    return $this->id;
+  }
   public function getFirstName(): string
   {
     return $this->firstName;

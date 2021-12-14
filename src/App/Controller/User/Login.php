@@ -85,6 +85,7 @@ class Login extends AbstractController
                     }
                 }
             }
+            
         }
 
         return $this->render('user/login.html.twig', [
@@ -211,7 +212,7 @@ class Login extends AbstractController
 
             $username = $this->formatInput($_POST["username"]);
             // check username for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9]+$/", $username)) {
+            if (!preg_match('/^[a-z\d_.-]{5,25}$/i', $username)) {
                 $this->registerMessages['username'] =  'Username invalide.';
                 $isValid = false;
             }
