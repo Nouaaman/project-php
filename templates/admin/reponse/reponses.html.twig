@@ -21,17 +21,19 @@
 				<h4>Bienvenue Admin</h4>
 			</div>
 			<div class="items">
-				<div class="users active">
-					<img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-user-management-kiranshastry-lineal-color-kiranshastry-9.png"/>
-					<h4>Utilisateurs</h4>
-				</div>
+				<a href="/admin/users">
+					<div class="users">
+						<img src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/64/000000/external-user-management-kiranshastry-lineal-color-kiranshastry-9.png"/>
+						<h4>Utilisateurs</h4>
+					</div>
+				</a>
 				<a href="/admin/question/questions">
 					<div class="question">
 						<img src="/assets/img/icon-question.png"/>
 						<h4>Questions</h4>
 					</div>
 				</a>
-				<div class="answers">
+				<div class="answers active">
 					<img src="/assets/img/icon-answer.png"/>
 					<h4>Réponses</h4>
 				</div>
@@ -39,27 +41,20 @@
 		</div>
 		<div class="gestion">
 			<div class="titleadd">
-				<h3>Gestion des Utilisateurs</h3>
+				<h3>Gestion des Réponses</h3>
 				<a href="/admin/adduser"><img src="/assets/img/icon-add.png" class="add"></a>
 			</div>
 			<table class="users">
 				<tr class="sticky">
-					<th>Nom d'utilisateur</th>
-					<th>Email</th>
-					<th>Rôle</th>
-					<th>Prénom</th>
-					<th>Nom</th>
-					<th>Date de création</th>
-					<th>Opération</th>
+					<th>Label</th>
+					<th>Question</th>
+					<th>Valide</th>
 				</tr>
 				{% for user in users %}
 					<tr>
 						<td>{{user.username}}</td>
 						<td>{{user.email}}</td>
 						<td>{{user.roles}}</td>
-						<td>{{user.firstName}}</td>
-						<td>{{user.lastName}}</td>
-						<td>{{user.createdAt}}</td>
 						<td>
 							<div class="tache">
 								<div class="update">

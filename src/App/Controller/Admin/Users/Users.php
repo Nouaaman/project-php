@@ -51,6 +51,7 @@ class Users extends AbstractController
             $stmt->execute();
             $results = $stmt->fetchAll();
             return $results;
+            $this->redirect('/admin/users');
         } catch (\Exception $ex) {
             array_push($this->registerMessages, $ex->getMessage());
             return [];

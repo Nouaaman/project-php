@@ -1,3 +1,6 @@
+@primary-color: #14112c;
+@secondary-color: #4e45ab;
+@third-color: #235ec5;
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
@@ -24,7 +27,10 @@ body {
     height: 100vh;
     width: 20%;
     background-color: rgb(255, 255, 255);
-
+    a{
+        text-decoration: none;
+        color: black;
+    }
     .back {
         position: absolute;
         left: 8px;
@@ -170,17 +176,37 @@ body {
         display: flex;
         justify-content: space-around;
 
-        .update,
-        button {
-            width: 35px;
-            height: 35px;
-            padding: 0;
-            border: none;
-            background: none;
+        .update{
+            background-color: @third-color;
+            &hover{
+                background-color: #1a4897;
+            }
+        }
+        .delete{
+            background-color: red;
+            &hover{
+                background-color: rgb(167, 0, 0);
+            }
+        }
+        .update, .delete{
+            width: 25px;
+            height: 25px;
+            padding: 5px;
+            border-radius: 5px;
             transition: 0.3s;
-
+            display: flex;
+            justify-content: center;
+            text-align: center;
             &:hover {
                 transform: scale(1.1);
+            }
+            .imgupdate, .imgdelete{
+            width: 80%;
+            height: 80%;
+            }
+
+            a{
+                text-decoration: none;
             }
         }
     }
