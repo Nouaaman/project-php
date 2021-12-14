@@ -18,17 +18,19 @@
 			<div class="navigation-container">
 				<div class="fullname-container">
 					<img src="/assets/img/user-black.png" alt="">
-					<h2>Nouaaman Roudane</h2>
+					<h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
 				</div>
 				<nav>
 					<ul>
-						<li class="active" data-panel='account'>
+						{% set cssClass = (passwordPanelisActive == false) ? 'active' : '' %}
+						<li class="{{cssClass}}" data-panel='account'>
 							<div class="img">
 								<img src="/assets/img/icon-edit-profile.png" alt="">
 							</div>
 							<p>Compte</p>
 						</li>
-						<li id='navPassword' data-panel='password'>
+						{% set cssClass = (passwordPanelisActive == true) ? 'active' : '' %}
+						<li id='navPassword' class="{{cssClass}}" data-panel='password'>
 							<div class="img">
 								<img src="/assets/img/icon-password.png" alt="">
 							</div>
@@ -39,8 +41,8 @@
 			</div>
 
 			<div class="main-content">
-
-				<div class="panel activePanel" id="account-container" data-panel='account'>
+				{% set cssClass = (passwordPanelisActive == false) ? 'activePanel' : '' %}
+				<div class="panel {{ cssClass }}" id="account-container" data-panel='account'>
 
 					<h2>Informations personnelles</h2>
 
@@ -49,35 +51,41 @@
 
 						<div class="field">
 							<label for="lastName">Nom</label>
-							<input type="text" name="lastName" id="lastName" value="{{userInfo.lastName}}" class="disabled" disabled>
-							<p class="message warning">{{registerMessages.lastName}}</p>
+							<input type="text" name="lastName" id="lastName" value="{{userInfo.lastName}}"
+								class="disabled" disabled>
+							<p class="message warning">{{updateMessages.lastName}}</p>
 						</div>
 						<div class="field">
 							<label for="firstName">Prenom</label>
-							<input type="text" name="firstName" id="firstName" value="{{userInfo.firstName}}" class="disabled" disabled>
-							<p class="message warning">{{registerMessages.firstName}}</p>
+							<input type="text" name="firstName" id="firstName" value="{{userInfo.firstName}}"
+								class="disabled" disabled>
+							<p class="message warning">{{updateMessages.firstName}}</p>
 						</div>
 						<div class="field">
 							<label for="username">Username</label>
-							<input type="text" name="username" id="username" value="{{userInfo.username}}" class="disabled" disabled>
-							<p class="message warning">{{registerMessages.username}}</p>
+							<input type="text" name="username" id="username" value="{{userInfo.username}}"
+								class="disabled" disabled>
+							<p class="message warning">{{updateMessages.username}}</p>
 						</div>
 						<div class="field">
 							<label for="email">Email</label>
-							<input type="email" name="email" id="email" value="{{userInfo.email}}" class="disabled" disabled>
-							<p class="message warning">{{registerMessages.email}}</p>
+							<input type="email" name="email" id="email" value="{{userInfo.email}}" class="disabled"
+								disabled>
+							<p class="message warning">{{updateMessages.email}}</p>
 						</div>
-
+						{% set cssClass = (updateMessages.status  == true) ? 'success' : 'warning' %}
+						<p class="message {{ cssClass }}">{{updateMessages.message}}</p>
 						<div class="buttons">
 
 							<button type="button" class="btn outline" onclick="enableInputs()">Modifier</button>
-							<button type="submit" id="saveButton" class="btn fill disabled" disabled>Enregistrer</button>
+							<button type="submit" id="saveButton" class="btn fill disabled"
+								disabled>Enregistrer</button>
 						</div>
 					</form>
 				</div>
 
-
-				<div class="panel password-container hiddenPanel" data-panel='password'>
+				{% set cssClass = (passwordPanelisActive == true) ? 'activePanel' : '' %}
+				<div class="panel password-container hiddenPanel {{ cssClass }}" data-panel='password'>
 
 					<h2>Changez votre mot de passe</h2>
 
@@ -86,21 +94,22 @@
 						<div class="field">
 							<label for="oldPassword">Mot de passe actuel</label>
 							<input type="password" name="oldPassword" id="oldPassword">
-							<p class="message warning">{{pwdUpdateMessages.oldPwd}}</p>
+							<p class="message warning">{{pwdUpdateMessages.oldPassword}}</p>
 						</div>
 
 						<div class="field">
-							<label for="password">Nouveau mot de passe</label>
-							<input type="password" name="password" id="password">
-							<p class="message warning">{{pwdUpdateMessages.newPwd}}</p>
+							<label for="newPassword">Nouveau mot de passe</label>
+							<input type="password" name="newPassword" id="newPassword">
+							<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
 						</div>
 						<div class="field">
-							<label for="passwordConfirmation">Confirmer mot de passe</label>
-							<input type="password" name="passwordConfirmation" id="passwordConfirmation">
-							<p class="message warning">{{pwdUpdateMessages.newPwd}}</p>
+							<label for="newPasswordConfirmation">Confirmer mot de passe</label>
+							<input type="password" name="newPasswordConfirmation" id="newPasswordConfirmation">
+							<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
 						</div>
 
-						<p class="message warning">{{registerMessages.password}}</p>
+						{% set cssClass = (pwdUpdateMessages.status  == true) ? 'success' : 'warning' %}
+						<p class="message {{ cssClass }}">{{pwdUpdateMessages.message}}</p>
 						<div class="buttons">
 
 							<button type="submit" class="btn fill">Enregistrer</button>
