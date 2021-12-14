@@ -47,36 +47,36 @@
 			</div>
 			<table class="users">
 				<tr class="sticky">
-					<th>Label</th>
-					<th>Niveau</th>
+					<th>Question</th>
+					<th>Level</th>
 					<th>Réponses</th>
-					<th>Opération</th>
+					<th>Opérations</th>
 				</tr>
 
 				<tr>
 					{% for question in questions %}
 
-						<td rowspan="3">
-							<div class="tache">
-								<div class="update">
-									<a href="/admin/edituser/{{user.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
-								</div>
-								<div class="delete">
-									<a href="/admin/users/delete/{{user.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ user.username }} ?')"></a>
-								</div>
-							</td>
+					</td>
+					<td>{{question.label}}</td>
+					<td>{{question.level}}</td>
+					<td>Voir les réponses</td>
+					<td>
+						<div class="tache">
+							<div class="update">
+								<a href="/admin/edituser/{{user.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
+							</div>
+							<div class="delete">
+								<a href="/admin/users/delete/{{user.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ user.username }} ?')"></a>
+							</div>
 						</td>
-						<td rowspan="3">{{question.label}}</td>
-						<td rowspan="3">{{question.level}}</td>
-						{% for reponse in reponses %}
-							{% if question.id == reponse.id_question %}
-								<td>{{reponse.label}}</td>
-							</tr>
-						{% endif %}
-					{% endfor %}
-					{{dump(results)}}
-				{% endfor %}
-			</tr>
+					</td>
+				</tr>
+
+				{# {% for reponse in reponses %}
+								{% if question.id == reponse.id_question %}	
+								{% endif %}
+								{% endfor %} #}
+			{% endfor %}
 		</table>
 	</div>
 </div>{% endblock %}
