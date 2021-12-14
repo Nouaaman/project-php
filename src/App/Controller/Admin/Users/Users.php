@@ -9,6 +9,10 @@ class Users extends AbstractController
 {
     public function __invoke(int $id = null): string
     {
+        session_start();
+        if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
+            $this->redirect('/');
+        }
 
         if ($id != null) {
             $this->delete($id);

@@ -25,7 +25,6 @@ class User
     $this->firstName = $firstName;
   }
 
-
   public function setLastName(string $lastName)
   {
     $this->lastName = $lastName;
@@ -47,8 +46,6 @@ class User
   }
 
   /*get */
-
-
   public function getFirstName(): string
   {
     return $this->firstName;
@@ -58,7 +55,6 @@ class User
   {
     return $this->id;
   }
-
 
   public function getLastName(): string
   {
