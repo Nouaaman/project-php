@@ -1,57 +1,70 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
-	{{ parent() }}Admin - Add Users
+{{ parent() }}Admin - Add Users
 {% endblock %}
 {% block css %}
-	<link rel="stylesheet/less" href="/assets/css/adduser.less">
+<link rel="stylesheet/less" href="/assets/css/adduser.less">
 {% endblock %}
 {% block body %}
-	<!-- messages -->
-	<div class="form-container">
-		<div class="container">
-			<form method="POST">
-				<input type="hidden" name="action" value="editUser">
-				<input type="hidden" name="recupid" id="recupid" value="{{user.id}}">
-				<h2>Modifier un Utilisateur</h2>
-				<div class="field">
-					<label for="username">Nom d'utilisateur</label>
-					<input type="text" name="username" id="username" value="{{user.username}}">
-					<p class="message warning">{{updateMessages.username}}</p>
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" value="{{user.email}}">
-					<p class="message warning">{{updateMessages.email}}</p>
-				</div>
-				<div class="field">
-					<label for="password">Mot de passe</label>
-					<input type="password" name="password" id="password" value="{{user.password}}">
-					<p class="message warning">{{updateMessages.password}}</p>
+<!-- messages -->
+<div class="form-container">
+	<div class="container">
+		<form method="POST">
+			<input type="hidden" name="action" value="editUser">
+			<input type="hidden" name="recupid" id="recupid" value="{{user.id}}">
+			<h2>Modifier un Utilisateur</h2>
+			<div class="field">
+				<label for="role">Role</label>
+				<select name="role" id="role">
+					{% set selected = '' %}
+					{% if user.roles == 'admin' %}
+					{% set selected = 'selected' %}
+					{% endif%}
+					<option value="user" selected>User</option>
+					<option value="admin" {{ selected }}>Admin</option>
+				</select>
+				<p class="message warning">{{updateMessages.role}}</p>
+			</div>
+			<div class="field">
+				<label for="username">Nom d'utilisateur</label>
+				<input type="text" name="username" id="username" value="{{user.username}}">
+				<p class="message warning">{{updateMessages.username}}</p>
+			</div>
+			<div class="field">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" value="{{user.email}}">
+				<p class="message warning">{{updateMessages.email}}</p>
+			</div>
+			<div class="field">
+				<label for="password">Mot de passe</label>
+				<input type="password" name="password" id="password" value="{{user.password}}">
+				<p class="message warning">{{updateMessages.password}}</p>
 
-				</div>
-				<div class="field">
-					<label for="passwordConfirmation">Confirmer mot de passe</label>
-					<input type="password" name="passwordConfirmation" id="passwordConfirmation">
-				</div>
-				<div class="field">
-					<label for="lastName">Nom</label>
-					<input type="text" name="lastName" id="lastName" value="{{user.lastName}}">
-					<p class="message warning">{{updateMessages.lastName}}</p>
+			</div>
+			<div class="field">
+				<label for="passwordConfirmation">Confirmer mot de passe</label>
+				<input type="password" name="passwordConfirmation" id="passwordConfirmation" value="{{user.password}}">
+			</div>
+			<div class="field">
+				<label for="lastName">Nom</label>
+				<input type="text" name="lastName" id="lastName" value="{{user.lastName}}">
+				<p class="message warning">{{updateMessages.lastName}}</p>
 
-				</div>
-				<div class="field">
-					<label for="firstName">Prénom</label>
-					<input type="text" name="firstName" id="firstName" value="{{user.firstName}}">
-					<p class="message warning">{{updateMessages.firstName}}</p>
-				</div>
-				<div class="buttons">
-					<button type="submit" class="btn fill">Modifier</button>
-					<a class="btn outline toggle" href="users">Annuler</a>
-				</div>
-			</form>
-		</div>
+			</div>
+			<div class="field">
+				<label for="firstName">Prénom</label>
+				<input type="text" name="firstName" id="firstName" value="{{user.firstName}}">
+				<p class="message warning">{{updateMessages.firstName}}</p>
+			</div>
+			<div class="buttons">
+				<button type="submit" class="btn fill">Modifier</button>
+				<a class="btn outline toggle" href="users">Annuler</a>
+			</div>
+		</form>
 	</div>
-	<div class="back">
-		<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
-	</div>
-</div></div>{% endblock %}
+</div>
+<div class="back">
+	<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+</div>
+</div>
+</div>{% endblock %}

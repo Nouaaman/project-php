@@ -115,6 +115,7 @@ class Profile extends AbstractController
 
         return false;
     }
+    //return user data from database
     private function getUserInfo(string $username): User
     {
         try {
