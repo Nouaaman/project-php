@@ -28,15 +28,11 @@
 					</div>
 				</a>
 				<a href="/admin/question/questions">
-					<div class="question">
+					<div class="question active">
 						<img src="/assets/img/icon-question.png"/>
 						<h4>Questions</h4>
 					</div>
 				</a>
-				<div class="answers active">
-					<img src="/assets/img/icon-answer.png"/>
-					<h4>Réponses</h4>
-				</div>
 			</div>
 		</div>
 		<div class="gestion">
@@ -46,33 +42,32 @@
 			</div>
 			<table class="users">
 				<tr class="sticky">
-					<th>Label</th>
-					<th>Question</th>
+					<th>Réponse</th>
 					<th>Valide</th>
+					<th>Opération</th>
 				</tr>
-				{% for user in users %}
+				{% for reponse in reponses %}
 					<tr>
-						<td>{{user.username}}</td>
-						<td>{{user.email}}</td>
-						<td>{{user.roles}}</td>
+
+						<td>{{reponse.label}}</td>
+						{% if reponse.isValid == 1 %}
+							<td>Vrai</td>
+						{% elseif reponse.isValid == 0 %}
+							<td>Faux</td>
+						{% endif %}
 						<td>
 							<div class="tache">
 								<div class="update">
 									<a href="/admin/edituser/{{user.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
 								</div>
 								<div class="delete">
-									<a href="/admin/users/delete/{{user.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ user.username }} ?')"></a>
+									<a href="/admin/reponse/delete/{{reponse.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ reponse.label }} ?')"></a>
 								</div>
 							</td>
 						</td>
 					</tr>
-				</td>
-			</tr>
-		{% endfor %}
-	</table>
-</div></div><p>
-{% for user in users %}
-	<ul>
-		<li>{{user.username}}</li>
-	</ul>
-{% endfor %}</p>{% endblock %}
+				</tr>
+			</td>
+		</tr>
+	{% endfor %}
+</table></div></div>{% endblock %}

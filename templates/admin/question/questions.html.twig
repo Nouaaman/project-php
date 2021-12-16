@@ -32,18 +32,12 @@
 					<img src="/assets/img/icon-question.png"/>
 					<h4>Questions</h4>
 				</div>
-				<a href="/admin/reponse/reponses">
-					<div class="answers">
-						<img src="/assets/img/icon-answer.png"/>
-						<h4>Réponses</h4>
-					</div>
-				</a>
 			</div>
 		</div>
 		<div class="gestion">
 			<div class="titleadd">
 				<h3>Gestion des Questions</h3>
-				<a href="/admin/adduser"><img src="/assets/img/icon-add.png" class="add"></a>
+				<a href="/admin/question/addquestion"><img src="/assets/img/icon-add.png" class="add"></a>
 			</div>
 			<table class="users">
 				<tr class="sticky">
@@ -59,7 +53,9 @@
 					</td>
 					<td>{{question.label}}</td>
 					<td>{{question.level}}</td>
-					<td>Voir les réponses</td>
+					<td>
+						<a href="/admin/reponse/reponses/{{question.id}}">Voir les réponses</td>
+					</td>
 					<td>
 						<div class="tache">
 							<div class="update">
@@ -71,11 +67,6 @@
 						</td>
 					</td>
 				</tr>
-
-				{# {% for reponse in reponses %}
-								{% if question.id == reponse.id_question %}	
-								{% endif %}
-								{% endfor %} #}
 			{% endfor %}
 		</table>
 	</div>

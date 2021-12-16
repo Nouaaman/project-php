@@ -12,10 +12,10 @@ class Edituser extends AbstractController
 
     public function __invoke(int $id = null): string
     {
-        session_start();
+        /*         session_start();
         if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
             $this->redirect('/');
-        }
+        } */
         $_SESSION['id'] = $id;
 
         if ($this->isPost()) {
@@ -44,12 +44,12 @@ class Edituser extends AbstractController
                         $user->setEmail($formData['email']);
                         $user->setPassword($formData['password']);
                         // $this->updateUser($user, $id);
-                        if ($this->updateUser($user,$id)) {
+                        if ($this->updateUser($user, $id)) {
                             $_SESSION['username'] = $user->getUsername();
                             $this->updateMessages['message'] = 'Modification réussi.';
-                        }
-                        else {
-                            echo 'erreur';die;
+                        } else {
+                            echo 'erreur';
+                            die;
                         }
 
                         $_SESSION['username'] = $formData['username'];
