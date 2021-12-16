@@ -12,8 +12,8 @@ class Edituser extends AbstractController
 
     public function __invoke(int $id = null): string
     {
-        /*         session_start();
-        if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
+        session_start();
+        /*if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
             $this->redirect('/');
         } */
         $_SESSION['id'] = $id;
@@ -38,6 +38,7 @@ class Edituser extends AbstractController
                     if ($formData != false) {
 
                         $user = new User();
+                        $user->setRole($formData['role']);
                         $user->setFirstName($formData['firstName']);
                         $user->setLastName($formData['lastName']);
                         $user->setUsername($formData['username']);
@@ -60,24 +61,27 @@ class Edituser extends AbstractController
                 }
             }
         }
+
+        $user = $this->displayUser($id);
+        // var_dump($this->updateMessages);
+        // die;
         return $this->render('admin/edituser.html.twig', [
-            'user' =>  $this->displayUsers($id),
-            'post' => $_POST,
+            'user' =>  $user,
             'updateMessages' => $this->updateMessages
         ]);
     }
 
-    public function displayUsers($id)
+    public function displayUser($id)
     {
         try {
-
             $users = "SELECT * FROM User WHERE id = :id";
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($users);
             $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
             $stmt->execute();
-            $results = $stmt->fetch();
+            $results = $stmt->fetch(\PDO::FETCH_ASSOC);
+
             return $results;
         } catch (\Exception $ex) {
             array_push($this->updateMessages, $ex->getMessage());
@@ -93,8 +97,8 @@ class Edituser extends AbstractController
     {
         try {
             $users = "UPDATE `User` SET `firstName` = :firstName, `lastName` = :lastName,
-             `username` = :username,`email` = :email, `password` = :newPassword
-            WHERE `id` = :id";
+             `username` = :username,`email` = :email, `password` = :newPassword, `roles` = :roles WHERE `id` = :id";
+
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($users);
@@ -104,6 +108,7 @@ class Edituser extends AbstractController
             $stmt->bindParam(":username", $user->getUsername(), \PDO::PARAM_STR);
             $stmt->bindParam(":email", $user->getEmail(), \PDO::PARAM_STR);
             $stmt->bindParam(":newPassword", $user->getPassword(), \PDO::PARAM_STR);
+            $stmt->bindParam(":roles", $user->getRole(), \PDO::PARAM_STR);
             $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
 
             $stmt->execute();
@@ -119,10 +124,25 @@ class Edituser extends AbstractController
         }
         return [];
     }
+
     public function getUpdateData(): array|bool
     {
-        $firstName = $lastName = $username = $email = $password = $passwordConfirmation = '';
+        $firstName = $lastName = $username = $email = $password = $passwordConfirmation = $role = '';
         $isValid = true;
+
+        //Role 
+        if (empty($_POST["role"])) {
+            $this->updateMessages['role'] = 'Role invalid.';
+            $isValid = false;
+        } else {
+
+            $role = $this->formatInput($_POST["role"]);
+            // check if only contains letters and whitespace
+            if ($role !== 'user' && $role !== 'admin') {
+                $this->updateMessages['role'] = 'Role invalid.';
+                $isValid = false;
+            }
+        }
         //first name 
         if (empty($_POST["firstName"])) {
             $this->updateMessages['firstName'] = 'Prenom obligatoire.';
@@ -198,6 +218,7 @@ class Edituser extends AbstractController
             return false;
         } else {
             return [
+                'role' => $role,
                 'firstName' => $firstName,
                 'lastName' => $lastName,
                 'username' => $username,

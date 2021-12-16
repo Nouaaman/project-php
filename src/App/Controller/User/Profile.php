@@ -86,7 +86,6 @@ class Profile extends AbstractController
                 $this->passwordPanelisActive = true;
             }
             unset($_POST);
-            
         }
 
         return $this->render('user/profile.html.twig', [
@@ -115,6 +114,7 @@ class Profile extends AbstractController
 
         return false;
     }
+    //return user data from database
     private function getUserInfo(string $username): User
     {
         try {
@@ -148,7 +148,7 @@ class Profile extends AbstractController
             exit($ex->getMessage());
             return false;
         } catch (\Throwable $e) {
-            exit($e->getMessage());
+            // exit($e->getMessage());
             return false;
         }
     }
@@ -316,10 +316,10 @@ class Profile extends AbstractController
             $stmt->execute();
             return true;
         } catch (\Exception $ex) {
-            exit($ex->getMessage());
+            //exit($ex->getMessage());
             return false;
         } catch (\Throwable $e) {
-            exit($e->getMessage());
+            //exit($e->getMessage());
             return false;
         }
     }
