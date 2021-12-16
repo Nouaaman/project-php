@@ -1,55 +1,64 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
-	{{ parent() }}Admin - Add Question
+{{ parent() }}Admin - Add Question
 {% endblock %}
-{% block css %}
-	<link rel="stylesheet/less" href="/assets/css/adduser.less">
-{% endblock %}
-{% block body %}
-	<!-- messages -->
-	<div class="form-container">
-		<div class="container">
-			<form method="POST">
-				<input type="hidden" name="action" value="addQuestion">
-				<h2>Ajouter une question</h2>
-				<div class="field">
-					<label for="label">Question</label>
-					<input type="text" name="label" id="label" value="{{post.label}}">
-					<p class="message warning">{{registerMessages.label}}</p>
-				</div>
-				<div class="field">
-					<label for="level">Niveau (entre 1 et 6)</label>
-					<input type="text" name="level" id="level" value="{{post.level}}">
-					<p class="message warning">{{registerMessages.level}}</p>
-				</div>
-				<div class="buttons">
-					<button type="submit" class="btn fill">Ajouter</button>
-					<a class="btn outline toggle" href="/admin/question/questions">Annuler</a>
-				</div>
-			</form>
-			<form method="POST">
-				<input type="hidden" name="action" value="addReponse">
-				<h2>Ajouter des réponses</h2>
-				<img src="/assets/img/icon-add.png" class="add">
 
-				<div class="field">
-					<label for="label">Réponse</label>
-					<input type="text" name="label" id="label" value="{{post.label}}">
-					<p class="message warning">{{registerMessages.label}}</p>
+{% block css %}
+<link rel="stylesheet/less" href="/assets/css/adduser.less">
+{% endblock %}
+
+{% block body %}
+<!-- messages -->
+<div class="form-container">
+	<div class="container">
+		<form method="POST">
+			<input type="hidden" name="action" value="addQuestion">
+			<h2>Ajouter une question</h2>
+			<div class="field">
+				<label for="label">Question</label>
+				<input type="text" name="label" id="label" value="{{post.label}}">
+				<p class="message warning">{{registerMessages.label}}</p>
+			</div>
+			<div class="field">
+				<label for="level">Niveau (entre 1 et 6)</label>
+				<input type="text" name="level" id="level" value="{{post.level}}">
+				<p class="message warning">{{registerMessages.level}}</p>
+			</div>
+
+			<!-- 
+			<input type="hidden" name="action" value="addReponse"> -->
+			<h2>Ajouter des réponses</h2>
+			<img src="/assets/img/icon-add.png" class="addAnswer">
+
+			<div class="field">
+				<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.label}}">
+				<div class="valid-answer">
+					<input class ="check"type="checkbox" name="validAnswer" id="validAnswer" value="">
+					<label for="validAnswer">Reponse correcte</label>
 				</div>
-				<div class="field">
-					<label for="Valid"></label>
-					<input type="checkbox" name="valid" id="valid" value="{{post.isValid}}">
-					<p class="message warning">{{registerMessages.level}}</p>
+				<p class="message warning">{{registerMessages.level}}</p>
+			</div>
+			
+			<div class="field">
+				<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.label}}">
+				<div class="valid-answer">
+					<input class ="check"type="checkbox" name="validAnswer" id="validAnswer" value="">
+					<label for="validAnswer">Reponse correcte</label>
 				</div>
-				<div class="buttons">
-					<button type="submit" class="btn fill">Ajouter</button>
-					<a class="btn outline toggle" href="/admin/question/questions">Annuler</>
-				</div>
-			</form>
-		</div>
+				<p class="message warning">{{registerMessages.level}}</p>
+			</div>
+			
+
+			<div class="buttons">
+				<button type="submit" class="btn fill">Ajouter</button>
+				<a class="btn outline toggle" href="/admin/question/questions">Annuler</a>
+			</div>
+		</form>
 	</div>
-	<div class="back">
-		<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
-	</div>
-</div></div>{% endblock %}
+</div>
+<div class="back">
+	<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+</div>
+
+
+{% endblock %}
