@@ -1,55 +1,57 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
-	{{ parent() }}Admin - Add Users
+{{ parent() }}Admin - Add Users
 {% endblock %}
 {% block css %}
-	<link rel="stylesheet/less" href="/assets/css/adduser.less">
+<link rel="stylesheet/less" href="/assets/css/adduser.less">
 {% endblock %}
 {% block body %}
-	<!-- messages -->
-	<div class="form-container">
-		<div class="container">
-			<form method="POST">
-				<input type="hidden" name="action" value="addUser">
-				<h2>Ajouter un Utilisateur</h2>
-				<div class="field">
-					<label for="username">Nom d'utilisateur</label>
-					<input type="text" name="username" id="username" value="{{post.username}}">
-					<p class="message warning">{{registerMessages.username}}</p>
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" value="{{post.email}}">
-					<p class="message warning">{{registerMessages.email}}</p>
-				</div>
-				<div class="field">
-					<label for="password">Mot de passe</label>
-					<input type="password" name="password" id="password" value="{{post.password}}">
-					<p class="message warning">{{registerMessages.password}}</p>
+<!-- messages -->
+<div class="form-container">
+	<div class="container">
+		<form method="POST">
+			<input type="hidden" name="action" value="addUser">
+			<h2>Ajouter un Utilisateur</h2>
+			<div class="field">
+				<label for="username">Nom d'utilisateur</label>
+				<input type="text" name="username" id="username" value="{{post.username}}">
+				<p class="message warning">{{addUserMessages.username}}</p>
+			</div>
+			<div class="field">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" value="{{post.email}}">
+				<p class="message warning">{{addUserMessages.email}}</p>
+			</div>
+			<div class="field">
+				<label for="password">Mot de passe</label>
+				<input type="password" name="password" id="password" value="{{post.password}}">
+				<p class="message warning">{{addUserMessages.password}}</p>
 
-				</div>
-				<div class="field">
-					<label for="passwordConfirmation">Confirmer mot de passe</label>
-					<input type="password" name="passwordConfirmation" id="passwordConfirmation">
-				</div>
-				<div class="field">
-					<label for="lastName">Nom</label>
-					<input type="text" name="lastName" id="lastName" value="{{post.lastName}}">
-					<p class="message warning">{{registerMessages.lastName}}</p>
+			</div>
+			<div class="field">
+				<label for="passwordConfirmation">Confirmer mot de passe</label>
+				<input type="password" name="passwordConfirmation" id="passwordConfirmation">
+				<p class="message warning">{{addUserMessages.password}}</p>
+			</div>
+			<div class="field">
+				<label for="lastName">Nom</label>
+				<input type="text" name="lastName" id="lastName" value="{{post.lastName}}">
+				<p class="message warning">{{addUserMessages.lastName}}</p>
 
-				</div>
-				<div class="field">
-					<label for="firstName">Prénom</label>
-					<input type="text" name="firstName" id="firstName" value="{{post.firstName}}">
-				</div>
-				<div class="buttons">
-					<button type="submit" class="btn fill">Ajouter</button>
-					<a class="btn outline toggle" href="users">Annuler</>
-				</div>
-			</form>
-		</div>
+			</div>
+			<div class="field">
+				<label for="firstName">Prénom</label>
+				<input type="text" name="firstName" id="firstName" value="{{post.firstName}}">
+			</div>
+			<div class="buttons">
+				<button type="submit" class="btn fill">Ajouter</button>
+				<a class="btn outline toggle" href="users">Annuler</>
+			</div>
+		</form>
 	</div>
-	<div class="back">
-		<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
-	</div>
-</div></div>{% endblock %}
+</div>
+<div class="back">
+	<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+</div>
+</div>
+</div>{% endblock %}

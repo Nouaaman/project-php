@@ -10,11 +10,11 @@ use App\Entity\User;
 
 class Adduser extends AbstractController
 {
-    public $registerMessages = [];
+    public $addUserMessages = [];
 
     public function __invoke()
     {
-        $this->registerMessages;
+        $this->addUserMessages;
 
         if ($this->isPost()) {
 
@@ -23,13 +23,13 @@ class Adduser extends AbstractController
                 $exist = false;
                 if ($this->checkExisting('username', $username)) {
                     $exist = true;
-                    $this->registerMessages['username'] = 'Username existe deja.';
+                    $this->addUserMessages['username'] = 'Username existe deja.';
                 };
 
                 $email = $this->formatInput($_POST['email']);
                 if ($this->checkExisting('email', $email)) {
                     $exist = true;
-                    $this->registerMessages['email'] = 'Email existe deja.';
+                    $this->addUserMessages['email'] = 'Email existe deja.';
                 };
 
                 if (!$exist) {
@@ -51,7 +51,7 @@ class Adduser extends AbstractController
         }
 
         return $this->render('admin/adduser.html.twig', [
-            'registerMessages' => $this->registerMessages,
+            'addUserMessages' => $this->addUserMessages,
             'post' => $_POST
         ]);
     }
@@ -113,62 +113,62 @@ class Adduser extends AbstractController
         $isValid = true;
         //first name 
         if (empty($_POST["firstName"])) {
-            $this->registerMessages['firstName'] = 'Prenom obligatoire.';
+            $this->addUserMessages['firstName'] = 'Prenom obligatoire.';
             $isValid = false;
         } else {
 
             $firstName = $this->formatInput($_POST["firstName"]);
             // check if only contains letters and whitespace
             if (!preg_match("/^([a-zA-Z' ]+)$/", $firstName)) {
-                $this->registerMessages['firstName'] = 'Prenom invalide.';
+                $this->addUserMessages['firstName'] = 'Prenom invalide.';
                 $isValid = false;
             }
         }
 
         //last name
         if (empty($_POST["lastName"])) {
-            $this->registerMessages['lastName'] = 'Nom obligatoire.';
+            $this->addUserMessages['lastName'] = 'Nom obligatoire.';
             $isValid = false;
         } else {
 
             $lastName = $this->formatInput($_POST["lastName"]);
             // check if only contains letters and whitespace
             if (!preg_match("/^([a-zA-Z' ]+)$/", $lastName)) {
-                $this->registerMessages['lastName'] = 'Nom invalide.';
+                $this->addUserMessages['lastName'] = 'Nom invalide.';
                 $isValid = false;
             }
         }
 
         //username
         if (empty($_POST["username"])) {
-            $this->registerMessages['username'] = 'Username obligatoire.';
+            $this->addUserMessages['username'] = 'Username obligatoire.';
             $isValid = false;
         } else {
 
             $username = $this->formatInput($_POST["username"]);
             // check username for no space or .. or ._.
             if (!preg_match("/^[a-zA-Z0-9]+$/", $username)) {
-                $this->registerMessages['username'] =  'Username invalide.';
+                $this->addUserMessages['username'] =  'Username invalide.';
                 $isValid = false;
             }
         }
 
         //email
         if (empty($_POST["email"])) {
-            $this->registerMessages['email'] = 'Email obligatoire.';
+            $this->addUserMessages['email'] = 'Email obligatoire.';
             $isValid = false;
         } else {
 
             $email = $this->formatInput($_POST["email"]);
             // check username for no space or .. or ._.
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->registerMessages['email'] = 'Email invalide.';
+                $this->addUserMessages['email'] = 'Email invalide.';
                 $isValid = false;
             }
         }
         //password
         if (empty($_POST["password"]) || empty($_POST["passwordConfirmation"])) {
-            $this->registerMessages['password'] = 'Mot de passe obligatoire.';
+            $this->addUserMessages['password'] = 'Mot de passe obligatoire.';
             $isValid = false;
         } else {
 
@@ -178,7 +178,7 @@ class Adduser extends AbstractController
             $passwordConfirmation = htmlspecialchars($passwordConfirmation);
             // check username for no space or .. or ._.
             if ($password !== $passwordConfirmation) {
-                $this->registerMessages['password'] = 'Mot de passe non identiques.';
+                $this->addUserMessages['password'] = 'Mot de passe non identiques.';
                 $isValid = false;
             }
         }
