@@ -8,7 +8,7 @@ use Framework\Controller\AbstractController;
 
 class Questions extends AbstractController
 {
-    public function __invoke(int $id = null): string
+    public function __invoke(int $id = null)
     {
         if ($id != null) {
             $this->delete($id);

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Questions;
 
 use App\Entity\Question;
+use App\Entity\Reponse;
 use App\Models\DatabaseConnect;
 use Framework\Controller\AbstractController;
 
@@ -79,6 +80,32 @@ class Addquestion extends AbstractController
 
             $stmt->bindParam(":label", $quest->getLabel(), \PDO::PARAM_STR);
             $stmt->bindParam(":levelquestion", $quest->getLevel(), \PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true;
+        } catch (\Exception $ex) {
+            exit($ex->getMessage());
+            return false;
+        } catch (\Throwable $e) {
+            exit($e->getMessage());
+            return false;
+        }
+    }
+    public function registerAnswer(Reponse $rep)
+    {
+
+        try {
+
+            $sql = "INSERT INTO `Answer` (`label`, :idquest,`level`) 
+            VALUES(:label, :idquest, :isvalid)";
+
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+
+            $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
+            $stmt->bindParam(":idquest", $rep->getIdquestion(), \PDO::PARAM_INT);
+            $stmt->bindParam(":isvalid", $rep->getIsValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
 
             return true;
