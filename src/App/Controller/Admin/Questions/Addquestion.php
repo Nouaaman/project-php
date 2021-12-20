@@ -30,8 +30,15 @@ class Addquestion extends AbstractController
                     $quest->setLabel($formData['label']);
                     $quest->setLevel((int)$formData['level']);
                     $this->registerQuestion($quest);
-                    $this->redirect('/admin/question/questions');
                 }
+                $formDataAns = $this->getAnswerData();
+                if ($formDataAns != false) {
+                    $rep = new Reponse();
+                    $rep->setLabel($formDataAns['labelAnswer']);
+                    //$rep->setisValid((bool)$formDataAns['isValid']);
+                    $this->registerAnswer($rep);
+                }
+                $this->redirect('/admin/question/questions');
             }
         }
 
@@ -93,10 +100,9 @@ class Addquestion extends AbstractController
     }
     public function registerAnswer(Reponse $rep)
     {
-
         try {
 
-            $sql = "INSERT INTO `Answer` (`label`, :idquest,`level`) 
+            $sql = "INSERT INTO `Answer` (`label`, :idquest, `isValid`) 
             VALUES(:label, :idquest, :isvalid)";
 
             $databaseconnect = new DatabaseConnect();
@@ -130,13 +136,56 @@ class Addquestion extends AbstractController
 
             $label = $this->formatInput($_POST["label"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
+            if (!preg_match("/^[a-zA-Z0-9 ]+$/", $label)) {
                 $this->registerMessages['label'] =  'question invalide.';
                 $isValid = false;
             }
         }
 
         //level question
+        if (empty($_POST["level"])) {
+            $this->registerMessages['level'] = 'Niveau obligatoire.';
+            $isValid = false;
+        } else {
+
+            $level = $this->formatInput($_POST["level"]);
+            // check question for no space or .. or ._.
+            if (!preg_match('/^[1-6]+$/', $level)) {
+                $this->registerMessages['level'] =  'Niveau invalide.';
+                $isValid = false;
+            }
+        }
+
+        if (!$isValid) {
+            return false;
+        } else {
+            return [
+                'label' => $label,
+                'level' => $level
+            ];
+        }
+    }
+
+    public function getAnswerData(): array|bool
+    {
+        $labelAnswer = $valid = '';
+        $isValid = true;
+
+        //label answer
+        if (empty($_POST["labelAnswer"])) {
+            $this->registerMessages['label'] = 'Réponse obligatoire.';
+            $isValid = false;
+        } else {
+
+            $labelAnswer = $this->formatInput($_POST["labelAnswer"]);
+            // check question for no space or .. or ._.
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $labelAnswer)) {
+                $this->registerMessages['label'] =  'question invalide.';
+                $isValid = false;
+            }
+        }
+
+        //valid answer
         if (empty($_POST["level"])) {
             $this->registerMessages['level'] = 'Niveau obligatoire.';
             $isValid = false;
@@ -154,11 +203,13 @@ class Addquestion extends AbstractController
             return false;
         } else {
             return [
-                'label' => $label,
+                'labelAnswer' => $labelAnswer,
                 'level' => $level
             ];
         }
     }
+
+
     public function formatInput($inputData)
     {
         $inputData = trim($inputData);

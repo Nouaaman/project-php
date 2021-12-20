@@ -1,64 +1,87 @@
 {% extends 'layout.html.twig' %}
 {% block title %}
-{{ parent() }}Admin - Add Question
+	{{ parent() }}Admin - Add Question
 {% endblock %}
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/adduser.less">
+	<link rel="stylesheet/less" href="/assets/css/adduser.less">
 {% endblock %}
 
 {% block body %}
-<!-- messages -->
-<div class="form-container">
-	<div class="container">
-		<form method="POST">
-			<input type="hidden" name="action" value="addQuestion">
-			<h2>Ajouter une question</h2>
-			<div class="field">
-				<label for="label">Question</label>
-				<input type="text" name="label" id="label" value="{{post.label}}">
-				<p class="message warning">{{registerMessages.label}}</p>
-			</div>
-			<div class="field">
-				<label for="level">Niveau (entre 1 et 6)</label>
-				<input type="text" name="level" id="level" value="{{post.level}}">
-				<p class="message warning">{{registerMessages.level}}</p>
-			</div>
-
-			<!-- 
-			<input type="hidden" name="action" value="addReponse"> -->
-			<h2>Ajouter des réponses</h2>
-			<img src="/assets/img/icon-add.png" class="addAnswer">
-
-			<div class="field">
-				<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.label}}">
-				<div class="valid-answer">
-					<input class ="check"type="checkbox" name="validAnswer" id="validAnswer" value="">
-					<label for="validAnswer">Reponse correcte</label>
+	<!-- messages -->
+	<div class="form-container">
+		<div class="container">
+			<form method="POST">
+				<input type="hidden" name="action" value="addQuestion">
+				<h2>Ajouter une question</h2>
+				<div class="field">
+					<label for="label">Question</label>
+					<input type="text" name="label" id="label" value="{{post.label}}">
+					<p class="message warning">{{registerMessages.label}}</p>
 				</div>
-				<p class="message warning">{{registerMessages.level}}</p>
-			</div>
-			
-			<div class="field">
-				<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.label}}">
-				<div class="valid-answer">
-					<input class ="check"type="checkbox" name="validAnswer" id="validAnswer" value="">
-					<label for="validAnswer">Reponse correcte</label>
+				<div class="field">
+					<label for="level">Niveau (entre 1 et 6)</label>
+					<input type="text" name="level" id="level" value="{{post.level}}">
+					<p class="message warning">{{registerMessages.level}}</p>
 				</div>
-				<p class="message warning">{{registerMessages.level}}</p>
-			</div>
-			
 
-			<div class="buttons">
-				<button type="submit" class="btn fill">Ajouter</button>
-				<a class="btn outline toggle" href="/admin/question/questions">Annuler</a>
-			</div>
-		</form>
+
+				{# 				<input type="hidden" name="action" value="addReponse">
+																				 #}
+				<h2>Ajouter des réponses</h2>
+				<img src="/assets/img/icon-add.png" id="addAnswer" class="addAnswer">
+				<div class="field">
+					<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.labelAnswer}}">
+					<div class="valid-answer">
+						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
+						<label for="validAnswer">Reponse correcte</label>
+					</div>
+					<p class="message warning">{{registerMessages.level}}</p>
+				</div>
+
+				<div class="field" id="field">
+					<input type=" text" name=" answerLabel[]" id=" answerLabel" value=" {{post.labelAnswer}} ">
+					<div class="valid-answer" id="valid-answer">
+						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
+						<label for="validAnswer">Reponse correcte</label>
+					</div>
+					<p class="message warning">{{registerMessages.level}}</p>
+				</div>
+
+
+				<div class="buttons">
+					<button type="submit" class="btn fill">Ajouter</button>
+					<a class="btn outline toggle" href="/admin/question/questions">Annuler</a>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-<div class="back">
-	<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
-</div>
+	<div class="back">
+		<a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+	</div>
 
+	<script>
+		document.getElementById("addAnswer").addEventListener("click", function () {
+let fields = document.getElementById('field')
+let validAnswer = document.createElement('valid-answer')
+let newInput = document.createElement('input')
+let newCheck = document.createElement('input')
+let lblCheck = document.createElement('label')
+newInput.setAttribute('type', 'text')
+newCheck.setAttribute('type', 'checkbox')
+newCheck.setAttribute('id', 'validAnswer')
+lblCheck.setAttribute('for', 'validAnswer')
+lblCheck.innerHTML = ('Réponse correcte')
+newInput.setAttribute('class', 'field')
+newCheck.setAttribute('class', 'check')
 
+let field = document.createElement('div')
+field.classList.add('field')
+
+field.appendChild(newInput)
+field.appendChild(lblCheck)
+field.appendChild(newCheck)
+fields.appendChild(field)
+})
+	</script>
 {% endblock %}
