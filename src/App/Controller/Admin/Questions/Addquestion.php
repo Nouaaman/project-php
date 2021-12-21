@@ -186,7 +186,7 @@ class Addquestion extends AbstractController
         }
 
         //valid answer
-        if (empty($_POST["level"])) {
+        /*         if (empty($_POST["level"])) {
             $this->registerMessages['level'] = 'Niveau obligatoire.';
             $isValid = false;
         } else {
@@ -197,14 +197,15 @@ class Addquestion extends AbstractController
                 $this->registerMessages['level'] =  'Niveau invalide.';
                 $isValid = false;
             }
-        }
+        } */
 
         if (!$isValid) {
             return false;
         } else {
             return [
-                'labelAnswer' => $labelAnswer,
-                'level' => $level
+                'labelAnswer' => $labelAnswer
+                /*                 'level' => $level
+ */
             ];
         }
     }

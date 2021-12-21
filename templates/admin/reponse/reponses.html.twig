@@ -38,7 +38,9 @@
 		<div class="gestion">
 			<div class="titleadd">
 				<h3>Gestion des Réponses</h3>
-				<a href="/admin/adduser"><img src="/assets/img/icon-add.png" class="add"></a>
+				{% for reponse in reponses %}
+					<a href="/admin/reponse/add/{{reponse.id_question}}"><img src="/assets/img/icon-add.png" class="add"></a>
+				{% endfor %}
 			</div>
 			<table class="users">
 				<tr class="sticky">
@@ -48,7 +50,6 @@
 				</tr>
 				{% for reponse in reponses %}
 					<tr>
-
 						<td>{{reponse.label}}</td>
 						{% if reponse.isValid == 1 %}
 							<td>Vrai</td>
@@ -58,7 +59,7 @@
 						<td>
 							<div class="tache">
 								<div class="update">
-									<a href="/admin/edituser/{{user.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
+									<a href="/admin/edituser/{{reponse.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
 								</div>
 								<div class="delete">
 									<a href="/admin/reponse/delete/{{reponse.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ reponse.label }} ?')"></a>
