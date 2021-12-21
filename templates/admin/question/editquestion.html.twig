@@ -36,8 +36,10 @@
                         {% if answer.isValid == true %}
                         {% set correct = 'checked'%}
                         {% endif %}
-                        <input class="check" type="checkbox" name="validAnswer[]" id="validAnswer" value="" {{correct}}>
+                        <input class="check" type="checkbox" name="validAnswer[]" id="validAnswer" value="{{answer.id}}"
+                            {{correct}}>
                         <label>Correcte</label>
+                        <a href="/admin/answer/delete/{{answer.id}}">X</a>
                     </div>
                 </div>
                 {% endfor %}

@@ -10,6 +10,7 @@ use App\Controller\Admin\Questions\Editquestion;
 use App\Controller\Admin\Reponses\Reponses;
 use App\Controller\Admin\Reponses\EditReponse;
 use App\Controller\Admin\Reponses\AddReponse;
+use App\Controller\Admin\Reponses\Deleteresponse;
 use App\Controller\Homepage;
 use App\Controller\User\Login;
 use App\Controller\Page404;
@@ -34,6 +35,7 @@ return [
     new Route(['GET', 'POST'], '/admin/reponse/editreponse', EditReponse::class),
     new Route(['GET', 'POST'], '/admin/adduser', Adduser::class),
     new Route(['GET', 'POST'], '/admin/edituser/{id}', Edituser::class),
+    new Route(['GET', 'POST'], '/admin/answer/delete/{id}', Deleteresponse::class),
 
     new Route(['GET', 'POST'], '/user/profile', Profile::class),
     new Route('GET', '/admin/homepage', Adminhomepage::class),
