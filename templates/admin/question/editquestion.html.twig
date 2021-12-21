@@ -1,0 +1,109 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+{{ parent() }}Admin - Add Question
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet/less" href="/assets/css/editquestion.less">
+{% endblock %}
+
+{% block body %}
+
+<div class="form-container">
+    <div class="container">
+        <form method="POST">
+            <input type="hidden" name="action" value="addQuestion">
+            <h2>Modifier une question</h2>
+            <div class="field">
+                <label for="label">Question</label>
+                <input type="text" name="label" id="label" value="{{question.label}}">
+                <p class="message warning">{{registerMessages.label}}</p>
+            </div>
+            <div class="field">
+                <label for="level">Niveau (entre 1 et 6)</label>
+                <input type="number" name="level" id="level" min="1" max="6" step="1" value="{{question.level}}">
+                <p class="message warning">{{registerMessages.level}}</p>
+            </div>
+
+            <h3>Les réponses</h3>
+
+            <div class="fields">
+                {% for answer in answersArray %}
+                <div class="field">
+                    <input type="text" name="answerLabel[]" id="" value="{{answer.label}}">
+                    <div class="valid-answer">
+                        {% set correct = ''%}
+                        {% if answer.isValid == true %}
+                        {% set correct = 'checked'%}
+                        {% endif %}
+                        <input class="check" type="checkbox" name="validAnswer[]" id="validAnswer" value="" {{correct}}>
+                        <label>Correcte</label>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+
+            <img src="/assets/img/icon-add.png" class="addAnswer" id="addAnswer">
+            <div class="buttons">
+                <button type="submit" class="btn fill">Modifier</button>
+                <a class="btn outline toggle" href="/admin/question/questions">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="back">
+    <a href="/"><img src="assets/img/back-100.png" alt="" class="back-btn"></a>
+</div>
+
+
+{% endblock %}
+
+{% block bottom_js %}
+
+//generate field
+
+
+<script>
+    document.getElementById('addAnswer').addEventListener('click', createNewField)
+    let fieldsNbr = document.querySelectorAll('.fields .field').length
+
+    function createNewField() {
+        if (fieldsNbr < 4) {
+            let divField = document.createElement('div')
+            divField.classList.add('field')
+
+            let Input = document.createElement('input')
+            Input.setAttribute('type', 'text')
+            Input.setAttribute('name', 'answerLabel[]')
+            Input.setAttribute('class', 'field')
+
+            let divAnswer = document.createElement('div')
+            divAnswer.classList.add('valid-answer')
+
+            let checkBox = document.createElement('input')
+            checkBox.setAttribute('type', 'checkbox')
+            checkBox.setAttribute('name', 'validAnswer[]')
+            checkBox.setAttribute('class', 'check')
+
+            let label = document.createElement('label')
+            label.innerText = 'Correcte'
+
+            divAnswer.appendChild(checkBox)
+            divAnswer.appendChild(label)
+
+            divField.appendChild(Input)
+            divField.appendChild(divAnswer)
+
+            document.querySelector('.fields').appendChild(divField)
+            fieldsNbr++;
+        } else {
+            console.log('4 answers reached');
+        }
+
+
+    }
+</script>
+
+{% endblock %}

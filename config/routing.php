@@ -26,7 +26,7 @@ return [
     new Route(['GET', 'POST'], '/admin/users', Users::class),
     new Route(['GET', 'POST'], '/admin/question/questions', Questions::class),
     new Route(['GET', 'POST'], '/admin/question/add', Addquestion::class),
-    new Route(['GET', 'POST'], '/admin/question/editquestion', Editquestion::class),
+    new Route(['GET', 'POST'], '/admin/question/edit/{id}', Editquestion::class),
     new Route(['GET', 'POST'], '/admin/question/delete/{id}', Questions::class),
     new Route(['GET', 'POST'], '/admin/reponse/reponses/{id}', Reponses::class),
     new Route(['GET', 'POST'], '/admin/reponse/delete/{id}', Reponses::class),
