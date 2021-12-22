@@ -26,7 +26,9 @@
 							</div>
 							<div class="user-actions">
 								<a href="/user/profile" class="action">Profil</a>
-								<a href="/admin/homepage" class="action">Admin</a>
+								{% if role == 'admin' %}
+									<a href="/admin/homepage" class="action">Admin</a>
+								{% endif %}
 								<form action="" method="POST">
 									<input type="submit" value="Déconnexion" name="signOut" class="action">
 								</form>
@@ -64,9 +66,9 @@
 				</p>
 				<p>Il faudra arriver au bout du plateau le plus rapidement possible.</p>
 				<p>Lorsque ce sera à votre tour de jouer, vous choisirez le niveau de difficulté entre 1 et 6 de la
-																			question
-																			à laquelle vous allez répondre.
-																			Plus le niveau est élevé, plus vous avancerez</p>
+																								question
+																								à laquelle vous allez répondre.
+																								Plus le niveau est élevé, plus vous avancerez</p>
 				<p>Les joueurs jouent chacun leur tour</p>
 				<p>Avant de commencer, connectez-vous à votre compte. Si ce n'est pas déjà fait, inscrivrez-vous
 				</p>

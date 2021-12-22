@@ -79,13 +79,25 @@ class Login extends AbstractController
                     if ($this->checkUserCredentials($username, $password)) {
                         //redirect to home page if connected
                         $_SESSION['username'] = $username;
+                        //get role
+                        try {
+                            $sql = "SELECT `roles` FROM `User` WHERE `username` = :username";
+                            $databaseconnect = new DatabaseConnect();
+                            $connection = $databaseconnect->GetConnection();
+                            $stmt = $connection->prepare($sql);
+                            $stmt->bindValue(':username', $username);
+                            $stmt->execute();
+                            $role = $stmt->fetchColumn();
+                            $_SESSION['role'] = $role;
+                        } catch (\Throwable $th) {
+                            exit($th->getMessage());
+                        }
                         $this->redirect('/');
                     } else {
                         $this->loginMessages['username'] = "Username ou mot de passe incorrect.";
                     }
                 }
             }
-            
         }
 
         return $this->render('user/login.html.twig', [
