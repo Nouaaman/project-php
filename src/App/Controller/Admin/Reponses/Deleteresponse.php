@@ -16,36 +16,8 @@ class Deleteresponse extends AbstractController
     {
         $this->idAnswer = (int)$id;
 
-        if (!$this->checkExisting('id', (string)$this->idAnswer)) {
-            $this->redirect('/admin/question/questions');
-        } else {
-            $this->deleteAnswer($this->idAnswer);
-            /*             echo '<script type="text/JavaScript"> 
-            history.back();
-                </script>'; */
-        }
-    }
-
-    public function checkExisting(string $searchBy, string $parameter): bool
-    {
-        try {
-
-            $sql = "SELECT count(*) FROM `Question` WHERE `{$searchBy}` = :parameter";
-            $databaseconnect = new DatabaseConnect();
-            $connection = $databaseconnect->GetConnection();
-            $stmt = $connection->prepare($sql);
-            $stmt->bindParam(":parameter", $parameter);
-            $stmt->execute();
-            $results = $stmt->fetchColumn();
-            return $results > 0;
-        } catch (\Exception $ex) {
-            exit($ex->getMessage());
-            return true;
-        } catch (\Throwable $e) {
-            exit($e->getMessage());
-            return true;
-        }
-        return false;
+        $this->deleteAnswer($this->idAnswer);
+        $this->redirect('/admin/question/questions');
     }
 
     public function deleteAnswer(int $id)

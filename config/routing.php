@@ -9,7 +9,7 @@ use App\Controller\Admin\Questions\Addquestion;
 use App\Controller\Admin\Questions\Editquestion;
 use App\Controller\Admin\Reponses\Reponses;
 use App\Controller\Admin\Reponses\EditReponse;
-use App\Controller\Admin\Reponses\AddReponse;
+use App\Controller\Admin\Reponses\Addreponse;
 use App\Controller\Admin\Reponses\Deleteresponse;
 use App\Controller\Homepage;
 use App\Controller\User\Login;
@@ -30,12 +30,11 @@ return [
     new Route(['GET', 'POST'], '/admin/question/edit/{id}', Editquestion::class),
     new Route(['GET', 'POST'], '/admin/question/delete/{id}', Questions::class),
     new Route(['GET', 'POST'], '/admin/reponse/reponses/{id}', Reponses::class),
-    new Route(['GET', 'POST'], '/admin/reponse/delete/{id}', Reponses::class),
-    new Route(['GET', 'POST'], '/admin/reponse/add/{id}', AddReponse::class),
+    new Route(['GET', 'POST'], '/admin/reponse/add/{id}', Addreponse::class),
     new Route(['GET', 'POST'], '/admin/reponse/editreponse', EditReponse::class),
     new Route(['GET', 'POST'], '/admin/adduser', Adduser::class),
     new Route(['GET', 'POST'], '/admin/edituser/{id}', Edituser::class),
-    new Route(['GET', 'POST'], '/admin/answer/delete/{id}', Deleteresponse::class),
+    new Route(['GET', 'POST'], '/admin/reponse/delete/{id}', Deleteresponse::class),
 
     new Route(['GET', 'POST'], '/user/profile', Profile::class),
     new Route('GET', '/admin/homepage', Adminhomepage::class),

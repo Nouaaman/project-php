@@ -13,7 +13,7 @@
 		<div class="container">
 			<form method="POST">
 				<input type="hidden" name="action" value="addQuestion">
-				<h2>Ajouter une #question</h2>
+				<h2>Ajouter une question</h2>
 				<div class="field">
 					<label for="label">Question</label>
 					<input type="text" name="label" id="label" value="{{post.label}}">
@@ -24,26 +24,6 @@
 					<input type="text" name="level" id="level" value="{{post.level}}">
 					<p class="message warning">{{registerMessages.level}}</p>
 				</div>
-				<h2>Ajouter des réponses</h2>
-				<img src="/assets/img/icon-add.png" id="addAnswer" class="addAnswer">
-				<div class="field">
-					<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.labelAnswer}}">
-					<div class="valid-answer">
-						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
-						<label for="validAnswer">Reponse correcte</label>
-					</div>
-					<p class="message warning">{{registerMessages.level}}</p>
-				</div>
-
-				<div class="field" id="field">
-					<input type=" text" name=" answerLabel[]" id=" answerLabel" value=" {{post.labelAnswer}} ">
-					<div class="valid-answer" id="valid-answer">
-						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
-						<label for="validAnswer">Reponse correcte</label>
-					</div>
-					<p class="message warning">{{registerMessages.level}}</p>
-				</div>
-
 
 				<div class="buttons">
 					<button type="submit" class="btn fill">Ajouter</button>

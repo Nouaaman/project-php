@@ -7,22 +7,25 @@ use App\Entity\Reponse;
 use App\Models\DatabaseConnect;
 use Framework\Controller\AbstractController;
 
-class AddReponse extends AbstractController
+class Addreponse extends AbstractController
 {
     public $registerMessages = [];
 
+
     public function __invoke(int $id = null)
     {
-
         $this->registerMessages;
 
         if (isset($_POST['action']) && $_POST['action'] == 'addAnswer') {
             $formDataAns = $this->getAnswerData();
-            $rep = new Reponse();
-            $rep->setLabel((string)$formDataAns['answerlabel']);
-            echo ($id);
-            $this->registerAnswer($rep, $id);
-            $this->redirect('/admin/question/questions');
+            if ($formDataAns != false) {
+                $rep = new Reponse();
+                $rep->setLabel($formDataAns['answerlabel']);
+                $rep->setIdquestion($id);
+                $rep->setIsValid($formDataAns['validAnswer']);
+                $this->registerAnswer($rep);
+                $this->redirect('/admin/question/questions');
+            }
         }
 
 
@@ -35,7 +38,7 @@ class AddReponse extends AbstractController
         );
     }
 
-    public function registerAnswer(Reponse $rep, $id)
+    public function registerAnswer(Reponse $rep)
     {
         try {
             $sql = "INSERT INTO `Answer` (`label`, `id_question`, `isValid`) 
@@ -44,13 +47,11 @@ class AddReponse extends AbstractController
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
-
-            $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":idquest", $id, \PDO::PARAM_STR);
-            $stmt->bindParam(":isvalid", $rep->getValidity(), \PDO::PARAM_BOOL);
+            $stmt->bindParam(":label", $rep->getLabel());
+            $stmt->bindParam(":idquest", $rep->getIdquestion(), \PDO::PARAM_INT);
+            $stmt->bindParam(":isvalid", $rep->getIsValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
             return true;
-            echo ($id);
         } catch (\Exception $ex) {
             exit($ex->getMessage());
             return false;
@@ -62,27 +63,35 @@ class AddReponse extends AbstractController
 
     public function getAnswerData(): array|bool
     {
-        $labelAnswer = $valid = '';
+        $labelAnswer = $CorrectAns = '';
         $isValid = true;
 
         //label answer
-        if (empty($_POST["labelAnswer"])) {
-            $this->registerMessages['label'] = 'Réponse obligatoire.';
+        if (empty($_POST["answerlabel"])) {
+            $this->registerMessages['answerlabel'] = 'Réponse obligatoire.';
             $isValid = false;
         } else {
 
-            $labelAnswer = $this->formatInput($_POST["labelAnswer"]);
+            $labelAnswer = $this->formatInput($_POST["answerlabel"]);
             // check question for no space or .. or ._.
             if (!preg_match("/^[a-zA-Z0-9 ]*$/", $labelAnswer)) {
-                $this->registerMessages['label'] =  'question invalide.';
+                $this->registerMessages['answerlabel'] =  'réponse invalide.';
                 $isValid = false;
             }
+        }
+        if (isset($_POST['validAnswer']) && $_POST['validAnswer'] == "true") { //where "Value" is the
+            //same string given in the HTML form, as value attribute the the checkbox input
+            $CorrectAns = true;
+        } else {
+            $CorrectAns = false;
         }
         if (!$isValid) {
             return false;
         } else {
             return [
-                'labelAnswer' => $labelAnswer
+                'answerlabel' => $labelAnswer,
+                'validAnswer' => $CorrectAns
+
             ];
         }
     }

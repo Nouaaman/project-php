@@ -89,4 +89,11 @@ class Reponses extends AbstractController
             ];
         }
     }
+    public function formatInput($inputData)
+    {
+        $inputData = trim($inputData);
+        $inputData = stripslashes($inputData);
+        $inputData = htmlspecialchars($inputData);
+        return $inputData;
+    }
 }

@@ -194,7 +194,7 @@ class Editquestion extends AbstractController
 
             $stmt->bindParam(":id", $rep->getId(), \PDO::PARAM_INT);
             $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":isValid", $rep->getIsValid(), \PDO::PARAM_BOOL);
+            $stmt->bindParam(":isValid", $rep->getisValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
 
             return true;
@@ -276,7 +276,7 @@ class Editquestion extends AbstractController
                 $answer = new Reponse();
                 $answer->setId($this->formatInput((int)$id));
                 $answer->setLabel($this->formatInput($_POST["answerLabel"][$i]));
-                in_array($id, $correctAnswersId) ? $answer->setIsValid(true) : $answer->setIsValid(false);
+                in_array($id, $correctAnswersId) ? $answer->setisValid(true) : $answer->setisValid(false);
                 $answersArray[] = $answer;
                 $i++;
             }

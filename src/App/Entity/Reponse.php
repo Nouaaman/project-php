@@ -7,7 +7,7 @@ class Reponse
     private int $id;
     private string $label;
     private int $idquestion;
-    private bool $Validity;
+    private bool $isValid;
 
     public function __construct()
     {
@@ -25,9 +25,9 @@ class Reponse
     {
         $this->idquestion = $idquestion;
     }
-    public function setValidity(bool $Validity)
+    public function setisValid(bool $isValid)
     {
-        $this->Validity = $Validity;
+        $this->isValid = $isValid;
     }
     //GET
     public function getId(): int
@@ -42,8 +42,8 @@ class Reponse
     {
         return $this->idquestion;
     }
-    public function getValidity(): bool
+    public function getisValid(): bool
     {
-        return $this->Validity;
+        return $this->isValid;
     }
 }

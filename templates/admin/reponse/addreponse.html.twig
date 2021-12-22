@@ -16,22 +16,12 @@
 
 				<div class="field">
 					<input type="text" name="answerlabel" id="answerLabel" value="{{post.labelAnswer}}">
+					<p class="message warning">{{registerMessages.answerlabel}}</p>
 					<div class="valid-answer">
-						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
+						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="true">
 						<label for="validAnswer">Reponse correcte</label>
 					</div>
-					<p class="message warning">{{registerMessages.level}}</p>
 				</div>
-
-				<div class="field" id="field">
-					<input type=" text" name=" answerLabel[]" id=" answerLabel" value=" {{post.labelAnswer}} ">
-					<div class="valid-answer" id="valid-answer">
-						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
-						<label for="validAnswer">Reponse correcte</label>
-					</div>
-					<p class="message warning">{{registerMessages.level}}</p>
-				</div>
-
 				<div class="buttons">
 					<button type="submit" class="btn fill">Ajouter</button>
 					<a class="btn outline toggle" href="/admin/question/questions">Annuler</>
