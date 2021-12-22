@@ -13,6 +13,7 @@ class Login extends AbstractController
     private $registerMessages = [];
     private $loginMessages = [];
     private $classCss;
+    private $username = '';
 
     public function __invoke()
     {
@@ -56,6 +57,7 @@ class Login extends AbstractController
                         $this->registerUser($user);
 
                         $_SESSION['username'] = $formData['username'];
+                        $_SESSION['role'] = $this->userRole($formData['username']);
                         $this->redirect('/login');
                     }
                 }
@@ -80,18 +82,8 @@ class Login extends AbstractController
                         //redirect to home page if connected
                         $_SESSION['username'] = $username;
                         //get role
-                        try {
-                            $sql = "SELECT `roles` FROM `User` WHERE `username` = :username";
-                            $databaseconnect = new DatabaseConnect();
-                            $connection = $databaseconnect->GetConnection();
-                            $stmt = $connection->prepare($sql);
-                            $stmt->bindValue(':username', $username);
-                            $stmt->execute();
-                            $role = $stmt->fetchColumn();
-                            $_SESSION['role'] = $role;
-                        } catch (\Throwable $th) {
-                            exit($th->getMessage());
-                        }
+                        $_SESSION['role'] = $this->userRole($username);
+
                         $this->redirect('/');
                     } else {
                         $this->loginMessages['username'] = "Username ou mot de passe incorrect.";
@@ -128,6 +120,23 @@ class Login extends AbstractController
         return false;
     }
 
+    /**check user role */
+    function userRole(string $username): string
+    {
+        //get role
+        try {
+            $sql = "SELECT `roles` FROM `User` WHERE `username` = :username";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->bindValue(':username', $username);
+            $stmt->execute();
+            $role = $stmt->fetchColumn();
+            return $role;
+        } catch (\Throwable $th) {
+            exit($th->getMessage());
+        }
+    }
     /* check if user exists in db by column of choice*/
     public function checkExisting(string $searchBy, string $parameter): bool
     {
