@@ -10,6 +10,21 @@ class Questions extends AbstractController
 {
     public function __invoke(int $id = null)
     {
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
+            $this->redirect('/');
+        }
+
+
         if ($id != null) {
             $this->delete($id);
         }

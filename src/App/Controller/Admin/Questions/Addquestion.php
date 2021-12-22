@@ -14,6 +14,22 @@ class Addquestion extends AbstractController
 
     public function __invoke()
     {
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        }else {
+            $this->redirect('/');
+        }
+
+
+
         $this->registerMessages;
 
         if (isset($_POST['action']) && $_POST['action'] == 'addQuestion') {

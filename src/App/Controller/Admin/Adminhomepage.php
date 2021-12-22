@@ -8,22 +8,25 @@ use Framework\Controller\AbstractController;
 
 class Adminhomepage extends AbstractController
 {
-    // private $userIsConnected = false;
-    // private $username = '';
+
+    private $userIsConnected = false;
+    private $username = '';
 
     public function __invoke(): string
     {
-        // session_start();
-
-        // if ($this->isPost() && isset($_POST['signOut'])) {
-        //     session_destroy();
-        //     $this->redirect('/');
-        // }
+        session_start();
         //check if user is connected to show profile link and icons
-        // if (array_key_exists('username', $_SESSION) && !empty($_SESSION['username'])) {
-        //     $this->userIsConnected = true;
-        //     $this->username = $_SESSION['username'];
-        // }
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        }else {
+            $this->redirect('/');
+        }
 
         return $this->render('admin/adminhomepage.html.twig', [
             'nbrOfQuestions' => $this->nbrOfQuestions(),

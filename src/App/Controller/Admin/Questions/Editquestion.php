@@ -19,27 +19,20 @@ class Editquestion extends AbstractController
 
     public function __invoke(int $id = null)
     {
-        /* $this->registerMessages;
-
-        if (isset($_POST['action']) && $_POST['action'] == 'addQuestion') {
-            $label = $this->formatInput($_POST['label']);
-            $exist = false;
-            if ($this->checkExisting('label', $label)) {
-                $exist = true;
-                $this->registerMessages['label'] = 'Cette question existe deja.';
-            };
-            if (!$exist) {
-                $formData = $this->getQuestionData();
-                if ($formData != false) {
-                    $quest = new Question();
-                    $quest->setLabel($formData['label']);
-                    $quest->setLevel((int)$formData['level']);
-                    $this->registerQuestion($quest);
-                    $this->redirect('/admin/question/questions');
-                }
-            }
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
+            $this->redirect('/');
         }
- */
+
 
         $this->idQuestion = (int)$id;
 
