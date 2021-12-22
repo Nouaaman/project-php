@@ -8,6 +8,7 @@ class Homepage extends AbstractController
 {
     private $userIsConnected = false;
     private $username = '';
+    private $role = '';
 
     public function __invoke(): string
     {
@@ -21,11 +22,13 @@ class Homepage extends AbstractController
         if (array_key_exists('username', $_SESSION) && !empty($_SESSION['username'])) {
             $this->userIsConnected = true;
             $this->username = $_SESSION['username'];
+            $this->role = $_SESSION['role'];
         }
 
         return $this->render('home.html.twig', [
             'userIsConnected' => $this->userIsConnected,
-            'username' => $this->username
+            'username' => $this->username,
+            'role' => $this->role
         ]);
     }
 }
