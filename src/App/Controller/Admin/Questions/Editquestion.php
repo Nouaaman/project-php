@@ -12,7 +12,7 @@ class Editquestion extends AbstractController
 {
 
     private $questionUpdateMessages = [];
-    private $answerUpdateMessages = [];
+    private $answerUpdateMessages = '';
     private int $idQuestion;
     private Question $question;
     private $answersArray = [];
@@ -41,22 +41,39 @@ class Editquestion extends AbstractController
         }
  */
 
-
         $this->idQuestion = (int)$id;
 
         if (!$this->checkExisting('id', (string)$this->idQuestion)) {
             $this->redirect('/admin/question/questions');
         }
 
+        //if post update question and answers
+        if ($this->isPost()) {
+            $isValid = true;
+            $question = $this->getQuestionFromForm();
+            $answersArray = $this->getAnswersFromForm();
+            if ($question != false) {
+                $this->updateQuestion($question);
+            }
+            if ($answersArray != false) {
+                foreach ($answersArray as $answer) {
+                    $this->UpdateAnswer($answer);
+                }
+            }
+        }
+
+        //get data to display
         $this->question = $this->getQuestion($this->idQuestion);
         $this->answersArray = $this->getAnswers($this->idQuestion);
+
 
         return $this->render(
             'admin/question/editquestion.html.twig',
             [
                 'question' => $this->question,
-                'post' => $_POST,
-                'answersArray' => $this->answersArray
+                'answersArray' => $this->answersArray,
+                'questionMessages' => $this->questionUpdateMessages,
+                'answersMessages' => $this->answerUpdateMessages
             ]
         );
     }
@@ -82,6 +99,8 @@ class Editquestion extends AbstractController
         }
         return false;
     }
+
+
     //get question fron db by id
     public function getQuestion(int $id): Question|false
     {
@@ -106,7 +125,6 @@ class Editquestion extends AbstractController
             // array_push($this->registerMessages, $e->getMessage());
             return false;
         }
-        return false;
     }
 
     //get answers fron db by id of question
@@ -128,7 +146,6 @@ class Editquestion extends AbstractController
             // array_push($this->registerMessages, $e->getMessage());
             return false;
         }
-        return false;
     }
 
 
@@ -139,15 +156,17 @@ class Editquestion extends AbstractController
 
         try {
 
-            $sql = "INSERT INTO `Question` (`label`,`level`) 
-            VALUES(:label,:levelquestion)";
+            $sql = "UPDATE `Question` SET `label` = :label , `level` = :levelquestion
+            WHERE id = :id";
 
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
 
+            $stmt->bindParam(":id", $quest->getId(), \PDO::PARAM_INT);
             $stmt->bindParam(":label", $quest->getLabel(), \PDO::PARAM_STR);
             $stmt->bindParam(":levelquestion", $quest->getLevel(), \PDO::PARAM_INT);
+
             $stmt->execute();
 
             return true;
@@ -166,16 +185,16 @@ class Editquestion extends AbstractController
 
         try {
 
-            $sql = "INSERT INTO `Answer` (`label`, :idquest,`level`) 
-            VALUES(:label, :idquest, :isvalid)";
+            $sql = "UPDATE `Answer` SET `label` = :label , isValid = :isValid 
+            WHERE id = :id";
 
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
 
+            $stmt->bindParam(":id", $rep->getId(), \PDO::PARAM_INT);
             $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":idquest", $rep->getIdquestion(), \PDO::PARAM_INT);
-            $stmt->bindParam(":isvalid", $rep->getIsValid(), \PDO::PARAM_BOOL);
+            $stmt->bindParam(":isValid", $rep->getIsValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
 
             return true;
@@ -188,6 +207,7 @@ class Editquestion extends AbstractController
         }
     }
 
+    //get auestion from form , return false if not valid
     public function getQuestionFromForm(): Question|bool
     {
         $question = new Question();
@@ -195,15 +215,15 @@ class Editquestion extends AbstractController
         $isValid = true;
 
         //label question
-        if (empty($_POST["labelQuestion"])) {
-            $this->registerMessages['label'] = 'Question obligatoire.';
+        if (empty($_POST["questionLabel"])) {
+            $this->questionUpdateMessages['label'] = 'Question obligatoire.';
             $isValid = false;
         } else {
 
-            $label = $this->formatInput($_POST["labelQuestion"]);
+            $label = $this->formatInput($_POST["questionLabel"]);
             // check question for no space or .. or ._.
             if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
-                $this->registerMessages['labelQuestion'] =  'Question invalide.';
+                $this->questionUpdateMessages['questionLabel'] =  'Question invalide.';
                 $isValid = false;
             } else {
                 $question->setLabel($label);
@@ -211,15 +231,15 @@ class Editquestion extends AbstractController
         }
 
         //level question
-        if (empty($_POST["level"])) {
-            $this->registerMessages['level'] = 'Niveau obligatoire.';
+        if (empty($_POST["questionLevel"])) {
+            $this->questionUpdateMessages['level'] = 'Niveau obligatoire.';
             $isValid = false;
         } else {
 
-            $level = $this->formatInput($_POST["level"]);
+            $level = $this->formatInput($_POST["questionLevel"]);
             // check question for no space or .. or ._.
             if (!preg_match('/^[1-6]*$/', $level)) {
-                $this->registerMessages['level'] =  'Niveau invalide.';
+                $this->questionUpdateMessages['level'] =  'Niveau invalide.';
                 $isValid = false;
             } else {
                 $question->setLevel($level);
@@ -233,50 +253,43 @@ class Editquestion extends AbstractController
         }
     }
 
-    public function getAnswersFromForm(): Question|bool
+    //get answers from form , return array of answers else false if not valid
+    public function getAnswersFromForm(): array|bool
     {
-        $question = new Question();
-        $question->setId($this->idQuestion);
+
         $isValid = true;
+        $answersArray = [];
+        $correctAnswersId = [];
+        $i = 0;
 
-        //label question
-        if (empty($_POST["labelQuestion"])) {
-            $this->registerMessages['label'] = 'Question obligatoire.';
-            $isValid = false;
-        } else {
-
-            $label = $this->formatInput($_POST["labelQuestion"]);
-            // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
-                $this->registerMessages['labelQuestion'] =  'Question invalide.';
-                $isValid = false;
-            } else {
-                $question->setLabel($label);
-            }
+        //get correct answers
+        foreach ($_POST["correctAnswer"] as $ca) {
+            $correctAnswersId[] = $this->formatInput($ca);
         }
 
-        //level question
-        if (empty($_POST["level"])) {
-            $this->registerMessages['level'] = 'Niveau obligatoire.';
-            $isValid = false;
-        } else {
-
-            $level = $this->formatInput($_POST["level"]);
-            // check question for no space or .. or ._.
-            if (!preg_match('/^[1-6]*$/', $level)) {
-                $this->registerMessages['level'] =  'Niveau invalide.';
+        foreach ($_POST["answerId"] as $id) {
+            if (empty($_POST["answerLabel"][$i])) {
+                $this->answerUpdateMessages = 'Tous les reponses doivent etre inserees';
                 $isValid = false;
+                break;
             } else {
-                $question->setLevel($level);
+                $answer = new Reponse();
+                $answer->setId($this->formatInput((int)$id));
+                $answer->setLabel($this->formatInput($_POST["answerLabel"][$i]));
+                in_array($id, $correctAnswersId) ? $answer->setIsValid(true) : $answer->setIsValid(false);
+                $answersArray[] = $answer;
+                $i++;
             }
         }
 
         if (!$isValid) {
             return false;
         } else {
-            return $question;
+            return $answersArray;
         }
     }
+
+
     public function formatInput($inputData)
     {
         $inputData = trim($inputData);
