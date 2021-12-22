@@ -59,4 +59,34 @@ class Reponses extends AbstractController
         }
         return [];
     }
+
+    public function getAnswerData(): array|bool
+    {
+        $labelAnswer = $valid = '';
+        $isValid = true;
+
+        //label answer
+        if (empty($_POST["labelAnswer"])) {
+            $this->registerMessages['label'] = 'Réponse obligatoire.';
+            $isValid = false;
+        } else {
+
+            $labelAnswer = $this->formatInput($_POST["labelAnswer"]);
+            // check question for no space or .. or ._.
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $labelAnswer)) {
+                $this->registerMessages['label'] =  'question invalide.';
+                $isValid = false;
+            }
+        }
+
+        if (!$isValid) {
+            return false;
+        } else {
+            return [
+                'labelAnswer' => $labelAnswer
+                /*                 'level' => $level
+ */
+            ];
+        }
+    }
 }

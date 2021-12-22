@@ -6,15 +6,20 @@ use App\Entity\Question;
 use App\Entity\Reponse;
 use App\Models\DatabaseConnect;
 use Framework\Controller\AbstractController;
+use Stringable;
 
-class Addquestion extends AbstractController
+class Editquestion extends AbstractController
 {
 
-    public $registerMessages = [];
+    private $questionUpdateMessages = [];
+    private $answerUpdateMessages = [];
+    private int $idQuestion;
+    private Question $question;
+    private $answersArray = [];
 
-    public function __invoke()
+    public function __invoke(int $id = null)
     {
-        $this->registerMessages;
+        /* $this->registerMessages;
 
         if (isset($_POST['action']) && $_POST['action'] == 'addQuestion') {
             $label = $this->formatInput($_POST['label']);
@@ -30,23 +35,28 @@ class Addquestion extends AbstractController
                     $quest->setLabel($formData['label']);
                     $quest->setLevel((int)$formData['level']);
                     $this->registerQuestion($quest);
+                    $this->redirect('/admin/question/questions');
                 }
-                $idQuest = $this->OrderQuestion();
-                $formDataAns = $this->getAnswerData();
-                if ($formDataAns != false) {
-                    $rep = new Reponse();
-                    $rep->setLabel($formDataAns['labelAnswer']);
-                    $this->registerAnswer($rep);
-                }
-                $this->redirect('/admin/question/questions');
             }
         }
+ */
+
+
+        $this->idQuestion = (int)$id;
+
+        if (!$this->checkExisting('id', (string)$this->idQuestion)) {
+            $this->redirect('/admin/question/questions');
+        }
+
+        $this->question = $this->getQuestion($this->idQuestion);
+        $this->answersArray = $this->getAnswers($this->idQuestion);
 
         return $this->render(
-            'admin/question/addquestion.html.twig',
+            'admin/question/editquestion.html.twig',
             [
-                'registerMessages' => $this->registerMessages,
-                'post' => $_POST
+                'question' => $this->question,
+                'post' => $_POST,
+                'answersArray' => $this->answersArray
             ]
         );
     }
@@ -72,8 +82,59 @@ class Addquestion extends AbstractController
         }
         return false;
     }
+    //get question fron db by id
+    public function getQuestion(int $id): Question|false
+    {
+        try {
+            $sql = "SELECT * FROM Question WHERE id = :id";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $results = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $question = new Question();
+            $question->setId((int)$results['id']);
+            $question->setLabel($results['label']);
+            $question->setLevel($results['level']);
 
-    public function registerQuestion(Question $quest)
+            return $question;
+        } catch (\Exception $ex) {
+            // array_push($this->registerMessages, $ex->getMessage());
+            return false;
+        } catch (\Throwable $e) {
+            // array_push($this->registerMessages, $e->getMessage());
+            return false;
+        }
+        return false;
+    }
+
+    //get answers fron db by id of question
+    public function getAnswers(int $idQuestion): array|false
+    {
+        try {
+            $sql = "SELECT * FROM Answer WHERE id_question = :idQuestion";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->bindParam(':idQuestion', $idQuestion);
+            $stmt->execute();
+            $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $results;
+        } catch (\Exception $ex) {
+            // array_push($this->registerMessages, $ex->getMessage());
+            return false;
+        } catch (\Throwable $e) {
+            // array_push($this->registerMessages, $e->getMessage());
+            return false;
+        }
+        return false;
+    }
+
+
+
+
+    public function updateQuestion(Question $quest)
     {
 
         try {
@@ -98,27 +159,14 @@ class Addquestion extends AbstractController
             return false;
         }
     }
-    public function OrderQuestion()
+
+
+    public function UpdateAnswer(Reponse $rep)
     {
+
         try {
-            $sql = "SELECT id FROM Question ORDER BY id DESC LIMIT 1";
-            $databaseconnect = new DatabaseConnect();
-            $connection = $databaseconnect->GetConnection();
-            $stmt = $connection->prepare($sql);
-            $stmt->execute();
-            return true;
-        } catch (\Exception $ex) {
-            exit($ex->getMessage());
-            return false;
-        } catch (\Throwable $e) {
-            exit($e->getMessage());
-            return false;
-        }
-    }
-    public function registerAnswer(Reponse $rep)
-    {
-        try {
-            $sql = "INSERT INTO `Answer` (`label`, ìd_question`, `isValid`) 
+
+            $sql = "INSERT INTO `Answer` (`label`, :idquest,`level`) 
             VALUES(:label, :idquest, :isvalid)";
 
             $databaseconnect = new DatabaseConnect();
@@ -126,8 +174,8 @@ class Addquestion extends AbstractController
             $stmt = $connection->prepare($sql);
 
             $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":idquest", $this->orderQuestion());
-            $stmt->bindParam(":isvalid", $rep->getValidity(), \PDO::PARAM_BOOL);
+            $stmt->bindParam(":idquest", $rep->getIdquestion(), \PDO::PARAM_INT);
+            $stmt->bindParam(":isvalid", $rep->getIsValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
 
             return true;
@@ -139,22 +187,26 @@ class Addquestion extends AbstractController
             return false;
         }
     }
-    public function getQuestionData(): array|bool
+
+    public function getQuestionFromForm(): Question|bool
     {
-        $label = $level = '';
+        $question = new Question();
+        $question->setId($this->idQuestion);
         $isValid = true;
 
         //label question
-        if (empty($_POST["label"])) {
+        if (empty($_POST["labelQuestion"])) {
             $this->registerMessages['label'] = 'Question obligatoire.';
             $isValid = false;
         } else {
 
-            $label = $this->formatInput($_POST["label"]);
+            $label = $this->formatInput($_POST["labelQuestion"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]+$/", $label)) {
-                $this->registerMessages['label'] =  'question invalide.';
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
+                $this->registerMessages['labelQuestion'] =  'Question invalide.';
                 $isValid = false;
+            } else {
+                $question->setLabel($label);
             }
         }
 
@@ -166,43 +218,45 @@ class Addquestion extends AbstractController
 
             $level = $this->formatInput($_POST["level"]);
             // check question for no space or .. or ._.
-            if (!preg_match('/^[1-6]+$/', $level)) {
+            if (!preg_match('/^[1-6]*$/', $level)) {
                 $this->registerMessages['level'] =  'Niveau invalide.';
                 $isValid = false;
+            } else {
+                $question->setLevel($level);
             }
         }
 
         if (!$isValid) {
             return false;
         } else {
-            return [
-                'label' => $label,
-                'level' => $level
-            ];
+            return $question;
         }
     }
 
-    public function getAnswerData(): array|bool
+    public function getAnswersFromForm(): Question|bool
     {
-        $labelAnswer = $valid = '';
+        $question = new Question();
+        $question->setId($this->idQuestion);
         $isValid = true;
 
-        //label answer
-        if (empty($_POST["labelAnswer"])) {
-            $this->registerMessages['label'] = 'Réponse obligatoire.';
+        //label question
+        if (empty($_POST["labelQuestion"])) {
+            $this->registerMessages['label'] = 'Question obligatoire.';
             $isValid = false;
         } else {
 
-            $labelAnswer = $this->formatInput($_POST["labelAnswer"]);
+            $label = $this->formatInput($_POST["labelQuestion"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $labelAnswer)) {
-                $this->registerMessages['label'] =  'question invalide.';
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
+                $this->registerMessages['labelQuestion'] =  'Question invalide.';
                 $isValid = false;
+            } else {
+                $question->setLabel($label);
             }
         }
 
-        //valid answer
-        /*         if (empty($_POST["level"])) {
+        //level question
+        if (empty($_POST["level"])) {
             $this->registerMessages['level'] = 'Niveau obligatoire.';
             $isValid = false;
         } else {
@@ -212,21 +266,17 @@ class Addquestion extends AbstractController
             if (!preg_match('/^[1-6]*$/', $level)) {
                 $this->registerMessages['level'] =  'Niveau invalide.';
                 $isValid = false;
+            } else {
+                $question->setLevel($level);
             }
-        } */
+        }
 
         if (!$isValid) {
             return false;
         } else {
-            return [
-                'labelAnswer' => $labelAnswer
-                /*                 'level' => $level
- */
-            ];
+            return $question;
         }
     }
-
-
     public function formatInput($inputData)
     {
         $inputData = trim($inputData);

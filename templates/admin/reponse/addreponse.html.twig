@@ -10,12 +10,12 @@
 	<div class="form-container">
 		<div class="container">
 			<form method="POST">
-				<input type="hidden" name="action" value="addUser">
+				<input type="hidden" name="action" value="addAnswer">
 				<h2>Ajouter des réponses</h2>
 				<img src="/assets/img/icon-add.png" id="addAnswer" class="addAnswer">
 
 				<div class="field">
-					<input type="text" name="answerLabel[]" id="answerLabel" value="{{post.labelAnswer}}">
+					<input type="text" name="answerlabel" id="answerLabel" value="{{post.labelAnswer}}">
 					<div class="valid-answer">
 						<input class="check" type="checkbox" name="validAnswer" id="validAnswer" value="{{post.isValid}}">
 						<label for="validAnswer">Reponse correcte</label>
