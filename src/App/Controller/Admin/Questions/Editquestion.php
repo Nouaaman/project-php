@@ -163,9 +163,9 @@ class Editquestion extends AbstractController
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
 
-            $stmt->bindParam(":id", $quest->getId(), \PDO::PARAM_INT);
-            $stmt->bindParam(":label", $quest->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":levelquestion", $quest->getLevel(), \PDO::PARAM_INT);
+            $stmt->bindValue(":id", $quest->getId(), \PDO::PARAM_INT);
+            $stmt->bindValue(":label", $quest->getLabel(), \PDO::PARAM_STR);
+            $stmt->bindValue(":levelquestion", $quest->getLevel(), \PDO::PARAM_INT);
 
             $stmt->execute();
 
@@ -191,18 +191,19 @@ class Editquestion extends AbstractController
             $databaseconnect = new DatabaseConnect();
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
-
-            $stmt->bindParam(":id", $rep->getId(), \PDO::PARAM_INT);
-            $stmt->bindParam(":label", $rep->getLabel(), \PDO::PARAM_STR);
-            $stmt->bindParam(":isValid", $rep->getisValid(), \PDO::PARAM_BOOL);
+            $stmt->bindValue(":id", $rep->getId(), \PDO::PARAM_INT);
+            $stmt->bindValue(":label", $rep->getLabel(), \PDO::PARAM_STR);
+            $stmt->bindValue(":isValid", $rep->getisValid(), \PDO::PARAM_BOOL);
             $stmt->execute();
 
             return true;
         } catch (\Exception $ex) {
-            exit($ex->getMessage());
+            /*             exit($ex->getMessage());
+ */
             return false;
         } catch (\Throwable $e) {
-            exit($e->getMessage());
+            /*             exit($e->getMessage());
+ */
             return false;
         }
     }
