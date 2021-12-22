@@ -14,6 +14,21 @@ class Adduser extends AbstractController
 
     public function __invoke()
     {
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
+            $this->redirect('/');
+        }
+
+
         $this->addUserMessages;
 
         if ($this->isPost()) {
@@ -50,7 +65,7 @@ class Adduser extends AbstractController
             }
         }
 
-        return $this->render('admin/adduser.html.twig', [
+        return $this->render('admin/user/adduser.html.twig', [
             'addUserMessages' => $this->addUserMessages,
             'post' => $_POST
         ]);

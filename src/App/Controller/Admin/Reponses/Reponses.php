@@ -10,10 +10,28 @@ class Reponses extends AbstractController
 {
     public function __invoke(int $id = null): string
     {
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
+            $this->redirect('/');
+        }
+
+
         $this->deleteReponse($id);
         return $this->render(
             'admin/reponse/reponses.html.twig',
-            ['reponses' =>  $this->displayReponses($id)]
+            [
+                'reponses' =>  $this->displayReponses($id),
+                'username' => $this->username
+            ]
         );
     }
 

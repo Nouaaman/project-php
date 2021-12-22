@@ -13,9 +13,19 @@ class Edituser extends AbstractController
     public function __invoke(int $id = null): string
     {
         session_start();
-        /*if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
             $this->redirect('/');
-        } */
+        }
+
         $_SESSION['id'] = $id;
 
         if ($this->isPost()) {
@@ -65,7 +75,7 @@ class Edituser extends AbstractController
         $user = $this->displayUser($id);
         // var_dump($this->updateMessages);
         // die;
-        return $this->render('admin/edituser.html.twig', [
+        return $this->render('admin/user/edituser.html.twig', [
             'user' =>  $user,
             'updateMessages' => $this->updateMessages
         ]);

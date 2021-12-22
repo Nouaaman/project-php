@@ -9,17 +9,29 @@ class Users extends AbstractController
 {
     public function __invoke(int $id = null): string
     {
-        /*         session_start();
-        if (!array_key_exists('username', $_SESSION) && empty($_SESSION['username'])) {
+        session_start();
+        //check if user is connected and admin
+        if (
+            array_key_exists('username', $_SESSION)
+            && !empty($_SESSION['username'])
+            && !empty($_SESSION['role'])
+            && $_SESSION['role'] == 'admin'
+        ) {
+            $this->userIsConnected = true;
+            $this->username = $_SESSION['username'];
+        } else {
             $this->redirect('/');
-        } */
+        }
 
         if ($id != null) {
             $this->delete($id);
         }
         return $this->render(
-            'admin/users.html.twig',
-            ['users' =>  $this->displayUsers()]
+            'admin/user/users.html.twig',
+            [
+                'users' =>  $this->displayUsers(),
+                'username' => $this->username
+            ]
         );
     }
 
