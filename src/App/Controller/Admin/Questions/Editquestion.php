@@ -223,13 +223,9 @@ class Editquestion extends AbstractController
 
             $label = $this->formatInput($_POST["questionLabel"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]*$/", $label)) {
-                $this->questionUpdateMessages['questionLabel'] =  'Question invalide.';
-                $isValid = false;
-            } else {
-                $question->setLabel($label);
-            }
+            $question->setLabel($label);
         }
+
 
         //level question
         if (empty($_POST["questionLevel"])) {

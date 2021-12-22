@@ -307,11 +307,11 @@ class Profile extends AbstractController
             $connection = $databaseconnect->GetConnection();
             $stmt = $connection->prepare($sql);
 
-            $stmt->bindParam(":firstName", $user->getFirstName(), \PDO::PARAM_STR);
-            $stmt->bindParam(":lastName", $user->getLastName(), \PDO::PARAM_STR);
-            $stmt->bindParam(":username", $user->getUsername(), \PDO::PARAM_STR);
-            $stmt->bindParam(":email", $user->getEmail(), \PDO::PARAM_STR);
-            $stmt->bindParam(":id", $_SESSION['id'], \PDO::PARAM_INT);
+            $stmt->bindValue(":firstName", $user->getFirstName(), \PDO::PARAM_STR);
+            $stmt->bindValue(":lastName", $user->getLastName(), \PDO::PARAM_STR);
+            $stmt->bindValue(":username", $user->getUsername(), \PDO::PARAM_STR);
+            $stmt->bindValue(":email", $user->getEmail(), \PDO::PARAM_STR);
+            $stmt->bindValue(":id", $_SESSION['id'], \PDO::PARAM_INT);
 
             $stmt->execute();
             return true;

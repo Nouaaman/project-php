@@ -151,7 +151,7 @@ class Edituser extends AbstractController
 
             $firstName = $this->formatInput($_POST["firstName"]);
             // check if only contains letters and whitespace
-            if (!preg_match("/^([a-zA-Z' ]+)$/", $firstName)) {
+            if (!preg_match("/^([a-zA-Z- ]+)$/", $firstName)) {
                 $this->updateMessages['firstName'] = 'Prenom invalide.';
                 $isValid = false;
             }
@@ -165,7 +165,7 @@ class Edituser extends AbstractController
 
             $lastName = $this->formatInput($_POST["lastName"]);
             // check if only contains letters and whitespace
-            if (!preg_match("/^([a-zA-Z' ]+)$/", $lastName)) {
+            if (!preg_match("/^([a-zA-Z- ]+)$/", $lastName)) {
                 $this->updateMessages['lastName'] = 'Nom invalide.';
                 $isValid = false;
             }

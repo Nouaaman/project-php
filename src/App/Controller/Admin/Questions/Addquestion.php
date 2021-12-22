@@ -122,7 +122,7 @@ class Addquestion extends AbstractController
 
             $label = $this->formatInput($_POST["label"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]+$/", $label)) {
+            if (!preg_match("/^[a-zA-Z0-9? ]+$/", $label)) {
                 $this->registerMessages['label'] =  'question invalide.';
                 $isValid = false;
             }
@@ -135,11 +135,6 @@ class Addquestion extends AbstractController
         } else {
 
             $level = $this->formatInput($_POST["level"]);
-            // check question for no space or .. or ._.
-            if (!preg_match('/^[1-6]+$/', $level)) {
-                $this->registerMessages['level'] =  'Niveau invalide.';
-                $isValid = false;
-            }
         }
 
         if (!$isValid) {

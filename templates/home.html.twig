@@ -1,88 +1,91 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Accueil
+	{{ parent() }}Accueil
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/home.less">
+	<link rel="stylesheet/less" href="/assets/css/home.less">
 {% endblock %}
 
 
 {% block body %}
-<div class="land">
-	<div class="nav">
-		<div class="logo">
-			<h4><img src="/assets/img/logo.png"></h4>
-		</div>
-		<ul>
-			{% if userIsConnected == true %}
-			<li>
-				<div class="user-icon-container">
-					<div class="user-icon-content" id="userIcon">
-						<img src="/assets/img/user-white.png" alt="" class="user-icon">
-						<p>{{username}}</p>
-					</div>
-					<div class="user-actions">
-						<a href="/user/profile" class="action">Profil</a>
-						<form action="" method="POST">
-							<input type="submit" value="Déconnexion" name="signOut" class="action">
-						</form>
-					</div>
-				</div>
-			</li>
-			{% endif %}
-			{% if userIsConnected == false %}
-			<li><a href="login">Connexion | Inscription</a></li>
-			{% endif %}
+	<div class="land">
+		<div class="nav">
+			<div class="logo">
+				<h4><img src="/assets/img/logo.png"></h4>
+			</div>
+			<ul>
+				{% if userIsConnected == true %}
+					<li>
+						<div class="user-icon-container">
+							<div class="user-icon-content" id="userIcon">
+								<img src="/assets/img/user-white.png" alt="" class="user-icon">
+								<p>{{username}}</p>
+							</div>
+							<div class="user-actions">
+								<a href="/user/profile" class="action">Profil</a>
+								<a href="/admin/homepage" class="action">Admin</a>
+								<form action="" method="POST">
+									<input type="submit" value="Déconnexion" name="signOut" class="action">
+								</form>
+							</div>
+						</div>
+					</li>
+				{% endif %}
+				{% if userIsConnected == false %}
+					<li>
+						<a href="login">Connexion | Inscription</a>
+					</li>
+				{% endif %}
 
-			<!-- <li><a href="admin/users">Admin</a></li> -->
+				<!-- <li><a href="admin/users">Admin</a></li> -->
 
-		</ul>
-	</div>
-	<div class="presentation">
-		<div class="title">BOARD GAME</div>
-		<div class="textpres">Défiez vos amis en découvrant votre culture cachée au fond de vous
+			</ul>
 		</div>
-		<div class="play">
-			<button id="play">Jouer</button>
+		<div class="presentation">
+			<div class="title">BOARD GAME</div>
+			<div class="textpres">Défiez vos amis en découvrant votre culture cachée au fond de vous
+			</div>
+			<div class="play">
+				<button id="play">Jouer</button>
+			</div>
+		</div>
+		<div class="down">
+			<img src="https://img.icons8.com/glyph-neue/64/ffffff/chevron-down.png"/>
+		</div>
+		<div class="rules">
+			<div class="description">
+				<h3>Fonctionnement du jeu</h3>
+				<p>
+					<b>Le but du jeu est simple :</b>
+					Répondre au maximum de question, et finir avant ses adversaires
+				</p>
+				<p>Il faudra arriver au bout du plateau le plus rapidement possible.</p>
+				<p>Lorsque ce sera à votre tour de jouer, vous choisirez le niveau de difficulté entre 1 et 6 de la
+																			question
+																			à laquelle vous allez répondre.
+																			Plus le niveau est élevé, plus vous avancerez</p>
+				<p>Les joueurs jouent chacun leur tour</p>
+				<p>Avant de commencer, connectez-vous à votre compte. Si ce n'est pas déjà fait, inscrivrez-vous
+				</p>
+				<p>Faites travailler vos méninges et bon chance !</p>
+			</div>
 		</div>
 	</div>
-	<div class="down">
-		<img src="https://img.icons8.com/glyph-neue/64/ffffff/chevron-down.png" />
-	</div>
-	<div class="rules">
-		<div class="description">
-			<h3>Fonctionnement du jeu</h3>
-			<p>
-				<b>Le but du jeu est simple :</b>
-				Répondre au maximum de question, et finir avant ses adversaires
-			</p>
-			<p>Il faudra arriver au bout du plateau le plus rapidement possible.</p>
-			<p>Lorsque ce sera à votre tour de jouer, vous choisirez le niveau de difficulté entre 1 et 6 de la
-				question
-				à laquelle vous allez répondre.
-				Plus le niveau est élevé, plus vous avancerez</p>
-			<p>Les joueurs jouent chacun leur tour</p>
-			<p>Avant de commencer, connectez-vous à votre compte. Si ce n'est pas déjà fait, inscrivrez-vous
-			</p>
-			<p>Faites travailler vos méninges et bon chance !</p>
-		</div>
-	</div>
-</div>
 {% endblock %}
 
 
 {% block bottom_js %}
-<script>
-	let userIcon = document.getElementById('userIcon')
-	userIcon.addEventListener('click', toggle)
+	<script>
+		let userIcon = document.getElementById('userIcon')
+userIcon.addEventListener('click', toggle)
 
-	function toggle() {
-		userIcon.classList.toggle('visible')
-	}
-</script>
-<script type="text/javascript" src="js/vanilla-tilt.js"></script>
+function toggle() {
+userIcon.classList.toggle('visible')
+}
+	</script>
+	<script type="text/javascript" src="js/vanilla-tilt.js"></script>
 
 {% endblock %}

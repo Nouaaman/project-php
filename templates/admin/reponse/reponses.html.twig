@@ -14,7 +14,7 @@
 	<div class="allpage">
 		<div class="sidebar">
 			<div class="back">
-				<a href="index.html"><img src="/assets/img/back-100.png" alt=""></a>
+				<a href="/admin/question/questions"><img src="/assets/img/back-100.png" alt=""></a>
 			</div>
 			<div class="admin">
 				<img src="https://img.icons8.com/external-tulpahn-flat-tulpahn/64/000000/external-astronaut-space-tulpahn-flat-tulpahn.png"/>
@@ -55,9 +55,6 @@
 						{% endif %}
 						<td>
 							<div class="tache">
-								<div class="update">
-									<a href="/admin/edituser/{{reponse.id}}"><img src="/assets/img/icon-update.png" class="imgupdate"></a>
-								</div>
 								<div class="delete">
 									<a href="/admin/reponse/delete/{{reponse.id}}"><img src="/assets/img/icon-delete.png" class="imgdelete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ reponse.label }} ?')"></a>
 								</div>
