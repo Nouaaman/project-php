@@ -24,7 +24,7 @@ class Addquestion extends AbstractController
         ) {
             $this->userIsConnected = true;
             $this->username = $_SESSION['username'];
-        }else {
+        } else {
             $this->redirect('/');
         }
 
@@ -138,10 +138,6 @@ class Addquestion extends AbstractController
 
             $label = $this->formatInput($_POST["label"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9? ]+$/", $label)) {
-                $this->registerMessages['label'] =  'question invalide.';
-                $isValid = false;
-            }
         }
 
         //level question

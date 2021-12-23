@@ -57,8 +57,6 @@ class Adduser extends AbstractController
                         $user->setEmail($formData['email']);
                         $user->setPassword($formData['password']);
                         $this->registerUser($user);
-
-                        $_SESSION['username'] = $formData['username'];
                         $this->redirect('/admin/users');
                     }
                 }

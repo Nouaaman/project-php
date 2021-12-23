@@ -53,6 +53,7 @@ class Editquestion extends AbstractController
                     $this->UpdateAnswer($answer);
                 }
             }
+            $this->redirect('/admin/question/questions');
         }
 
         //get data to display
