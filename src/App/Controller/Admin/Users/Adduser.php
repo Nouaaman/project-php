@@ -57,15 +57,13 @@ class Adduser extends AbstractController
                         $user->setEmail($formData['email']);
                         $user->setPassword($formData['password']);
                         $this->registerUser($user);
-
-                        $_SESSION['username'] = $formData['username'];
                         $this->redirect('/admin/users');
                     }
                 }
             }
         }
 
-        return $this->render('admin/adduser.html.twig', [
+        return $this->render('admin/user/adduser.html.twig', [
             'addUserMessages' => $this->addUserMessages,
             'post' => $_POST
         ]);
@@ -134,7 +132,7 @@ class Adduser extends AbstractController
 
             $firstName = $this->formatInput($_POST["firstName"]);
             // check if only contains letters and whitespace
-            if (!preg_match("/^([a-zA-Z' ]+)$/", $firstName)) {
+            if (!preg_match("/^([a-zA-Z- ]+)$/", $firstName)) {
                 $this->addUserMessages['firstName'] = 'Prenom invalide.';
                 $isValid = false;
             }
@@ -148,7 +146,7 @@ class Adduser extends AbstractController
 
             $lastName = $this->formatInput($_POST["lastName"]);
             // check if only contains letters and whitespace
-            if (!preg_match("/^([a-zA-Z' ]+)$/", $lastName)) {
+            if (!preg_match("/^([a-zA-Z- ]+)$/", $lastName)) {
                 $this->addUserMessages['lastName'] = 'Nom invalide.';
                 $isValid = false;
             }
@@ -162,7 +160,7 @@ class Adduser extends AbstractController
 
             $username = $this->formatInput($_POST["username"]);
             // check username for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9]+$/", $username)) {
+            if (!preg_match("/^[a-zA-Z0-9-]+$/", $username)) {
                 $this->addUserMessages['username'] =  'Username invalide.';
                 $isValid = false;
             }

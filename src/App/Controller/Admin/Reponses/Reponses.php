@@ -28,7 +28,10 @@ class Reponses extends AbstractController
         $this->deleteReponse($id);
         return $this->render(
             'admin/reponse/reponses.html.twig',
-            ['reponses' =>  $this->displayReponses($id)]
+            [
+                'reponses' =>  $this->displayReponses($id),
+                'username' => $this->username
+            ]
         );
     }
 

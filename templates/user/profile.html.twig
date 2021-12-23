@@ -1,162 +1,162 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Profil
+	{{ parent() }}Profil
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/profile.less">
+	<link rel="stylesheet/less" href="/assets/css/profile.less">
 {% endblock %}
 
 
 {% block body %}
-<div class="page">
-	<div class="container">
-		<h1>Paramètres du compte</h1>
-		<div class="content">
-			<div class="navigation-container">
-				<div class="fullname-container">
-					<img src="/assets/img/user-black.png" alt="">
-					<h2>{{userInfo.firstName}} {{userInfo.lastName}}</h2>
-				</div>
-				<nav>
-					<ul>
-						{% set cssClass = (passwordPanelisActive == false) ? 'active' : '' %}
-						<li class="{{cssClass}}" data-panel='account'>
-							<div class="img">
-								<img src="/assets/img/icon-edit-profile.png" alt="">
-							</div>
-							<p>Compte</p>
-						</li>
-						{% set cssClass = (passwordPanelisActive == true) ? 'active' : '' %}
-						<li id='navPassword' class="{{cssClass}}" data-panel='password'>
-							<div class="img">
-								<img src="/assets/img/icon-password.png" alt="">
-							</div>
-							<p>Mot de passe</p>
-						</li>
-					</ul>
-				</nav>
-			</div>
-
-			<div class="main-content">
-				{% set cssClass = (passwordPanelisActive == false) ? 'activePanel' : '' %}
-				<div class="panel {{ cssClass }}" id="account-container" data-panel='account'>
-
-					<h2>Informations personnelles</h2>
-
-					<form method="POST">
-						<input type="hidden" name="action" value="updateAccount">
-
-						<div class="field">
-							<label for="lastName">Nom</label>
-							<input type="text" name="lastName" id="lastName" value="{{userInfo.lastName}}"
-								class="disabled" disabled>
-							<p class="message warning">{{updateMessages.lastName}}</p>
-						</div>
-						<div class="field">
-							<label for="firstName">Prenom</label>
-							<input type="text" name="firstName" id="firstName" value="{{userInfo.firstName}}"
-								class="disabled" disabled>
-							<p class="message warning">{{updateMessages.firstName}}</p>
-						</div>
-						<div class="field">
-							<label for="username">Username</label>
-							<input type="text" name="username" id="username" value="{{userInfo.username}}"
-								class="disabled" disabled>
-							<p class="message warning">{{updateMessages.username}}</p>
-						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" value="{{userInfo.email}}" class="disabled"
-								disabled>
-							<p class="message warning">{{updateMessages.email}}</p>
-						</div>
-						{% set cssClass = (updateMessages.status  == true) ? 'success' : 'warning' %}
-						<p class="message {{ cssClass }}">{{updateMessages.message}}</p>
-						<div class="buttons">
-
-							<button type="button" class="btn outline" onclick="enableInputs()">Modifier</button>
-							<button type="submit" id="saveButton" class="btn fill disabled"
-								disabled>Enregistrer</button>
-						</div>
-					</form>
+	<div class="page">
+		<div class="container">
+			<h1>Paramètres du compte</h1>
+			<div class="content">
+				<div class="navigation-container">
+					<div class="fullname-container">
+						<img src="/assets/img/user-black.png" alt="">
+						<h2>{{userInfo.firstName}}
+							{{userInfo.lastName}}</h2>
+					</div>
+					<nav>
+						<ul>
+							{% set cssClass = (passwordPanelisActive == false) ? 'active' : '' %}
+							<li class="{{cssClass}}" data-panel='account'>
+								<div class="img">
+									<img src="/assets/img/icon-edit-profile.png" alt="">
+								</div>
+								<p>Compte</p>
+							</li>
+							{% set cssClass = (passwordPanelisActive == true) ? 'active' : '' %}
+							<li id='navPassword' class="{{cssClass}}" data-panel='password'>
+								<div class="img">
+									<img src="/assets/img/icon-password.png" alt="">
+								</div>
+								<p>Mot de passe</p>
+							</li>
+						</ul>
+					</nav>
 				</div>
 
-				{% set cssClass = (passwordPanelisActive == true) ? 'activePanel' : '' %}
-				<div class="panel password-container hiddenPanel {{ cssClass }}" data-panel='password'>
+				<div class="main-content">
+					{% set cssClass = (passwordPanelisActive == false) ? 'activePanel' : '' %}
+					<div class="panel {{ cssClass }}" id="account-container" data-panel='account'>
 
-					<h2>Changez votre mot de passe</h2>
+						<h2>Informations personnelles</h2>
 
-					<form method="POST">
-						<input type="hidden" name="action" value="updatePassword">
-						<div class="field">
-							<label for="oldPassword">Mot de passe actuel</label>
-							<input type="password" name="oldPassword" id="oldPassword">
-							<p class="message warning">{{pwdUpdateMessages.oldPassword}}</p>
-						</div>
+						<form method="POST">
+							<input type="hidden" name="action" value="updateAccount">
 
-						<div class="field">
-							<label for="newPassword">Nouveau mot de passe</label>
-							<input type="password" name="newPassword" id="newPassword">
-							<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
-						</div>
-						<div class="field">
-							<label for="newPasswordConfirmation">Confirmer mot de passe</label>
-							<input type="password" name="newPasswordConfirmation" id="newPasswordConfirmation">
-							<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
-						</div>
+							<div class="field">
+								<label for="lastName">Nom</label>
+								<input type="text" name="lastName" id="lastName" value="{{userInfo.lastName}}" class="disabled" disabled>
+								<p class="message warning">{{updateMessages.lastName}}</p>
+							</div>
+							<div class="field">
+								<label for="firstName">Prenom</label>
+								<input type="text" name="firstName" id="firstName" value="{{userInfo.firstName}}" class="disabled" disabled>
+								<p class="message warning">{{updateMessages.firstName}}</p>
+							</div>
+							<div class="field">
+								<label for="username">Username</label>
+								<input type="text" name="username" id="username" value="{{userInfo.username}}" class="disabled" disabled>
+								<p class="message warning">{{updateMessages.username}}</p>
+							</div>
+							<div class="field">
+								<label for="email">Email</label>
+								<input type="email" name="email" id="email" value="{{userInfo.email}}" class="disabled" disabled>
+								<p class="message warning">{{updateMessages.email}}</p>
+							</div>
+							{% set cssClass = (updateMessages.status  == true) ? 'success' : 'warning' %}
+							<p class="message {{ cssClass }}">{{updateMessages.message}}</p>
+							<div class="buttons">
 
-						{% set cssClass = (pwdUpdateMessages.status  == true) ? 'success' : 'warning' %}
-						<p class="message {{ cssClass }}">{{pwdUpdateMessages.message}}</p>
-						<div class="buttons">
+								<button type="button" class="btn outline" onclick="enableInputs()">Modifier</button>
+								<button type="submit" id="saveButton" class="btn fill disabled" disabled>Enregistrer</button>
+								<a href="/">
+									<button type="button" class="btn outline">Quitter</button>
+								</a>
 
-							<button type="submit" class="btn fill">Enregistrer</button>
-						</div>
-					</form>
+							</div>
+						</form>
+					</div>
+
+					{% set cssClass = (passwordPanelisActive == true) ? 'activePanel' : '' %}
+					<div class="panel password-container hiddenPanel {{ cssClass }}" data-panel='password'>
+
+						<h2>Changez votre mot de passe</h2>
+
+						<form method="POST">
+							<input type="hidden" name="action" value="updatePassword">
+							<div class="field">
+								<label for="oldPassword">Mot de passe actuel</label>
+								<input type="password" name="oldPassword" id="oldPassword">
+								<p class="message warning">{{pwdUpdateMessages.oldPassword}}</p>
+							</div>
+
+							<div class="field">
+								<label for="newPassword">Nouveau mot de passe</label>
+								<input type="password" name="newPassword" id="newPassword">
+								<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
+							</div>
+							<div class="field">
+								<label for="newPasswordConfirmation">Confirmer mot de passe</label>
+								<input type="password" name="newPasswordConfirmation" id="newPasswordConfirmation">
+								<p class="message warning">{{pwdUpdateMessages.newPassword}}</p>
+							</div>
+
+							{% set cssClass = (pwdUpdateMessages.status  == true) ? 'success' : 'warning' %}
+							<p class="message {{ cssClass }}">{{pwdUpdateMessages.message}}</p>
+							<div class="buttons">
+
+								<button type="submit" class="btn fill">Enregistrer</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 {% endblock %}
 
 
 {% block bottom_js %}
-<script>
-	let navs = document.querySelectorAll('nav li')
-	let panels = document.querySelectorAll('.panel')
+	<script>
+		let navs = document.querySelectorAll('nav li')
+let panels = document.querySelectorAll('.panel')
 
-	navs.forEach(element => {
-		element.addEventListener('click', (e) => {
-			navs.forEach(element => {
-				element.classList.remove('active')
-			})
-			let clickedNav = e.currentTarget
-			clickedNav.classList.add('active')
-			panels.forEach(panel => {
-				panel.classList.remove('activePanel')
-			})
-			panels.forEach(panel => {
-				if (clickedNav.dataset.panel === panel.dataset.panel) {
-					panel.classList.add('activePanel')
-				}
-			})
+navs.forEach(element => {
+element.addEventListener('click', (e) => {
+navs.forEach(element => {
+element.classList.remove('active')
+})
+let clickedNav = e.currentTarget
+clickedNav.classList.add('active')
+panels.forEach(panel => {
+panel.classList.remove('activePanel')
+})
+panels.forEach(panel => {
+if (clickedNav.dataset.panel === panel.dataset.panel) {
+panel.classList.add('activePanel')
+}
+})
 
-		})
-	})
+})
+})
 
-	function enableInputs() {
+function enableInputs() {
 
-		let inputs = document.querySelectorAll("#account-container .field input")
-		inputs.forEach(input => {
-			input.disabled = false;
-			input.classList.remove('disabled')
-		})
-		let saveButton = document.getElementById('saveButton')
-		saveButton.disabled = false
-		saveButton.classList.remove('disabled')
-	}
-</script>
+let inputs = document.querySelectorAll("#account-container .field input")
+inputs.forEach(input => {
+input.disabled = false;
+input.classList.remove('disabled')
+})
+let saveButton = document.getElementById('saveButton')
+saveButton.disabled = false
+saveButton.classList.remove('disabled')
+}
+	</script>
 {% endblock %}

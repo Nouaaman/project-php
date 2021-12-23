@@ -24,7 +24,7 @@ class Addquestion extends AbstractController
         ) {
             $this->userIsConnected = true;
             $this->username = $_SESSION['username'];
-        }else {
+        } else {
             $this->redirect('/');
         }
 
@@ -138,10 +138,6 @@ class Addquestion extends AbstractController
 
             $label = $this->formatInput($_POST["label"]);
             // check question for no space or .. or ._.
-            if (!preg_match("/^[a-zA-Z0-9 ]+$/", $label)) {
-                $this->registerMessages['label'] =  'question invalide.';
-                $isValid = false;
-            }
         }
 
         //level question
@@ -151,11 +147,6 @@ class Addquestion extends AbstractController
         } else {
 
             $level = $this->formatInput($_POST["level"]);
-            // check question for no space or .. or ._.
-            if (!preg_match('/^[1-6]+$/', $level)) {
-                $this->registerMessages['level'] =  'Niveau invalide.';
-                $isValid = false;
-            }
         }
 
         if (!$isValid) {

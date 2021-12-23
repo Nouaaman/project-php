@@ -27,8 +27,11 @@ class Users extends AbstractController
             $this->delete($id);
         }
         return $this->render(
-            'admin/users.html.twig',
-            ['users' =>  $this->displayUsers()]
+            'admin/user/users.html.twig',
+            [
+                'users' =>  $this->displayUsers(),
+                'username' => $this->username
+            ]
         );
     }
 

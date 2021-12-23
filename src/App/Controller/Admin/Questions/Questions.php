@@ -32,6 +32,7 @@ class Questions extends AbstractController
             'admin/question/questions.html.twig',
             [
                 'questions' =>  $this->displayQuestions(),
+                'username' => $this->username
             ]
         );
     }
