@@ -22,13 +22,11 @@ class Addreponse extends AbstractController
             && !empty($_SESSION['role'])
             && $_SESSION['role'] == 'admin'
         ) {
-            $this->userIsConnected = true;
+
             $this->username = $_SESSION['username'];
         } else {
             $this->redirect('/');
         }
-
-        $this->registerMessages;
 
         if (isset($_POST['action']) && $_POST['action'] == 'addAnswer') {
             $formDataAns = $this->getAnswerData();
