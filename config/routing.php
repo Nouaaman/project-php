@@ -16,6 +16,7 @@ use App\Controller\User\Login;
 use App\Controller\Page404;
 use App\Controller\User\Profile;
 use App\Controller\Game\Createorjoin;
+use App\Controller\Game\Gamepage;
 use Framework\Routing\Route;
 
 
@@ -42,5 +43,6 @@ return [
     new Route('GET', '/admin/homepage', Adminhomepage::class),
     /* game*/
     new Route('GET', '/game/create_join', Createorjoin::class),
+    new Route('GET', '/game', Gamepage::class),
     
 ];

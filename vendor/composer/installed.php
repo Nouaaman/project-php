@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a3cd2e349bcbc98caaa92d4f7e52d7d56dd705a4',
+        'reference' => '2f0b04cae44917f36fa313a7dc9d1cccc84b9bcc',
         'name' => 'boris/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a3cd2e349bcbc98caaa92d4f7e52d7d56dd705a4',
+            'reference' => '2f0b04cae44917f36fa313a7dc9d1cccc84b9bcc',
             'dev_requirement' => false,
         ),
         'cboden/ratchet' => array(

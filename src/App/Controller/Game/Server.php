@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Controller\Game;
+namespace App\Controller\Game\Gamepage;
 
-// use Framework\Controller\AbstractController;
+use App\Controller\Game\GameManager;
+use Ratchet\Server\IoServer;
 
-class Server 
-{
-    
-}
+// require dirname(__DIR__) . '/vendor/autoload.php';
+
+$server = IoServer::factory(
+    new GameManager(),
+    8080
+);
+
+$server->run();

@@ -7,7 +7,7 @@ namespace App\Controller\Game;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-class Chat implements MessageComponentInterface
+class GameManager implements MessageComponentInterface
 {
     public function onOpen(ConnectionInterface $conn)
     {
