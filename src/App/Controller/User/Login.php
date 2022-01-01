@@ -9,7 +9,7 @@ use Framework\Controller\AbstractController;
 
 class Login extends AbstractController
 {
-
+    
     private $registerMessages = [];
     private $loginMessages = [];
     private $classCss;
@@ -17,6 +17,7 @@ class Login extends AbstractController
 
     public function __invoke()
     {
+     
         session_start();
 
         //redirect to homepage in case session exists
