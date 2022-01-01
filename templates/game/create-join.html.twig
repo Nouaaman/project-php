@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+{{ parent() }}Créer ou Joindre une partie
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet/less" href="/assets/css/home.less">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+	<div class="back">
+		<a href="/"><img src="/assets/img/back-100.png" alt="" class="back-btn"></a>
+	</div>
+	<div class="questions box">
+		<button class="btn">Créer</button>
+	</div>
+	<div class="users box">
+		<label for="idGame">Code de la partie</label>
+		<input type="text" name="idGame" id="idGame">
+		<button class="btn">Joindre</button>
+	</div>
+
+</div>
+{% endblock %}
+
+
+{% block bottom_js %}
+
+{% endblock %}
