@@ -4,7 +4,7 @@ namespace App\Controller\Game;
 
 use Framework\Controller\AbstractController;
 
-class Createorjoin extends AbstractController
+class Create extends AbstractController
 {
     private $username = '';
     public function __invoke(): string
@@ -21,6 +21,6 @@ class Createorjoin extends AbstractController
         }
 
 
-        return $this->render('game/create_join.html.twig', []);
+        return $this->render('game/create.html.twig', []);
     }
 }

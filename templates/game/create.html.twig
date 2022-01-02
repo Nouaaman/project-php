@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+{{ parent() }}Créer ou Joindre une partie
+{% endblock %}
+
+
+{% block css %}
+<link rel="stylesheet/less" href="/assets/css/createGame.less">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+	<div class="back">
+		<a href="/"><img src="/assets/img/back-100.png" alt="" class="back-btn"></a>
+	</div>
+	<div class="users box">
+		<h1>Créer une nouvelle partie</h1>
+		<div class="field">
+			<label>Joueur</label>
+			<div class="autocomplete">
+				<input type="text" name="username" placeholder="Username" autocomplete="off">
+				<!-- <div class="autocomplete-items">
+					<p class="item">ergerg</p>
+					<p class="item">bbbss</p>
+				</div> -->
+			</div>
+			
+		</div>
+
+		<button class="btn">Créer</button>
+	</div>
+
+</div>
+{% endblock %}
+
+
+{% block bottom_js %}
+<script type="text/javascript" src="/js/createGame.js"></script>
+{% endblock %}

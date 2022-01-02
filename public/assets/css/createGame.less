@@ -38,6 +38,7 @@ body {
         z-index: 5;
         width: 80px;
         height: 80px;
+
         img {
             height: 100%;
             width: 100%;
@@ -56,14 +57,14 @@ body {
     gap: 4px;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.2);
     width: 40%;
     max-width: 360px;
-    height: 45%;
+    height: auto;
 
     h1 {
-        
+
         color: #fff;
     }
 
@@ -84,6 +85,7 @@ body {
         cursor: pointer;
         border: none;
         font-size: 24px;
+
         &:hover {
             background-color: @third-color;
         }
@@ -99,18 +101,48 @@ body {
         gap: 6px;
 
         label {
-            
+
             color: rgb(255, 255, 255);
         }
 
-        input {
+        .autocomplete {
+            position: relative;
+            display: inline-block;
             width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 2px solid #d2e2e7;
-            font-size: 16px;
-            background-color: #f7f8f9;
+        }
+
+        .autocomplete-items {
+            // display: none;
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 106%;
+            left: 0;
+            right: 0;
+
+            .item {
+                padding: 8px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+                color: rgb(58, 58, 58);
+                text-align: left;
+            }
+        }
+
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            // background-color: rgba(255, 255, 255, 0.795); 
             color: @primary-color;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-size: 17px;
+            
         }
 
         input:focus {
