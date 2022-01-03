@@ -1,28 +1,36 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Jeu
+	{{ parent() }}Jeu
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/createjoingame.less">
+	<link rel="stylesheet/less" href="/assets/css/game.less">
 {% endblock %}
 
 
 {% block body %}
-<div class="container">
-	<div class="back">
-		<a href="/"><img src="/assets/img/back-100.png" alt="" class="back-btn"></a>
+	<div class="land">
+
+		<div class="tables">
+			<div class="line l1"></div>
+			<div class="line l2"></div>
+		</div>
 	</div>
-    <h1>game!</h1>
-	<div class="game-container">
-		
-	</div> 
-</div>
 {% endblock %}
-
-
 {% block bottom_js %}
+	<script>
+		let board = document.createElement('div');
+board.className = "case";
+for (x = 0; x < 10; x ++) {
+let lines = document.querySelectorAll('.tables .line')
+lines.forEach(line => {
+line.appendChild(board);
+console.log(lines)
 
+});
+
+}
+	</script>
 {% endblock %}

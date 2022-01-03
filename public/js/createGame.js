@@ -10,7 +10,7 @@ inputs.forEach(input => {
 
 function autocomplete(input) {
 
-    let parentElement = input.sib
+    let parentElement = input.parentElement
 
     let items = document.createElement('div')
     items.setAttribute('class', 'autocomplete-items')

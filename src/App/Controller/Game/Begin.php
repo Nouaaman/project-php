@@ -4,7 +4,7 @@ namespace App\Controller\Game;
 
 use Framework\Controller\AbstractController;
 
-class Game extends AbstractController
+class Begin extends AbstractController
 {
     private $username = '';
     public function __invoke(): string
@@ -21,6 +21,6 @@ class Game extends AbstractController
         }
 
 
-        return $this->render('game/game.html.twig', []);
+        return $this->render('game/begin.html.twig', []);
     }
 }

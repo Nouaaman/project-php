@@ -16,7 +16,8 @@ use App\Controller\User\Login;
 use App\Controller\Page404;
 use App\Controller\User\Profile;
 use App\Controller\Game\Create;
-use App\Controller\Game\Gamepage;
+use App\Controller\Game\Begin;
+use App\Controller\Game\Game;
 use App\Controller\Game\Searchplayer;
 use Framework\Routing\Route;
 
@@ -44,7 +45,8 @@ return [
     new Route('GET', '/admin/homepage', Adminhomepage::class),
     /* game*/
     new Route('GET', '/game/create', Create::class),
-    new Route('GET', '/game', Gamepage::class),
+    new Route('GET', '/game/begin', Begin::class),
+    new Route('GET', '/game', Game::class),
 
     /*testing */
     new Route(['GET', 'POST'], '/test/searchplayer', Searchplayer::class)
