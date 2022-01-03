@@ -1,0 +1,165 @@
+@primary-color: #14112c;
+@secondary-color: #4e45ab;
+@third-color: #235ec5;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/assets/img/land.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    align-items: center;
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+
+
+    .back {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        z-index: 5;
+        width: 80px;
+        height: 80px;
+
+        img {
+            height: 100%;
+            width: 100%;
+
+        }
+    }
+}
+
+.box {
+    padding: 32px;
+    min-height: 262px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 40%;
+    max-width: 360px;
+    height: auto;
+
+    h1 {
+
+        color: #fff;
+    }
+
+    p {
+
+        color: #fff;
+    }
+
+    .btn {
+        text-decoration: none;
+        text-align: center;
+        padding: 12px 18px;
+        margin-top: 8px;
+        border-radius: 8px;
+        color: #fff;
+        background-color: @secondary-color;
+        transition: .5s;
+        cursor: pointer;
+        border: none;
+        font-size: 24px;
+
+        &:hover {
+            background-color: @third-color;
+        }
+    }
+
+    .field {
+        padding: 12px 0;
+        width: 98%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 6px;
+
+        label {
+
+            color: rgb(255, 255, 255);
+        }
+
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .autocomplete-items {
+            // display: none;
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 106%;
+            left: 0;
+            right: 0;
+
+            .item {
+                padding: 8px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+                color: rgb(58, 58, 58);
+                text-align: left;
+            }
+        }
+
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            // background-color: rgba(255, 255, 255, 0.795); 
+            color: @primary-color;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-size: 17px;
+            
+        }
+
+        input:focus {
+            outline: none;
+            border-color: @third-color;
+        }
+    }
+
+}
+
+@media screen and (max-width: 540px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .box {
+        width: 90%;
+    }
+
+}

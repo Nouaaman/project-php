@@ -11,8 +11,8 @@ class DatabaseConnect
 
     function __construct()
     {
-        // $configs = require(__DIR__ . '../../../../config/app.local.php');
-        $configs = require(__DIR__ . '../../../../config/app.php');
+        $configs = require(__DIR__ . '../../../../config/app.local.php');
+        //$configs = require(__DIR__ . '../../../../config/app.php');
         $this->host = $configs['DB_HOST'];
         $this->user = $configs['DB_USER'];
         $this->pwd = $configs['DB_PASSWORD'];

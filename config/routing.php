@@ -15,15 +15,21 @@ use App\Controller\Homepage;
 use App\Controller\User\Login;
 use App\Controller\Page404;
 use App\Controller\User\Profile;
+use App\Controller\Game\Create;
+use App\Controller\Game\Begin;
+use App\Controller\Game\Game;
+use App\Controller\Game\Searchplayer;
 use Framework\Routing\Route;
 
 
 
 return [
     new Route(['GET', 'POST'], '/', Homepage::class),
+    new Route(['GET', 'POST'], '/login', Login::class),
+    new Route('GET', '/404', Page404::class),
+    /* admin */
     new Route('GET', '/admin/users/delete/{id}', Users::class),
     new Route('GET', '/admin/users/{operation}/{id}', Users::class),
-    new Route(['GET', 'POST'], '/login', Login::class),
     new Route(['GET', 'POST'], '/admin/users', Users::class),
     new Route(['GET', 'POST'], '/admin/question/questions', Questions::class),
     new Route(['GET', 'POST'], '/admin/question/add', Addquestion::class),
@@ -35,9 +41,13 @@ return [
     new Route(['GET', 'POST'], '/admin/adduser', Adduser::class),
     new Route(['GET', 'POST'], '/admin/edituser/{id}', Edituser::class),
     new Route(['GET', 'POST'], '/admin/reponse/delete/{id}', Deleteresponse::class),
-
     new Route(['GET', 'POST'], '/user/profile', Profile::class),
     new Route('GET', '/admin/homepage', Adminhomepage::class),
-    new Route('GET', '/404', Page404::class),
+    /* game*/
+    new Route('GET', '/game/create', Create::class),
+    new Route('GET', '/game/begin', Begin::class),
+    new Route('GET', '/game', Game::class),
 
+    /*testing */
+    new Route(['GET', 'POST'], '/test/searchplayer', Searchplayer::class)
 ];
