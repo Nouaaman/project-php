@@ -48,6 +48,6 @@ return [
     new Route('GET', '/game/begin', Begin::class),
     new Route('GET', '/game', Game::class),
 
-    /*testing */
-    new Route(['GET', 'POST'], '/test/searchplayer', Searchplayer::class)
+    /*searchPlayer autocomplete */
+    new Route(['GET', 'POST'], '/game/searchplayer', Searchplayer::class)
 ];
