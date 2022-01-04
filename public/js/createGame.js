@@ -54,68 +54,56 @@ function showSuggestion(items, usernames) {
 
 
 /*****************create game******************/
+
 let btnCreate = document.getElementById('create')
 
 /* connect to server */
-const conn = new WebSocket('ws://project-php:2222');
+const conn = new WebSocket('ws://project-php:8282');
 
-// Connect
+// send data
+btnCreate.addEventListener("click", e => {
 
-conn.onopen = function(e) {
-    console.log("Connection established!");
-    conn.send('Hello Me!');
-};
-conn.onmessage = function(e) { console.log(e.data); };
+  let usernames = document.querySelectorAll('.username')
+  let colors = document.querySelectorAll('.color')
+
+  let players = []
+  for (let i = 0; i < usernames.length; i++) {
+    const player = {
+      idConn: '',
+      idGame: '',
+      username: usernames[i].value,
+      color: colors[i].value,
+      position: 0
+    }
+    players.push(player)
+  }
+
+  const payLoad = {
+    "method": "create",
+    "players": players
+  }
+
+  conn.send(JSON.stringify(payLoad));
+  // wsSend(payLoad)
+
+})
 
 
 
 
-// btnCreate.addEventListener("click", e => {
 
-//   let usernames = document.querySelectorAll('.username')
-//   let colors = document.querySelectorAll('.color')
 
-//   let players = []
-//   for (let i = 0; i < usernames.length; i++) {
-//     const player = {
-//       idConn: '',
-//       idGame: '',
-//       username: usernames[i].value,
-//       color: colors[i].value,
-//       position: 0
-//     }
-//     players.push(player)
-//   }
 
-//   const payLoad = {
-//     "method": "create",
-//     "players": players
-//   }
 
-//   // ws.send(JSON.stringify(payLoad));
-//   wsSend(payLoad)
 
-// })
-
-// const handleSend = (data) => {
-//   if (ws.readyState === WebSocket.OPEN) {
-//     ws.send(JSON.stringify(data))
-//   } else if (ws.readyState == WebSocket.CONNECTING) {
-//     console.log('waiting connection');
-//     ws.addEventListener('open', () => handleSend(data))
+// let wsSend = function (data) {
+//   if (!ws.readyState) {
+//     console.log(ws.readyState);
+//     setTimeout(function () {
+//       wsSend(data);
+//     }, 100);
 //   } else {
-//     console.log('error connection');
+//     ws.send(data);
+//     console.log('sent');
 //   }
 // };
-
-let wsSend = function (data) {
-  if (!ws.readyState) {
-    console.log(ws.readyState);
-    setTimeout(function () {
-      wsSend(data);
-    }, 100);
-  } else {
-    ws.send(data);
-    console.log('sent');
-  }
-};
