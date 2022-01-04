@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2f0b04cae44917f36fa313a7dc9d1cccc84b9bcc',
+        'reference' => '9dbc65ad0da53fe2ebd8ba6d2024d8177423337c',
         'name' => 'boris/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2f0b04cae44917f36fa313a7dc9d1cccc84b9bcc',
+            'reference' => '9dbc65ad0da53fe2ebd8ba6d2024d8177423337c',
             'dev_requirement' => false,
         ),
         'cboden/ratchet' => array(
@@ -53,6 +53,15 @@
             'install_path' => __DIR__ . '/../nikic/fast-route',
             'aliases' => array(),
             'reference' => '181d480e08d9476e61381e04a71b34dc0432e812',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.5.3',
+            'version' => '6.5.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => 'baeb7cde6b60b1286912690ab0693c7789a31e71',
             'dev_requirement' => false,
         ),
         'psr/http-factory' => array(

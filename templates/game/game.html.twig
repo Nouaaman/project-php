@@ -12,25 +12,63 @@
 
 {% block body %}
 	<div class="land">
-
-		<div class="tables">
-			<div class="line l1"></div>
-			<div class="line l2"></div>
+		<div class="buttons">
+			<button class="level l1" type="button">Level 1</button>
+			<button class="level l2" type="button">Level 2</button>
+			<button class="level l3" type="button">Level 3</button>
+			<button class="level l4" type="button">Level 4</button>
+			<button class="level l5" type="button">Level 5</button>
+			<button class="level l6" type="button">Level 6</button>
 		</div>
+		<div class="modal-bg">
+			<div class="modal">
+				<h2>Question</h2>
+				{% for question in questions %}
+					<h4>
+						{{question.label}}</h4>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="tables">
+			{% for i in 1..48 %}
+				<div class="line l1">
+					{{ i }}
+				</div>
+			</br>
+		{% endfor %}
+		{% for i in 1..48 %}
+			<div class="line l2">
+				{{ i }}
+			</div><br>
+		{% endfor %}
+		{% for i in 1..48 %}
+			<div class="line l3">
+				{{ i }}
+			</div><br>
+		{% endfor %}
+		{% for i in 1..48 %}
+			<div class="line l4">
+				{{ i }}
+			</div><br>
+		{% endfor %}
 	</div>
-{% endblock %}
-{% block bottom_js %}
-	<script>
-		let board = document.createElement('div');
+</div>{% endblock %}{% block bottom_js %}
+<script>
+	let modalBtn = document.querySelector('.level');
+let modalBg = document.querySelector('.modal-bg');
+
+modalBtn.addEventListener('click', function () {
+modalBg.classList.add('bg-active');
+});
+{ /*let board = document.createElement('div');
 board.className = "case";
 for (x = 0; x < 10; x ++) {
 let lines = document.querySelectorAll('.tables .line')
 lines.forEach(line => {
 line.appendChild(board);
 console.log(lines)
-
 });
+}*/
 
 }
-	</script>
-{% endblock %}
+</script>{% endblock %}
