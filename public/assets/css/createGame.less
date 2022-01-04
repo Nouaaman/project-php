@@ -62,15 +62,21 @@ body {
     width: 40%;
     max-width: 360px;
     height: auto;
-
+    max-height: 95vh;
+    overflow-y: auto;
     h1 {
-
+        margin-bottom: 22px;
         color: #fff;
     }
 
     p {
-
+        width: 100%;
+        text-align: left;
         color: #fff;
+    }
+    #add{
+        cursor: pointer;
+        filter: brightness(10);
     }
 
     .btn {
@@ -90,9 +96,15 @@ body {
             background-color: @third-color;
         }
     }
-
+    .fields{
+        width: 100%;
+    }
     .field {
-        padding: 12px 0;
+       border:10px solid @secondary-color;
+       border-radius: 8px;
+       margin-top: 4px;
+       margin-bottom: 24px;
+        padding: 0;
         width: 98%;
         display: flex;
         flex-direction: column;
@@ -125,10 +137,15 @@ body {
             .item {
                 padding: 8px;
                 cursor: pointer;
-                background-color: #fff;
-                border-bottom: 1px solid #d4d4d4;
-                color: rgb(58, 58, 58);
-                text-align: left;
+                background-color: rgb(255, 255, 255);
+                border-bottom: 2px solid #979797;
+                color: black;
+                font-weight: bold;
+                font-size: 17px;
+                text-align: center;
+                &:hover{
+                    background-color: rgb(243, 243, 243);
+                }
             }
         }
 
@@ -142,7 +159,8 @@ body {
             color: @primary-color;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             font-size: 17px;
-            
+            text-align: center;
+            font-weight: bold;
         }
 
         input:focus {

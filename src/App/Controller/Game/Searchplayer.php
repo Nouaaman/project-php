@@ -28,6 +28,9 @@ class Searchplayer extends AbstractController
                 $results = $this->searchPlayers($playerUsername);
                 echo json_encode($results);
             }
+            else{
+                echo 'nothing found';
+            }
         }
     }
 
