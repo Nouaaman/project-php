@@ -60,6 +60,20 @@ let btnCreate = document.getElementById('create')
 /* connect to server */
 const conn = new WebSocket('ws://project-php:8282');
 
+let wsSend = function (data) {
+  if (!conn.readyState) {
+    console.log(conn.readyState);
+    setTimeout(function () {
+      wsSend(data);
+    }, 100);
+  } else {
+    conn.send(data);
+    console.log('sent');
+  }
+}
+
+
+
 // send data
 btnCreate.addEventListener("click", e => {
 
@@ -83,8 +97,8 @@ btnCreate.addEventListener("click", e => {
     "players": players
   }
 
-  conn.send(JSON.stringify(payLoad));
-  // wsSend(payLoad)
+  // conn.send(JSON.stringify(payLoad));
+  wsSend(JSON.stringify(payLoad))
 
 })
 

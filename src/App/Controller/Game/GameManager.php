@@ -4,12 +4,13 @@ namespace App\Controller\Game;
 
 require_once(__DIR__ . '/../../../../vendor/autoload.php');
 
-
+use App\Entity\Player;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 class GameManager implements MessageComponentInterface
 {
+
     public $players;
     public $games;
 
@@ -27,27 +28,51 @@ class GameManager implements MessageComponentInterface
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $result = json_decode($msg);
+        if ($result != null) {
+            //create game and set every player idgame 
+            if ($result->method == 'create') {
+                $uidGame = $this->uid();
+                foreach ($result->players as $player) {
+                    $player->idGame = $uidGame;
+                }
+                array_push($this->players, $result->players);
 
-        //create game and set every player idgame 
-        if ($result->method == 'create') {
-            $uidGame = $this->uid();
-            foreach ($result->players as $player) {
-                $player->idGame = $uidGame;
+                $game = (object)[
+                    'idGame' => $uidGame,
+                    'players' => $result->players
+                ];
+
+                array_push($this->games, $game);
+                //send idgame
+                $response = (object)[
+                    'method' => 'create',
+                    'idGame' => $uidGame
+                ];
+                $from->send(json_encode($response));
             }
-            array_push($this->players, $result->players);
 
-            $game = (object)[
-                'idGame' => $uidGame,
-                'players' => $result->players
-            ];
+            //player joigning game
+            if ($result->method == 'join') {
+                foreach ($this->games as $game) {
+                    if ($game->idGame == $result->idGame) {
+                        foreach ($game->players as $player) {
+                            if ($player->username == $result->username) {
+                                $player->idConn = $from;
+                            }
+                        }
+                        break;
+                    }
+                }
 
-            array_push($this->games, $game);
-            //send idgame
-            $response = (object)[
-                'method' => 'create',
-                'idGame' => $uidGame
-            ];
-            $from->send(json_encode($response));
+                $response = (object)[
+                    'method' => 'join',
+                    'msg' => 'you id is : ' . $from->resourceId
+                ];
+                $from->send(json_encode($response));
+            }
+        }
+        else {
+            echo 'result nuul.    ';
         }
     }
 
