@@ -26,6 +26,7 @@ class Game extends AbstractController
         }
 
         return $this->render('game/game.html.twig', [
+            'username'=> $_SESSION['username'],
             'questions' =>  $this->displayQuestions(),
             /*             'mail' => $this->sendMail()
  */

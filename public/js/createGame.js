@@ -89,6 +89,19 @@ btnCreate.addEventListener("click", e => {
 })
 
 
+conn.onmessage = message => {
+  //message.data
+  const response = JSON.parse(message.data);
+  if (response.method === "create") {
+    let idGame = response.idGame;
+    alert('URL de la partie : ' + window.location.hostname + '/game?idGame=' + idGame);
+    // if (idGame) {
+    //   window.location = '/game?idGame=' + idGame;
+    // }
+  }
+
+}
+
 
 
 

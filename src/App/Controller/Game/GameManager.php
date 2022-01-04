@@ -13,36 +13,42 @@ class GameManager implements MessageComponentInterface
     public $players;
     public $games;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->players = [];
         $this->games = [];
     }
 
     public function onOpen(ConnectionInterface $conn)
     {
-        
-        echo 'someone connected at : ' .$conn->resourceId;
-        
-       
+        // echo 'someone connected at : ' . $conn->resourceId;
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
         $result = json_decode($msg);
+
         //create game and set every player idgame 
         if ($result->method == 'create') {
             $uidGame = $this->uid();
             foreach ($result->players as $player) {
-               $player->idGame = $uidGame;
+                $player->idGame = $uidGame;
             }
             array_push($this->players, $result->players);
-            print_r($this->players);
+
             $game = (object)[
                 'idGame' => $uidGame,
-                'players' =>$result->players
+                'players' => $result->players
             ];
-        } 
 
+            array_push($this->games, $game);
+            //send idgame
+            $response = (object)[
+                'method' => 'create',
+                'idGame' => $uidGame
+            ];
+            $from->send(json_encode($response));
+        }
     }
 
     public function onClose(ConnectionInterface $conn)
@@ -53,7 +59,8 @@ class GameManager implements MessageComponentInterface
     {
     }
 
-    public function uid(){
+    public function uid()
+    {
         $uid = uniqid('game-');
         return $uid;
     }
