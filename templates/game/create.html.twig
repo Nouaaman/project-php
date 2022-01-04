@@ -22,12 +22,12 @@
 		<div class="fields">
 			<div class="field">
 				<div class="autocomplete">
-					<input type="text" name="username" placeholder="Username" autocomplete="off">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
 					<div class="autocomplete-items">
 
 					</div>
 				</div>
-				<select name="color" id="color">
+				<select class="color" name="color" >
 					<option value="blue">Bleu</option>
 					<option value="yellow">Jaune</option>
 					<option value="red">Rouge</option>
@@ -39,12 +39,12 @@
 			</div>
 			<div class="field">
 				<div class="autocomplete">
-					<input type="text" name="username" placeholder="Username" autocomplete="off">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
 					<div class="autocomplete-items">
 
 					</div>
 				</div>
-				<select name="color" id="color">
+				<select class="color"  name="color">
 					<option value="yellow">Jaune</option>
 					<option value="blue">Bleu</option>
 					<option value="red">Rouge</option>
@@ -57,7 +57,7 @@
 
 		</div>
 		<img src="/assets/img/icon-add.png" id="add">
-		<button class="btn">Créer</button>
+		<button id="create" class="btn">Créer</button>
 	</div>
 
 </div>
@@ -65,8 +65,7 @@
 
 
 {% block bottom_js %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
 	function checkTheDropdownsColor() {
 		var arr = $('select').find(':selected');
@@ -98,12 +97,12 @@
 
 			field.innerHTML = `
 				<div class="autocomplete">
-					<input type="text" name="username" placeholder="Username" autocomplete="off">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
 					<div class="autocomplete-items">
 
 					</div>
 				</div>
-				<select name="color" id="color">
+				<select class="color" name="color">
 					<option value="yellow">Jaune</option>
 					<option value="blue">Bleu</option>
 					<option value="red">Rouge</option>
