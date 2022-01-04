@@ -5,50 +5,108 @@
 }
 
 .land {
-    background-image: url('../img/game-back.png');
+    //background-image: url('../img/game-back.png');
     height: 100vh;
     background-size: cover;
     background-attachment: fixed;
-
-    .tables{
+    .buttons{
+        text-align: center;
+    .level{
+        width: 150px;
+        height: 50px;
+        border-style: hidden;
+        font-size: 15px;
+        margin-top: 100px;
+    }
+    .level.l1{
+        background-color: rgb(0, 122, 255);
+        box-shadow: 0px 10px 10px rgba(0, 122, 255, 0.5);
+    }
+    .level.l2{
+        background-color: rgb(52, 199, 89);
+        box-shadow: 0px 10px 10px rgba(52, 199, 89, 0.5);
+    }
+    .level.l3{
+        background-color: rgb(255, 204, 0);
+        box-shadow: 0px 10px 10px rgba(255, 204, 0, 0.5);
+    }
+    .level.l4{
+        background-color: rgb(175, 82, 222);
+        box-shadow: 0px 10px 10px rgba(175, 82, 222, 0.5);
+    }
+    .level.l5{
+        background-color: rgb(64, 200, 224);
+        box-shadow: 0px 10px 10px rgba(64, 200, 224, 0.5);
+    }
+    .level.l6{
+        background-color: rgb(52, 199, 89);
+        box-shadow: 0px 10px 10px rgba(52, 199, 89, 0.5);
+    }
+    }
+    .modal-bg{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+    }
+    .bg-active{
+        visibility: visible;
+        opacity: 1;
+    }
+    .modal{
+        background-color: white;
+        width: 30%;
+        height: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 10px;
+    }
+    .tables{
+        display:flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        justify-content: center;
+        align-items: center;
         .line.l1{
-            height: 90vh;
-            width: 10px;
-            margin: 20px;
-            .case{
-                height: 10px;
-                width: 10px;
-                background-color: rgb(255, 49, 58);
-                border: solid white 1px;
-            }
+            width: 20px;
+            height: 20px;
+            border: solid black 1px;
+            background-color: rgb(0, 89, 255);
+            color:rgba(255, 255, 255, 0);
+            width: 600px;
         }
         .line.l2{
-            height: 90vh;
-            width: 10px;
-            margin: 20px;
-            .case{
-                height: 12px;
-                width: 12px;
-                background-color: rgb(255, 204, 0);
-                border: solid white 1px;
-            }
-        }
-/*         .line.l3{
+            width: 20px;
+            height: 20px;
+            border: solid black 1px;
+            background-color: rgb(255, 81, 0);
+            color:rgba(255, 255, 255, 0);
+        } 
+         .line.l3{
+            width: 20px;
+            height: 20px;
+            border: solid black 1px;
             background-color: rgb(52, 199, 89);
+            color:rgba(255, 255, 255, 0);
         }
         .line.l4{
-            background-color: rgb(0, 122, 255);
+            width: 20px;
+            height: 20px;
+            border: solid black 1px;
+            background-color: rgb(204, 0, 255);
+            color:rgba(255, 255, 255, 0);
         }
-        .line.l5{
-            background-color: rgb(175, 82, 222);
-        }
-        .line.l6{
-            background-color: rgb(64, 200, 224);
-        } */
-    }
+
+    
         }
     
-
+    }

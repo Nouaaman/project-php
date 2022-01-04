@@ -45,7 +45,7 @@ return [
     new Route('GET', '/admin/homepage', Adminhomepage::class),
     /* game*/
     new Route('GET', '/game/create', Create::class),
-    new Route('GET', '/game/begin', Begin::class),
+    new Route('GET', '/game/begin', Begin::class, Searchplayer::class),
     new Route('GET', '/game', Game::class),
 
     /*searchPlayer autocomplete */
