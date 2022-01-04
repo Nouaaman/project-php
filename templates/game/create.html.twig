@@ -44,7 +44,7 @@
 
 					</div>
 				</div>
-				<select name="color1" id="color1">
+				<select name="color" id="color">
 					<option value="yellow">Jaune</option>
 					<option value="blue">Bleu</option>
 					<option value="red">Rouge</option>
@@ -56,7 +56,7 @@
 			</div>
 
 		</div>
-		<img src="/assets/img/icon-add.png" id = "add">
+		<img src="/assets/img/icon-add.png" id="add">
 		<button class="btn">Créer</button>
 	</div>
 
@@ -65,7 +65,7 @@
 
 
 {% block bottom_js %}
-<script type="text/javascript" src="/js/createGame.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
 	function checkTheDropdownsColor() {
@@ -85,5 +85,40 @@
 	};
 	checkTheDropdownsColor();
 	$('select').on('change', checkTheDropdownsColor);
+
+
+	// generate new field
+	let nbrField = 2
+	let addBtn = document.getElementById("add")
+	addBtn.addEventListener('click', (e) => {
+		if (nbrField < 6) {
+
+			let field = document.createElement('div')
+			field.setAttribute('class', 'field')
+
+			field.innerHTML = `
+				<div class="autocomplete">
+					<input type="text" name="username" placeholder="Username" autocomplete="off">
+					<div class="autocomplete-items">
+
+					</div>
+				</div>
+				<select name="color" id="color">
+					<option value="yellow">Jaune</option>
+					<option value="blue">Bleu</option>
+					<option value="red">Rouge</option>
+					<option value="green">Vert</option>
+					<option value="purple">Violet</option>
+					<option value="brown">Brun</option>
+
+				</select>
+  `
+			let fields = document.querySelector('.fields')
+			fields.appendChild(field)
+			nbrField++
+			checkTheDropdownsColor();
+		}
+	})
 </script>
+<script type="text/javascript" src="/js/createGame.js"></script>
 {% endblock %}

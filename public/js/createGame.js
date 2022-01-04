@@ -1,5 +1,4 @@
-let nbrField = 2
-let addBtn = document.getElementById("add")
+
 let inputs = document.querySelectorAll('.field input')
 inputs.forEach(input => {
   input.addEventListener('input', (e) => {
@@ -18,34 +17,7 @@ inputs.forEach(input => {
   });
 })
 
-addBtn.addEventListener('click', (e) => {
-  if (nbrField < 6) {
 
-    let field = document.createElement('div')
-    field.setAttribute('class', 'field')
-    
-    field.innerHTML = `
-				<div class="autocomplete">
-					<input type="text" name="username" placeholder="Username" autocomplete="off">
-					<div class="autocomplete-items">
-
-					</div>
-				</div>
-				<select name="color${nbrField}" id="color${nbrField}">
-					<option value="yellow">Jaune</option>
-					<option value="blue">Bleu</option>
-					<option value="red">Rouge</option>
-					<option value="green">Vert</option>
-					<option value="purple">Violet</option>
-					<option value="brown">Brun</option>
-
-				</select>
-  `
-    let fields = document.querySelector('.fields')
-    fields.appendChild(field)
-    nbrField++
-  }
-})
 
 async function getUsernames(searchUser) {
   let url = window.location.origin + "/game/searchplayer"
@@ -80,5 +52,6 @@ function showSuggestion(items, usernames) {
 
 
   })
-
 }
+checkTheDropdownsColor()
+/* connect to server */

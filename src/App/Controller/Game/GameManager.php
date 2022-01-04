@@ -11,6 +11,7 @@ class GameManager implements MessageComponentInterface
 {
     public function onOpen(ConnectionInterface $conn)
     {
+        echo 'someone connected at : ' . $conn;
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
