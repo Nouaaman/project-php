@@ -9,7 +9,7 @@ if (urlParams.has('idGame')) {
 }
 
 /* connect to server */
-const conn = new WebSocket('ws://project-php:8282');
+const conn = new WebSocket('ws://localhost:8282');
 const username = document.getElementById('username').value
 
 //handle still connecting error to send msg
