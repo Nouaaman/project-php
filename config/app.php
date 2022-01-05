@@ -5,5 +5,6 @@ return [
     'DB_HOST' => '',
     'DB_NAME' => '',
     'DB_USER' => '',
-    'DB_PASSWORD' => ''
+    'DB_PASSWORD' => '',
+    'HOSTNAME' =>'project-php'//for creating game URL in websocket server
 ];
