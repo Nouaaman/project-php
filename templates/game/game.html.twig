@@ -1,130 +1,132 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Jeu
+	{{ parent() }}Jeu
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/game.less">
+	<link rel="stylesheet/less" href="/assets/css/game.less">
 {% endblock %}
 
 
 {% block body %}
-<input type="hidden" id='username' value="{{username}}">
-<div id="page">
+	<input type="hidden" id='username' value="{{username}}">
+	<div id="page">
 
-	<div class="questionModal hidden">
+		<div class="questionModal hidden">
 
-		<div class="questionLevel hidden">
-			<h4>Niveau de la question?</h4>
-			<div class="buttons">
-				<button class="level l1" type="button">1</button>
-				<button class="level l2" type="button">2</button>
-				<button class="level l3" type="button">3</button>
-				<button class="level l4" type="button">4</button>
-				<button class="level l5" type="button">5</button>
-				<button class="level l6" type="button">6</button>
-			</div>
-
-		</div>
-		<div class="question hidden">
-			<h4>Questioninriengierinreg iengieg jji ni n?</h4>
-			<div class="questionAnswers">
-				<div>
-					<input type="checkbox" class="answer" id="answer1">
-					<label for="answer1">reponse 1</label>
-				</div>
-				<div>
-					<input type="checkbox" class="answer" id="answer2">
-					<label for="answer2">reponse 2</label>
-				</div>
-				<div>
-					<input type="checkbox" class="answer" id="answer3">
-					<label for="answer3">reponse3</label>
-				</div>
-				<div>
-					<input type="checkbox" class="answer" id="answer4">
-					<label for="answer4">reponse 4</label>
+			<div class="questionLevel hidden">
+				<h4>Niveau de la question?</h4>
+				<div class="buttons">
+					<button class="level l1" type="button">1</button>
+					<button class="level l2" type="button">2</button>
+					<button class="level l3" type="button">3</button>
+					<button class="level l4" type="button">4</button>
+					<button class="level l5" type="button">5</button>
+					<button class="level l6" type="button">6</button>
 				</div>
 
 			</div>
-			<button id="validate" class="button">Valider</button>
+			<div class="question hidden">
+				<h4>Questioninriengierinreg iengieg jji ni n?</h4>
+				<div class="questionAnswers">
+					<div>
+						<input type="checkbox" class="answer" id="answer1">
+						<label for="answer1">reponse 1</label>
+					</div>
+					<div>
+						<input type="checkbox" class="answer" id="answer2">
+						<label for="answer2">reponse 2</label>
+					</div>
+					<div>
+						<input type="checkbox" class="answer" id="answer3">
+						<label for="answer3">reponse3</label>
+					</div>
+					<div>
+						<input type="checkbox" class="answer" id="answer4">
+						<label for="answer4">reponse 4</label>
+					</div>
+
+				</div>
+				<button id="validate" class="button">Valider</button>
+			</div>
 		</div>
+		<div id="game">
+			<h3>
+				<span id="currentPlayer">xxxxx</span>
+				a ton tour!</h3>
+			<div id="gameContainer" class="container">
+				<div class="line">
+					<ul class="cases">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li class="currentPosition"></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+					<p id="usernameCase">nouaaman</p>
+				</div>
+			</div>
+			<button id="start" class="button">Jouer</button>
+		</div>
+
 	</div>
-	<div id="game">
-		<h3><span id="currentPlayer">xxxxx</span> a ton tour!</h3>
-		<div id="gameContainer" class="container">
-			<div class="line">
-				<ul class="cases">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-				<p id="usernameCase">nouaaman</p>
-			</div>
-		</div>
-		<button id="start" class="button">Jouer</button>
-	</div>
-
-</div>
 
 {% endblock %}
 
 {% block bottom_js %}
-<script>
-	let modalBtn = document.querySelector('.level');
-	let modalBg = document.querySelector('.modal-bg');
+	<script>
+		let modalBtn = document.querySelector('.level');
+let modalBg = document.querySelector('.modal-bg');
 
-	modalBtn.addEventListener('click', function() {
-		modalBg.classList.add('bg-active');
-	}); {
-		/*let board = document.createElement('div');
+modalBtn.addEventListener('click', function () {
+modalBg.classList.add('bg-active');
+});
+{ /*let board = document.createElement('div');
 board.className = "case";
 for (x = 0; x < 10; x ++) {
 let lines = document.querySelectorAll('.tables .line')
@@ -134,7 +136,7 @@ console.log(lines)
 });
 }*/
 
-	}
-</script>
-<script type="text/javascript" src="/js/gameManager.js"></script>
+}
+	</script>
+	<script type="text/javascript" src="/js/gameManager.js"></script>
 {% endblock %}
