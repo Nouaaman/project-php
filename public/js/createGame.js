@@ -83,18 +83,20 @@ btnCreate.addEventListener("click", e => {
   let players = []
   for (let i = 0; i < usernames.length; i++) {
     const player = {
-      idConn: '',
+      idConn: null,
       idGame: '',
       username: usernames[i].value,
       color: colors[i].value,
-      position: 0
+      position: 0,
+      
     }
     players.push(player)
   }
 
   const payLoad = {
     "method": "create",
-    "players": players
+    "players": players,
+    "currentPLayer": ''
   }
 
   // conn.send(JSON.stringify(payLoad));

@@ -52,30 +52,40 @@ class GameManager implements MessageComponentInterface
             }
 
             //player joigning game
+            $gameToSend = null;
             if ($result->method == 'join') {
                 foreach ($this->games as $game) {
                     if ($game->idGame == $result->idGame) {
                         foreach ($game->players as $player) {
                             if ($player->username == $result->username) {
-                                $player->idConn = $from;
+                                $player->idConn = (object)$from;
                             }
                         }
+                        $gameToSend =  $game;
                         break;
                     }
                 }
-
-                $response = (object)[
-                    'method' => 'join',
-                    'msg' => 'you id is : ' . $from->resourceId
-                ];
-                $from->send(json_encode($response));
+                $this->updateGamePlayers($gameToSend);
             }
         }
     }
 
-    public function updateGameState(){
-        
+    public function updateGamePlayers($gameToSend)
+    {
+        $response = (object)[
+            'method' => 'join',
+            'game' => $gameToSend
+        ];
+        foreach ($this->games as $game) {
+            if ($game->idGame == $gameToSend->idGame) {
+                foreach ($game->players as $player) {
+                    $player->idConn->send(json_encode($response));
+                }
+                break;
+            }
+        }
     }
+
 
 
 

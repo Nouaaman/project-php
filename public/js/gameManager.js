@@ -43,7 +43,11 @@ conn.onmessage = message => {
     //message.data
     const response = JSON.parse(message.data);
     if (response.method === "join") {
-        console.log(response.msg)
+        console.log(response.game)
     }
 
+}
+
+function updateGameState(data) {
+    
 }
