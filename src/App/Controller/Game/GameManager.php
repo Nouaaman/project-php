@@ -80,7 +80,9 @@ class GameManager implements MessageComponentInterface
                     if ($game->idGame == $result->idGame) {
                         foreach ($game->players as $player) {
                             if ($player->username == $result->username) {
-                                $player->idConn = (object)$from;
+                                $player->conn = new \SplObjectStorage;
+                                $player->conn->attach($from);
+                                $player->isJoined = true;
                             }
                         }
                         $gameToSend =  $game;
@@ -101,7 +103,9 @@ class GameManager implements MessageComponentInterface
         foreach ($this->games as $game) {
             if ($game->idGame == $gameToSend->idGame) {
                 foreach ($game->players as $player) {
-                    $player->idConn->send(json_encode($response));
+                    foreach ( $player->conn as $conn) {
+                            $conn->send(json_encode($response));
+                    }
                 }
                 break;
             }

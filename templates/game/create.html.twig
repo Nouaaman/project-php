@@ -86,38 +86,6 @@
 	$('select').on('change', checkTheDropdownsColor);
 
 
-	// generate new field
-	let nbrField = 2
-	let addBtn = document.getElementById("add")
-	addBtn.addEventListener('click', (e) => {
-		if (nbrField < 6) {
-
-			let field = document.createElement('div')
-			field.setAttribute('class', 'field')
-
-			field.innerHTML = `
-				<div class="autocomplete">
-					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
-					<div class="autocomplete-items">
-
-					</div>
-				</div>
-				<select class="color" name="color">
-					<option value="yellow">Jaune</option>
-					<option value="blue">Bleu</option>
-					<option value="red">Rouge</option>
-					<option value="green">Vert</option>
-					<option value="purple">Violet</option>
-					<option value="brown">Brun</option>
-
-				</select>
-  `
-			let fields = document.querySelector('.fields')
-			fields.appendChild(field)
-			nbrField++
-			checkTheDropdownsColor();
-		}
-	})
 </script>
 <script type="text/javascript" src="/js/createGame.js"></script>
 {% endblock %}
