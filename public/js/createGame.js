@@ -19,12 +19,12 @@
 					</div>
 				</div>
 				<select class="color" name="color">
-					<option value="yellow">Jaune</option>
-					<option value="blue">Bleu</option>
-					<option value="red">Rouge</option>
-					<option value="green">Vert</option>
-					<option value="purple">Violet</option>
-					<option value="brown">Brun</option>
+					<option value="#E2703A">Jaune</option>
+					<option value="#141E61">Bleu</option>
+					<option value="#950101">Rouge</option>
+					<option value="#1E5128">Vert</option>
+					<option value="#3E065F">Violet</option>
+					<option value="#461111">Brun</option>
 
 				</select>
   `

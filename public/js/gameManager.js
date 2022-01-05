@@ -1,6 +1,5 @@
 //global variables
 let gameContainer = document.getElementById('gameContainer')
-
 //getting game id form url else redirect to home page
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -10,7 +9,6 @@ if (urlParams.has('idGame')) {
 } else {
     window.location = '/';
 }
-
 
 /**functions** */
 function generateLine(username,color) {
@@ -34,7 +32,15 @@ function generateLine(username,color) {
     gameContainer.appendChild(line)
 }
 
-
+function displayLevel(){
+    let modalBtn = document.querySelector('.buttonPlay')
+    let modalBg = document.querySelector('.questionModal')
+console.log('marche ?')
+    modalBtn.addEventListener('click', function(){
+        modalBg.style.visibility = "visible"
+        modalBg.style.visibility = 1
+    });
+}displayLevel()
 
 
 /* connect to server */

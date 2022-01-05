@@ -14,42 +14,43 @@
 	<input type="hidden" id='username' value="{{username}}">
 	<div id="page">
 
-		<div class="questionModal hidden">
-
-			<div class="questionLevel hidden">
-				<h4>Niveau de la question?</h4>
-				<div class="buttons">
-					<button class="level l1" type="button">1</button>
-					<button class="level l2" type="button">2</button>
-					<button class="level l3" type="button">3</button>
-					<button class="level l4" type="button">4</button>
-					<button class="level l5" type="button">5</button>
-					<button class="level l6" type="button">6</button>
-				</div>
-
-			</div>
-			<div class="question hidden">
-				<h4>Questioninriengierinreg iengieg jji ni n?</h4>
-				<div class="questionAnswers">
-					<div>
-						<input type="checkbox" class="answer" id="answer1">
-						<label for="answer1">reponse 1</label>
-					</div>
-					<div>
-						<input type="checkbox" class="answer" id="answer2">
-						<label for="answer2">reponse 2</label>
-					</div>
-					<div>
-						<input type="checkbox" class="answer" id="answer3">
-						<label for="answer3">reponse3</label>
-					</div>
-					<div>
-						<input type="checkbox" class="answer" id="answer4">
-						<label for="answer4">reponse 4</label>
+		<div class="questionModal-bg">
+			<div class="modal">
+				<div class="questionLevel hidden">
+					<h4>Niveau de la question?</h4>
+					<div class="buttons">
+						<button class="level l1" type="button">1</button>
+						<button class="level l2" type="button">2</button>
+						<button class="level l3" type="button">3</button>
+						<button class="level l4" type="button">4</button>
+						<button class="level l5" type="button">5</button>
+						<button class="level l6" type="button">6</button>
 					</div>
 
 				</div>
-				<button id="validate" class="button">Valider</button>
+				<div class="question">
+					<h4>Questioninriengierinreg iengieg jji ni n?</h4>
+					<div class="questionAnswers">
+						<div>
+							<input type="checkbox" class="answer" id="answer1">
+							<label for="answer1">reponse 1</label>
+						</div>
+						<div>
+							<input type="checkbox" class="answer" id="answer2">
+							<label for="answer2">reponse 2</label>
+						</div>
+						<div>
+							<input type="checkbox" class="answer" id="answer3">
+							<label for="answer3">reponse3</label>
+						</div>
+						<div>
+							<input type="checkbox" class="answer" id="answer4">
+							<label for="answer4">reponse 4</label>
+						</div>
+
+					</div>
+					<button id="validate" class="button">Valider</button>
+				</div>
 			</div>
 		</div>
 		<div id="game">
@@ -58,9 +59,8 @@
 				a ton tour!
 			</h3>
 			<div id="gameContainer" class="container"></div>
-			<button id="start" class="button">Jouer</button>
+			<button class="buttonPlay" id="start">Jouer</button>
 		</div>
-
 	</div>
 
 
