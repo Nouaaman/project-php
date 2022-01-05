@@ -223,19 +223,17 @@ body {
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+
         li {
             min-width: 20px;
             min-height: 10px;
-            background-color: rgb(0, 110, 255);
+            background-color: rgb(255, 255, 255);
             border-radius: 4px;
-            transition:ease-out .1s;
         }
-        li:hover{
-            transform: scale(1.5);
-        }
-        li.currentPosition{
-            background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 29%, rgba(76,92,241,1) 52%, rgba(252,70,107,1) 66%);
+
+        li.currentPosition {
+            background: rgb(63, 94, 251);
+            background: radial-gradient(circle, rgba(63, 94, 251, 1) 29%, rgba(76, 92, 241, 1) 52%, rgba(252, 70, 107, 1) 66%);
             transform: scale(1.1);
         }
     }

@@ -1,21 +1,66 @@
+
+	// generate new field
+  let inputs = document.querySelectorAll('.field input')
+  addInputEvent()
+
+	let nbrField = 2
+	let addBtn = document.getElementById("add")
+	addBtn.addEventListener('click', (e) => {
+		if (nbrField < 6) {
+
+			let field = document.createElement('div')
+			field.setAttribute('class', 'field')
+
+			field.innerHTML = `
+				<div class="autocomplete">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
+					<div class="autocomplete-items">
+
+					</div>
+				</div>
+				<select class="color" name="color">
+					<option value="yellow">Jaune</option>
+					<option value="blue">Bleu</option>
+					<option value="red">Rouge</option>
+					<option value="green">Vert</option>
+					<option value="purple">Violet</option>
+					<option value="brown">Brun</option>
+
+				</select>
+  `
+			let fields = document.querySelector('.fields')
+			fields.appendChild(field)
+			nbrField++
+			checkTheDropdownsColor();
+      addInputEvent()
+		}
+	})
+
+
+
+
 //auto complete
-let inputs = document.querySelectorAll('.field input')
-inputs.forEach(input => {
-  input.addEventListener('input', (e) => {
-    inputValue = e.target.value
-    let divItems = e.target.nextElementSibling
-    if (inputValue.length > 0) {
-      let usernamesResult = getUsernames(e.target.value).then(user => {
-        return user
-      })
 
-      showSuggestion(divItems, usernamesResult)
-    } else {
-      divItems.innerHTML = ''
-    }
-
-  });
-})
+function addInputEvent(){
+  inputs = document.querySelectorAll('.field input')
+  inputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+      inputValue = e.target.value
+      let divItems = e.target.nextElementSibling
+      if (inputValue.length > 0) {
+        let usernamesResult = getUsernames(e.target.value).then(user => {
+          return user
+        })
+  
+        showSuggestion(divItems, usernamesResult)
+      } else {
+        divItems.innerHTML = ''
+      }
+  
+    });
+  })
+  
+}
 
 async function getUsernames(searchUser) {
   let url = window.location.origin + "/game/searchplayer"
@@ -53,6 +98,7 @@ function showSuggestion(items, usernames) {
 }
 
 
+
 /*****************create game******************/
 
 let btnCreate = document.getElementById('create')
@@ -83,12 +129,11 @@ btnCreate.addEventListener("click", e => {
   let players = []
   for (let i = 0; i < usernames.length; i++) {
     const player = {
-      idConn: null,
       idGame: '',
       username: usernames[i].value,
       color: colors[i].value,
       position: 0,
-      
+      isJoigned: false
     }
     players.push(player)
   }
@@ -110,7 +155,8 @@ conn.onmessage = message => {
   const response = JSON.parse(message.data);
   if (response.method === "create") {
     let idGame = response.idGame;
-    alert('URL de la partie : ' + window.location.hostname + '/game?idGame=' + idGame);
+    // alert('URL de la partie : ' + window.location.hostname + '/game?idGame=' + idGame);
+    console.log('URL de la partie : ' + window.location.hostname + '/game?idGame=' + idGame);
     // if (idGame) {
     //   window.location = '/game?idGame=' + idGame;
     // }
