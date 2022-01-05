@@ -55,6 +55,8 @@ class GameManager implements MessageComponentInterface
                 ];
 
                 array_push($this->games, $game);
+
+                /*  
                 //send mails
                 // $host = $_SESSION['website_host'];
 
@@ -62,7 +64,7 @@ class GameManager implements MessageComponentInterface
                 $gamelink = "project-php/game?idGame=" . $uidGame;
                 echo 'link : ' . $gamelink;
                 $this->sendMail($this->getEmails($usernames), $gamelink);
-
+                */
                 //send idgame optional for test without mail
                 $response = (object)[
                     'method' => 'create',
