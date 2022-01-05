@@ -58,7 +58,7 @@ function showSuggestion(items, usernames) {
 let btnCreate = document.getElementById('create')
 
 /* connect to server */
-const conn = new WebSocket('ws://project-php:8282');
+const conn = new WebSocket('ws://localhost:8282');
 
 let wsSend = function (data) {
   if (!conn.readyState) {
@@ -91,8 +91,6 @@ btnCreate.addEventListener("click", e => {
       
     }
     players.push(player)
-    console.log(players)
-
   }
 
   const payLoad = {
