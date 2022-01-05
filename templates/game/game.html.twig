@@ -59,15 +59,7 @@
 			<div id="gameContainer" class="container">
 				<div class="line">
 					<p id="usernameCase">Nouaaman</p>
-					<ul class="cases" id="cases">
-						<li class="currentPosition"></li>
-					</ul>
-				</div>
-				<div class="line">
-					<ul class="cases" id="cases">
-						<li class="currentPosition"></li>
-					</ul>
-					<p id="usernameCase">Alexy</p>
+					<ul class="cases" id="cases"></ul>
 				</div>
 			</div>
 			<button id="start" class="button">Jouer</button>
@@ -78,8 +70,8 @@
 {% endblock %}
 
 {% block bottom_js %}
-	<script>
-		let modalBtn = document.querySelector('.level');
+<script>
+	let modalBtn = document.querySelector('.level');
 let modalBg = document.querySelector('.modal-bg');
 
 modalBtn.addEventListener('click', function () {
@@ -91,22 +83,24 @@ let ul = document.getElementById("cases");
 let li = document.createElement("li");
 ul.appendChild(li);
 }
-function generateLine(username)
-{
-	
-}
 
-{ /*let board = document.createElement('div');
-board.className = "case";
-for (x = 0; x < 10; x ++) {
-let lines = document.querySelectorAll('.tables .line')
-lines.forEach(line => {
-line.appendChild(board);
-console.log(lines)
-});
-}*/
+function generateLine(username) {
 
+for (x = 0; x < 6; x ++) {
+let line = document.createElement("div");
+line.setAttribute('class', 'line');
+line.setAttribute('id', username);
+let ul = document.createElement("ul");
+ul.setAttribute('class', 'cases');
+let li = document.createElement('li');
+ul.appendChild(li)
+line.appendChild(ul)
+let container = document.getElementById('gameContainer');
+container.appendChild(line);
 }
-	</script>
-	<script type="text/javascript" src="/js/gameManager.js"></script>
-{% endblock %}
+}
+generateLine()
+</script>
+<script type="text/javascript" src="/js/gameManager.js">
+
+	{% endblock %}
