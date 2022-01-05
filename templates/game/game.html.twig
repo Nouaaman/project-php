@@ -58,57 +58,16 @@
 				a ton tour!</h3>
 			<div id="gameContainer" class="container">
 				<div class="line">
-					<ul class="cases">
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
+					<p id="usernameCase">Nouaaman</p>
+					<ul class="cases" id="cases">
 						<li class="currentPosition"></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
 					</ul>
-					<p id="usernameCase">nouaaman</p>
+				</div>
+				<div class="line">
+					<ul class="cases" id="cases">
+						<li class="currentPosition"></li>
+					</ul>
+					<p id="usernameCase">Alexy</p>
 				</div>
 			</div>
 			<button id="start" class="button">Jouer</button>
@@ -126,6 +85,13 @@ let modalBg = document.querySelector('.modal-bg');
 modalBtn.addEventListener('click', function () {
 modalBg.classList.add('bg-active');
 });
+
+for (x = 0; x < 48; x ++) {
+let ul = document.getElementById("cases");
+let li = document.createElement("li");
+ul.appendChild(li);
+}
+
 { /*let board = document.createElement('div');
 board.className = "case";
 for (x = 0; x < 10; x ++) {
