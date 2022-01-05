@@ -128,7 +128,7 @@ class GameManager implements MessageComponentInterface
         $emails = [];
         foreach ($usernames as $username) {
             try {
-                $sql = "SELECT `email` FROM `User` WHERE `username` = {$username} ";
+                $sql = "SELECT `email` FROM `User` WHERE `username` = '" . $username . "' ";
                 $databaseconnect = new DatabaseConnect();
                 $connection = $databaseconnect->GetConnection();
                 $stmt = $connection->prepare($sql);
@@ -143,8 +143,8 @@ class GameManager implements MessageComponentInterface
                 return false;
             }
         }
-        
-        
+
+
         return $emails;
     }
 
