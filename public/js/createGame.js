@@ -132,7 +132,7 @@ btnCreate.addEventListener("click", e => {
       idGame: '',
       username: usernames[i].value,
       color: colors[i].value,
-      position: 0,
+      position: 1,
       isJoigned: false
     }
     players.push(player)
