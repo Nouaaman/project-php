@@ -91,6 +91,8 @@ btnCreate.addEventListener("click", e => {
       
     }
     players.push(player)
+    console.log(players)
+
   }
 
   const payLoad = {

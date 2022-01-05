@@ -5,9 +5,13 @@ namespace App\Controller\Game;
 use App\Entity\Question;
 use App\Models\DatabaseConnect;
 use Framework\Controller\AbstractController;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-/* require 'PHPMailerAutoload.php';
- */
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
 
 class Game extends AbstractController
 {
@@ -26,10 +30,10 @@ class Game extends AbstractController
         }
 
         return $this->render('game/game.html.twig', [
-            'username'=> $_SESSION['username'],
+            'username' => $_SESSION['username'],
             'questions' =>  $this->displayQuestions(),
-            /*             'mail' => $this->sendMail()
- */
+            'mail' => $this->sendMail()
+
         ]);
     }
     public function displayQuestions()
@@ -55,29 +59,29 @@ class Game extends AbstractController
         return [];
     }
 
-    /*     public function sendMail()
+    public function sendMail()
     {
         $mail = new PHPMailer;
         $mail->isSMTP();                            // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;                     // Enable SMTP authentication
-        $mail->Username = 'example@gmail.com'; // your email id
-        $mail->Password = 'password'; // your password
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';        // Enable SMTP authentication
         $mail->Port = 587;     //587 is used for Outgoing Mail (SMTP) Server.
-        $mail->setFrom('alexychalopin@gmail.com', 'Chalopin');
-        $mail->addAddress('alexynouaaman@gmail.com');   // Add a recipient
+        $mail->Username = 'alexynouaaman@gmail.com'; // your email id
+        $mail->Password = 'Admin-57160'; // your password
+        $mail->setFrom('alexynouaaman@gmail.com');
+        $mail->addAddress('gamereceipteur@gmail.com');   // Add a recipient
         $mail->isHTML(true);  // Set email format to HTML
 
-        $bodyContent = '<h1>Test Mail</h1>';
-        $bodyContent .= '<p>This is a email that Radhika send you From LocalHost using PHPMailer</p>';
-        $mail->Subject = 'Email from Localhost by Radhika';
+        $bodyContent = '<h1>Bienvenue</h1>';
+        $bodyContent .= '<p>Clique sur ce lien pour rejoindre la partie</p>';
+        $mail->Subject = 'Invitation Board Game';
         $mail->Body    = $bodyContent;
         if (!$mail->send()) {
             echo 'Message was not sent.';
             echo 'Mailer error: ' . $mail->ErrorInfo;
         } else {
-            echo 'Message has been sent.';
+            echo 'Email Sent.';
         }
-    } */
+    }
 }
