@@ -58,8 +58,7 @@
 				a ton tour!</h3>
 			<div id="gameContainer" class="container">
 				<div class="line">
-					<p id="usernameCase">Nouaaman</p>
-					<ul class="cases" id="cases"></ul>
+					<ul class="cases" id=""></ul>
 				</div>
 			</div>
 			<button id="start" class="button">Jouer</button>
@@ -70,37 +69,7 @@
 {% endblock %}
 
 {% block bottom_js %}
-<script>
-	let modalBtn = document.querySelector('.level');
-let modalBg = document.querySelector('.modal-bg');
 
-modalBtn.addEventListener('click', function () {
-modalBg.classList.add('bg-active');
-});
-
-for (x = 0; x < 48; x ++) {
-let ul = document.getElementById("cases");
-let li = document.createElement("li");
-ul.appendChild(li);
-}
-
-function generateLine(username) {
-
-for (x = 0; x < 6; x ++) {
-let line = document.createElement("div");
-line.setAttribute('class', 'line');
-line.setAttribute('id', username);
-let ul = document.createElement("ul");
-ul.setAttribute('class', 'cases');
-let li = document.createElement('li');
-ul.appendChild(li)
-line.appendChild(ul)
-let container = document.getElementById('gameContainer');
-container.appendChild(line);
-}
-}
-generateLine()
-</script>
 <script type="text/javascript" src="/js/gameManager.js">
 
 	{% endblock %}
