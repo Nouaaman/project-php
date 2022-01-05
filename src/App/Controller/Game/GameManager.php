@@ -12,15 +12,18 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\DatabaseConnect;
 
+
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/Exception.php';
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require __DIR__ . '/../../../../vendor/autoload.php';
 
+$configs = require  __DIR__ .'../../../../../config/app.local.php';
+define('HOSTNAME',$configs['HOSTNAME']);
 
 class GameManager implements MessageComponentInterface
 {
-
+    
     public $players;
     public $games;
 
@@ -28,6 +31,7 @@ class GameManager implements MessageComponentInterface
     {
         $this->players = [];
         $this->games = [];
+        echo 'Listening...';
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -56,14 +60,15 @@ class GameManager implements MessageComponentInterface
 
                 array_push($this->games, $game);
 
+                $host = HOSTNAME;
+                $gameURL = $host . "/game?idGame=" . $uidGame;
+                echo "\n game created, URL => ".$gameURL."\n";
                 /*  
                 //send mails
-                // $host = $_SESSION['website_host'];
-
-                // $gamelink = $host . "/game?idGame=" . $uidGame;
+                
                 $gamelink = "project-php/game?idGame=" . $uidGame;
                 echo 'link : ' . $gamelink;
-                $this->sendMail($this->getEmails($usernames), $gamelink);
+                $this->sendMail($this->getEmails($usernames), $gameURL);
                 */
                 //send idgame optional for test without mail
                 $response = (object)[
@@ -85,11 +90,12 @@ class GameManager implements MessageComponentInterface
                                 $player->isJoined = true;
                             }
                         }
-                        $gameToSend =  $game;
+                    
+                        $this->updateGamePlayers($game);
                         break;
                     }
                 }
-                $this->updateGamePlayers($gameToSend);
+                
             }
         }
     }
