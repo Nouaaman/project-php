@@ -3,15 +3,6 @@
 namespace App\Controller;
 
 use Framework\Controller\AbstractController;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require '../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../vendor/phpmailer/phpmailer/src/SMTP.php';
-
-require '../vendor/autoload.php';
 
 
 class Homepage extends AbstractController
@@ -38,34 +29,9 @@ class Homepage extends AbstractController
         return $this->render('home.html.twig', [
             'userIsConnected' => $this->userIsConnected,
             'username' => $this->username,
-            'role' => $this->role,
-            'mail' => $this->sendMail()
+            'role' => $this->role
         ]);
     }
 
-    public function sendMail()
-    {
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();                            // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';        // Enable SMTP authentication
-        $mail->Port = 587;     //587 is used for Outgoing Mail (SMTP) Server.
-        $mail->Username = 'alexynouaaman@gmail.com'; // your email id
-        $mail->Password = 'Admin-57160'; // your password
-        $mail->setFrom('alexynouaaman@gmail.com');
-        $mail->addAddress('gamereceipteur@gmail.com');   // Add a recipient
-        $mail->isHTML(true);  // Set email format to HTML
-
-        $bodyContent = '<h1>Bienvenue</h1>';
-        $bodyContent .= '<p>Clique sur ce lien pour rejoindre la partie</p>';
-        $mail->Subject = 'Invitation Board Game';
-        $mail->Body    = $bodyContent;
-        if (!$mail->send()) {
-            echo 'Message was not sent.';
-            echo 'Mailer error: ' . $mail->ErrorInfo;
-        } else {
-            echo 'Email Sent.';
-        }
-    }
+    
 }

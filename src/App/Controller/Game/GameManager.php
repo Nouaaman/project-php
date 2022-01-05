@@ -4,9 +4,19 @@ namespace App\Controller\Game;
 
 require_once(__DIR__ . '/../../../../vendor/autoload.php');
 
-use App\Entity\Player;
+
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+use App\Models\DatabaseConnect;
+
+require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/Exception.php';
+require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/SMTP.php';
+require __DIR__ . '/../../../../vendor/autoload.php';
+
 
 class GameManager implements MessageComponentInterface
 {
@@ -31,9 +41,11 @@ class GameManager implements MessageComponentInterface
         if ($result != null) {
             //create game and set every player idgame 
             if ($result->method == 'create') {
+                $usernames = []; //usernames of players to send  game link later
                 $uidGame = $this->uid();
                 foreach ($result->players as $player) {
                     $player->idGame = $uidGame;
+                    array_push($usernames, $player->username);
                 }
                 array_push($this->players, $result->players);
 
@@ -43,7 +55,15 @@ class GameManager implements MessageComponentInterface
                 ];
 
                 array_push($this->games, $game);
-                //send idgame
+                //send mails
+                // $host = $_SESSION['website_host'];
+
+                // $gamelink = $host . "/game?idGame=" . $uidGame;
+                $gamelink = "project-php/game?idGame=" . $uidGame;
+                echo 'link : ' . $gamelink;
+                $this->sendMail($this->getEmails($usernames), $gamelink);
+
+                //send idgame optional for test without mail
                 $response = (object)[
                     'method' => 'create',
                     'idGame' => $uidGame
@@ -101,5 +121,61 @@ class GameManager implements MessageComponentInterface
     {
         $uid = uniqid('game-');
         return $uid;
+    }
+
+    public function getEmails($usernames): array
+    {
+        $emails = [];
+        foreach ($usernames as $username) {
+            try {
+                $sql = "SELECT `email` FROM `User` WHERE `username` = {$username} ";
+                $databaseconnect = new DatabaseConnect();
+                $connection = $databaseconnect->GetConnection();
+                $stmt = $connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchColumn();
+                array_push($emails, $result);
+            } catch (\Exception $ex) {
+                exit($ex->getMessage());
+                return false;
+            } catch (\Throwable $e) {
+                exit($e->getMessage());
+                return false;
+            }
+        }
+        
+        
+        return $emails;
+    }
+
+    public function sendMail($adresses, $gameLink)
+    {
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();                            // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';        // Enable SMTP authentication
+        $mail->Port = 587;     //587 is used for Outgoing Mail (SMTP) Server.
+        $mail->Username = 'alexynouaaman@gmail.com'; // your email id
+        $mail->Password = 'Admin-57160'; // your password
+        $mail->setFrom('alexynouaaman@gmail.com');
+        // $mail->addAddress('gamereceipteur@gmail.com');   // Add a recipient
+        foreach ($adresses as $address) {
+            $mail->addAddress($address);
+        }
+
+        $mail->isHTML(true);  // Set email format to HTML
+
+        $bodyContent = '<h1>Bienvenue</h1>';
+        $bodyContent .= '<p>Clique sur ce lien pour rejoindre la partie</p>';
+        $bodyContent .= "<a href = '{$gameLink}' >lien</a>";
+        $mail->Subject = 'Invitation Board Game';
+        $mail->Body = $bodyContent;
+        if (!$mail->send()) {
+            echo 'Message was not sent.';
+            echo 'Mailer error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Email Sent.';
+        }
     }
 }

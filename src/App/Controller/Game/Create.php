@@ -10,7 +10,7 @@ class Create extends AbstractController
     public function __invoke(): string
     {
         session_start();
-        
+    
         if (
             array_key_exists('username', $_SESSION)
             && !empty($_SESSION['username'])
