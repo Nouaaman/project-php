@@ -71,10 +71,13 @@ class GameManager implements MessageComponentInterface
                 $from->send(json_encode($response));
             }
         }
-        else {
-            echo 'result nuul.    ';
-        }
     }
+
+    public function updateGameState(){
+        
+    }
+
+
 
     public function onClose(ConnectionInterface $conn)
     {

@@ -1,112 +1,242 @@
+@secondary-color: #4e45ab;
+@third-color: #235ec5;
+
 * {
     margin: 0;
     padding: 0;
     font-family: helvetica;
+    box-sizing: border-box;
 }
 
-.land {
-    //background-image: url('../img/game-back.png');
+body {
+    background-image: url('../img/game-back.png');
     height: 100vh;
+    width: 100vw;
     background-size: cover;
-    background-attachment: fixed;
-    .buttons{
-        text-align: center;
-    .level{
-        width: 150px;
-        height: 50px;
+    background-position: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-weight: bold;
+
+    .level {
         border-style: hidden;
         font-size: 15px;
-        margin-top: 100px;
+        padding: 12px;
     }
-    .level.l1{
+
+    .level.l1 {
         background-color: rgb(0, 122, 255);
         box-shadow: 0px 10px 10px rgba(0, 122, 255, 0.5);
     }
-    .level.l2{
+
+    .level.l2 {
         background-color: rgb(52, 199, 89);
         box-shadow: 0px 10px 10px rgba(52, 199, 89, 0.5);
     }
-    .level.l3{
+
+    .level.l3 {
         background-color: rgb(255, 204, 0);
         box-shadow: 0px 10px 10px rgba(255, 204, 0, 0.5);
     }
-    .level.l4{
+
+    .level.l4 {
         background-color: rgb(175, 82, 222);
         box-shadow: 0px 10px 10px rgba(175, 82, 222, 0.5);
     }
-    .level.l5{
+
+    .level.l5 {
         background-color: rgb(64, 200, 224);
         box-shadow: 0px 10px 10px rgba(64, 200, 224, 0.5);
     }
-    .level.l6{
-        background-color: rgb(52, 199, 89);
-        box-shadow: 0px 10px 10px rgba(52, 199, 89, 0.5);
+
+    .level.l6 {
+        background-color: #528AAE;
+        box-shadow: 0px 10px 10px rgb(120, 160, 185);
     }
-    }
-    .modal-bg{
+}
+
+
+.questionModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     width: 100%;
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    // visibility: hidden;
+    // opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+
+    .questionLevel {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgb(223, 223, 223);
+        padding: 30px 12px;
+        width: 100vw;
+        max-width: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+.question {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgb(223, 223, 223);
+    padding: 30px 12px;
+    width: 100vw;
+    max-width: 360px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s;
-    }
-    .bg-active{
-        visibility: visible;
-        opacity: 1;
-    }
-    .modal{
-        background-color: white;
-        width: 30%;
-        height: 30%;
+    gap: 30px;
+
+    .questionAnswers {
+        width: 80%;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-    }
-    .tables{
-        display:flex;
-        flex-wrap: wrap;
-        margin-top: 10px;
-        justify-content: center;
-        align-items: center;
-        .line.l1{
-            width: 20px;
-            height: 20px;
-            border: solid black 1px;
-            background-color: rgb(0, 89, 255);
-            color:rgba(255, 255, 255, 0);
-            width: 600px;
-        }
-        .line.l2{
-            width: 20px;
-            height: 20px;
-            border: solid black 1px;
-            background-color: rgb(255, 81, 0);
-            color:rgba(255, 255, 255, 0);
-        } 
-         .line.l3{
-            width: 20px;
-            height: 20px;
-            border: solid black 1px;
-            background-color: rgb(52, 199, 89);
-            color:rgba(255, 255, 255, 0);
-        }
-        .line.l4{
-            width: 20px;
-            height: 20px;
-            border: solid black 1px;
-            background-color: rgb(204, 0, 255);
-            color:rgba(255, 255, 255, 0);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 18px;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-    
+        input {
+            transform: scale(1.5);
         }
-    
     }
+
+    .button {
+        border-style: hidden;
+        font-size: 15px;
+        padding: 12px;
+        background-color: rgb(33, 120, 235);
+        color: #fff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
+    }
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+#game {
+    margin: auto;
+    max-width: 360px;
+    min-width: 250px;
+    height: 100vh;
+    padding: 8px 0px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+    align-items: center;
+
+
+    h3 {
+        text-align: center;
+        color: #fff;
+
+    }
+
+    #jouer {
+        border-style: hidden;
+        font-size: 15px;
+        padding: 12px;
+        background-color: @third-color;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+        // background-color: rgba(194, 141, 72, 0.445);
+        width: 100%;
+        flex: 1;
+    }
+
+    .button {
+        border-style: hidden;
+        font-size: 15px;
+        padding: 12px;
+        background-color: rgb(33, 120, 235);
+        color: #fff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
+    }
+}
+
+
+#gameContainer {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .line {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: auto;
+        background-color: cornflowerblue;
+    }
+
+    .cases {
+        flex: 1;
+        list-style: none;
+        height: 100%;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        li {
+            min-width: 22px;
+            min-height: 8px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 4px;
+        }
+        li.currentPosition{
+            background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 29%, rgba(76,92,241,1) 52%, rgba(252,70,107,1) 66%);
+            transform: scale(1.1);
+        }
+    }
+
+    #usernameCase {
+        font-size: 12px;
+        background-color: #fff;
+        padding: 2px;
+    }
+
+}
