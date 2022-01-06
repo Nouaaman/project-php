@@ -27,7 +27,7 @@ let labelValidAnswerMessage
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         let level = e.target.getAttribute('data-level');
-        selectedLevel = level
+        selecteLevel = level
         getRandomQuestion(level)
     })
 })
@@ -239,9 +239,9 @@ conn.onmessage = message => {
 
     /***************** play ************ */
     if (response.method == "play") {
-
+        gameContainer.innerHTML = ''
         response.game.players.forEach(player => {
-            gameContainer.innerHTML = ''
+           
             gameUi(player.username, player.color, player.score)
 
             console.log("scores :", player.username, " ", player.score)
