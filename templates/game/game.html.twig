@@ -1,20 +1,20 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-{{ parent() }}Jeu
+	{{ parent() }}Jeu
 {% endblock %}
 
 
 {% block css %}
-<link rel="stylesheet/less" href="/assets/css/game.less">
+	<link rel="stylesheet/less" href="/assets/css/game.less">
 {% endblock %}
 
 
 {% block body %}
-<input type="hidden" id='username' value="{{username}}">
-<div id="page">
+	<input type="hidden" id='username' value="{{username}}">
+	<div id="page">
 
-	<div class="questionModal hidden" id = "questionModal">
+		<div class="questionModal hidden" id="questionModal">
 			<div class="questionLevel ">
 				<h4>Niveau de la question?</h4>
 				<div class="buttons">
@@ -27,29 +27,29 @@
 				</div>
 
 			</div>
-			<div class="question hidden " id="questionContainer">
-				<h4 id="questionLabel">Questioninriengierinreg iengieg jji ni n?</h4>
-				<div class="questionAnswers">
-					<button class="button answer">reponse</button>
-					<button class="button answer">response</button>
-					<button class="button answer">response</button>
-					<button class="button answer">reponse</button>
+			<div class="question" id="questionContainer">
+				<h4 id="questionLabel"></h4>
+				<div
+					class="questionAnswers">{# 					<button class="button answer">reponse</button>
+											<button class="button answer">response</button>
+											<button class="button answer">response</button>
+											<button class="button answer">reponse</button> #}
 				</div>
 				<button id="validate" class="button">Valider</button>
 			</div>
+		</div>
+		<div id="game">
+			<h3 id="titleInfo">
+				En attente d'autres Joueurs...
+			</h3>
+			<div id="gameContainer" class="container"></div>
+			<button class="buttonPlay" id="playButton" disabled>Jouer</button>
+		</div>
 	</div>
-	<div id="game">
-		<h3 id="titleInfo">
-			En attente d'autres Joueurs...
-		</h3>
-		<div id="gameContainer" class="container"></div>
-		<button class="buttonPlay" id="playButton" disabled>Jouer</button>
-	</div>
-</div>
 
 
 {% endblock %}
 
 {% block bottom_js %}
-<script type="text/javascript" src="/js/gameManager.js"></script>
+	<script type="text/javascript" src="/js/gameManager.js"></script>
 {% endblock %}
