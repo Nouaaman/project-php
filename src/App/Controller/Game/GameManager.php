@@ -11,7 +11,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\DatabaseConnect;
-
+use App\Entity\Question;
+use App\Entity\Reponse;
+use React\Dns\Model\Record;
 
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/Exception.php';
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
@@ -44,9 +46,9 @@ class GameManager implements MessageComponentInterface
         $result = json_decode($msg);
         if ($result != null) {
 
-            /************create game and set every player idgame *******/
+            /******************** create game and set every player idgame ***********************/
             if ($result->method == 'create') {
-                $usernames = []; //usernames of players to send  game link later
+                $usernames = []; //usernames of players to send them game url
                 $uidGame = $this->uid();
                 foreach ($result->players as $player) {
                     $player->idGame = $uidGame;
@@ -98,7 +100,7 @@ class GameManager implements MessageComponentInterface
             }
 
 
-            /************ start game if all player joigned *******/
+            /******************** start game if all player joigned ***********************/
             if ($result->method == 'play') {
                 // $totaPlayers = $result->game->players->count();
                 $i = 0;
@@ -113,9 +115,25 @@ class GameManager implements MessageComponentInterface
                 }
                 $this->playGame($result->game);
             }
+
+
+            /**************************** sync screens ***********************/
+            if ($result->method == 'sync') {
+                $this->syncScreens($from, $result->idGame, $result->phase);
+            }
+
+
+            /**************************** send question by level **************************/
+            if ($result->method == 'getQuestion') {
+                $level = (int)$result->level;
+                $question = $this->getQuestion($level);
+                $this->sendQuestion($from, $result->idGame, $question);
+            }
         }
     }
 
+
+    //show players line
     public function updateGamePlayers($gameToSend)
     {
         $response = (object)[
@@ -134,6 +152,7 @@ class GameManager implements MessageComponentInterface
         }
     }
 
+    //play if all player joined
     public function playGame($gameToSend)
     {
         $response = (object)[
@@ -152,6 +171,105 @@ class GameManager implements MessageComponentInterface
         }
     }
 
+    //sync screen data or phase of game for all players
+    public function syncScreens($from, $idGameToSync, $phase)
+    {
+        $response = (object)[
+            'method' => 'sync',
+            'game' => $idGameToSync,
+            'phase' => $phase
+        ];
+        foreach ($this->games as $game) {
+            if ($game->idGame == $idGameToSync) {
+                foreach ($game->players as $player) {
+                    foreach ($player->conn as $conn) {
+                        if ($conn != $from) {
+                            $conn->send(json_encode($response));
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+     //send question to players
+     public function sendQuestion($from, $idGameToSync,object $question)
+     {
+         $response = (object)[
+             'method' => 'getQuestion',
+             'game' => $idGameToSync,
+             'question' => $question
+         ];
+         foreach ($this->games as $game) {
+             if ($game->idGame == $idGameToSync) {
+                 foreach ($game->players as $player) {
+                     foreach ($player->conn as $conn) {
+                         if ($conn != $from) {
+                             $conn->send(json_encode($response));
+                         }
+                     }
+                 }
+                 break;
+             }
+         }
+     }
+
+    public function getQuestion($level):object
+    {
+        $questionAnswers = (object)[
+            // 'question' => 
+            // 'answers' => 
+        ];
+        $question = new Question;
+
+        //get random question by level
+        try {
+            $sql = "SELECT * FROM `Question` WHERE `level` = " . $level . " ORDER BY RAND() LIMIT 1";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            $question->setId((int)$result['id']);
+            $question->setLabel($result['label']);
+            $question->setLevel((int)$result['level']);
+            $questionAnswers->question = $question->getLabel();
+        } catch (\Exception $ex) {
+            exit($ex->getMessage());    
+        
+        } catch (\Throwable $e) {
+            exit($e->getMessage());
+        
+        }
+
+        //get answers of the question 
+        try {
+            $sql = "SELECT * FROM `Answer` WHERE `id_question` = " . $question->getId() . "";
+            $databaseconnect = new DatabaseConnect();
+            $connection = $databaseconnect->GetConnection();
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $arrayOfanswers=[];
+            foreach ($result as $asw) {
+                $answer = (object)[
+                    'label' => $asw['label'],
+                    'isValid' => $asw['isValid']
+                ];
+                array_push($arrayOfanswers, $answer);
+            }
+            $questionAnswers->answers = $arrayOfanswers;
+        } catch (\Exception $ex) {
+            exit($ex->getMessage());    
+            
+        } catch (\Throwable $e) {
+            exit($e->getMessage());
+            
+        }
+        
+        return $questionAnswers;
+    }
 
     public function onClose(ConnectionInterface $conn)
     {
@@ -167,7 +285,8 @@ class GameManager implements MessageComponentInterface
         return $uid;
     }
 
-    public function getEmails($usernames): array
+    //return array of emails of players by given usernames
+    public function getEmails(array $usernames): array
     {
         $emails = [];
         foreach ($usernames as $username) {
@@ -192,7 +311,7 @@ class GameManager implements MessageComponentInterface
         return $emails;
     }
 
-    public function sendMail($adresses, $gameLink)
+    public function sendMail(array $adresses, $gameLink)
     {
         $mail = new PHPMailer(true);
         $mail->isSMTP();                            // Set mailer to use SMTP
