@@ -18,12 +18,12 @@ require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/../../../../vendor/phpmailer/phpmailer/src/SMTP.php';
 require __DIR__ . '/../../../../vendor/autoload.php';
 
-$configs = require  __DIR__ .'../../../../../config/app.local.php';
-define('HOSTNAME',$configs['HOSTNAME']);
+$configs = require  __DIR__ . '../../../../../config/app.local.php';
+define('HOSTNAME', $configs['HOSTNAME']);
 
 class GameManager implements MessageComponentInterface
 {
-    
+
     public $players;
     public $games;
 
@@ -43,7 +43,8 @@ class GameManager implements MessageComponentInterface
     {
         $result = json_decode($msg);
         if ($result != null) {
-            //create game and set every player idgame 
+
+            /************create game and set every player idgame *******/
             if ($result->method == 'create') {
                 $usernames = []; //usernames of players to send  game link later
                 $uidGame = $this->uid();
@@ -62,7 +63,7 @@ class GameManager implements MessageComponentInterface
 
                 $host = HOSTNAME;
                 $gameURL = $host . "/game?idGame=" . $uidGame;
-                echo "\n game created, URL => ".$gameURL."\n";
+                echo "\n game created, URL => " . $gameURL . "\n";
                 /*  
                 //send mails
                 
@@ -79,7 +80,6 @@ class GameManager implements MessageComponentInterface
             }
 
             //player joigning game
-            $gameToSend = null;
             if ($result->method == 'join') {
                 foreach ($this->games as $game) {
                     if ($game->idGame == $result->idGame) {
@@ -90,12 +90,28 @@ class GameManager implements MessageComponentInterface
                                 $player->isJoined = true;
                             }
                         }
-                    
+
                         $this->updateGamePlayers($game);
                         break;
                     }
                 }
-                
+            }
+
+
+            /************ start game if all player joigned *******/
+            if ($result->method == 'play') {
+                // $totaPlayers = $result->game->players->count();
+                $i = 0;
+                foreach ($result->game->players as $player) {
+                    //turn of first player to play
+                    if ($i == 0) {
+                        $player->hisTurn = true;
+                        $i++;
+                    } else {
+                        $player->hisTurn = false;
+                    }
+                }
+                $this->playGame($result->game);
             }
         }
     }
@@ -109,8 +125,8 @@ class GameManager implements MessageComponentInterface
         foreach ($this->games as $game) {
             if ($game->idGame == $gameToSend->idGame) {
                 foreach ($game->players as $player) {
-                    foreach ( $player->conn as $conn) {
-                            $conn->send(json_encode($response));
+                    foreach ($player->conn as $conn) {
+                        $conn->send(json_encode($response));
                     }
                 }
                 break;
@@ -118,7 +134,23 @@ class GameManager implements MessageComponentInterface
         }
     }
 
-
+    public function playGame($gameToSend)
+    {
+        $response = (object)[
+            'method' => 'play',
+            'game' => $gameToSend
+        ];
+        foreach ($this->games as $game) {
+            if ($game->idGame == $gameToSend->idGame) {
+                foreach ($game->players as $player) {
+                    foreach ($player->conn as $conn) {
+                        $conn->send(json_encode($response));
+                    }
+                }
+                break;
+            }
+        }
+    }
 
 
     public function onClose(ConnectionInterface $conn)

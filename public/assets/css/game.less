@@ -63,7 +63,7 @@ body {
 }
 
 
-.questionModal-bg {
+.questionModal{
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -73,16 +73,10 @@ body {
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
 }
 
-.bg-active {
-    visibility: visible;
-    opacity: 1;
-}
 
 .modal {
     background-color: rgb(255, 255, 255);
@@ -96,26 +90,21 @@ body {
 
 
 
-/*     .questionLevel {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgb(223, 223, 223);
-        padding: 30px 12px;
-        width: 100vw;
-        max-width: 360px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-    } */
+.questionLevel {
+
+    background-color: rgb(223, 223, 223);
+    padding: 30px 12px;
+    width: 100vw;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
 
 
-/* .question {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.question {
     background-color: rgb(223, 223, 223);
     padding: 30px 12px;
     width: 100vw;
@@ -127,22 +116,13 @@ body {
     gap: 30px;
 
     .questionAnswers {
-        width: 80%;
+        
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         gap: 18px;
-
-        div {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        input {
-            transform: scale(1.5);
-        }
+        flex-wrap: wrap;
     }
 
     .button {
@@ -153,7 +133,11 @@ body {
         color: #fff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
     }
-} */
+    .button.answer{
+        color: black;
+        background-color: #fff;
+    }
+}
 
 .hidden {
     display: none;
@@ -162,10 +146,6 @@ body {
 
 }
 
-.visible {
-    visibility: visible;
-    opacity: 1;
-}
 
 #game {
     margin: auto;
@@ -211,6 +191,10 @@ body {
         color: #fff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
     }
+    .buttonPlay:disabled{
+        background-color: rgb(161, 161, 161);
+        color: rgb(31, 31, 31);
+    }
 }
 
 
@@ -230,7 +214,10 @@ body {
         background-color: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
+        flex: 1 1 0;
+        max-width: 40%;
+        border-radius: 10px;
     }
 
     .cases {

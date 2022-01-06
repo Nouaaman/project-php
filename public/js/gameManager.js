@@ -1,5 +1,3 @@
-//global variables
-let gameContainer = document.getElementById('gameContainer')
 //getting game id form url else redirect to home page
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -10,9 +8,20 @@ if (urlParams.has('idGame')) {
     window.location = '/';
 }
 
+
+
+//global variables
+const usernameOfPlayer = document.getElementById('username').value;
+const titleInfo = document.getElementById('titleInfo')
+const gameContainer = document.getElementById('gameContainer')
+const questionModal = document.getElementById('questionModal')
+const playButton = document.getElementById('playButton')
+
+
+
 /**functions** */
-function generateLine(username,color) {
-   
+function generateLine(username, color) {
+
     let line = document.createElement("div")
     line.setAttribute('class', 'line');
     line.setAttribute('id', username);
@@ -32,20 +41,13 @@ function generateLine(username,color) {
     gameContainer.appendChild(line)
 }
 
-function displayLevel(){
-    let modalBtn = document.querySelector('.buttonPlay')
-    let modalBg = document.querySelector('.questionModal')
-console.log('marche ?')
-    modalBtn.addEventListener('click', function(){
-        modalBg.style.visibility = "visible"
-        modalBg.style.visibility = 1
-    });
-}displayLevel()
+function showQuestionModal() {
+    questionModal.classList.remove('hidden')
+}
 
 
 /* connect to server */
 const conn = new WebSocket('ws://localhost:8282');
-const username = document.getElementById('username').value
 
 //handle still connecting error to send msg
 let wsSend = function (data) {
@@ -56,39 +58,70 @@ let wsSend = function (data) {
         }, 100);
     } else {
         conn.send(data);
-        console.log('sent');
     }
 }
-
 
 //join game
 const payLoad = {
     "method": "join",
-    "username": username,
+    "username": usernameOfPlayer,
     "idGame": idGame
 }
-
-conn.onopen = function (event) {
-    conn.send("Voici un texte que le serveur attend de recevoir dès que possible !");
-};
 wsSend(JSON.stringify(payLoad));
 
 
+
+
 conn.onmessage = message => {
+
     //message.data
     const response = JSON.parse(message.data);
-
+    console.log(response)
     /***************** joinging game ************ */
-    if (response.method === "join") {
-        console.log(response.game)
+    let nbrOfTotalPlayers = 0;
+    let nbrOfJoinedPlayers = 0;
+
+    if (response.method == "join") {
         gameContainer.innerHTML = ''
         response.game.players.forEach(player => {
+            nbrOfTotalPlayers++
             if (player.isJoined == true) {
-                generateLine(player.username,player.color)
+                generateLine(player.username, player.color)
+                nbrOfJoinedPlayers++
             }
-           
+
         });
+
+        if (nbrOfJoinedPlayers == nbrOfTotalPlayers) {
+            //tell server to start game if all players joigned
+            const payLoad = {
+                "method": "play",
+                "game": response.game
+            }
+            wsSend(JSON.stringify(payLoad));
+        }
     }
+
+    /***************** play ************ */
+    if (response.method == "play") {
+        response.game.players.forEach(player => {
+            if (player.hisTurn == true) {
+                titleInfo.innerText = "Le tour de : " + player.username
+                if (player.username == usernameOfPlayer) {
+                    playButton.disabled = false
+                } else {
+                    playButton.disabled = true
+
+                }
+            }
+
+
+        });
+
+        // wsSend(JSON.stringify(payLoad));
+    }
+
+
 
 }
 

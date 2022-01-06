@@ -1,71 +1,55 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-	{{ parent() }}Jeu
+{{ parent() }}Jeu
 {% endblock %}
 
 
 {% block css %}
-	<link rel="stylesheet/less" href="/assets/css/game.less">
+<link rel="stylesheet/less" href="/assets/css/game.less">
 {% endblock %}
 
 
 {% block body %}
-	<input type="hidden" id='username' value="{{username}}">
-	<div id="page">
+<input type="hidden" id='username' value="{{username}}">
+<div id="page">
 
-		<div class="questionModal-bg">
-			<div class="modal">
-				<div class="questionLevel hidden">
-					<h4>Niveau de la question?</h4>
-					<div class="buttons">
-						<button class="level l1" type="button">1</button>
-						<button class="level l2" type="button">2</button>
-						<button class="level l3" type="button">3</button>
-						<button class="level l4" type="button">4</button>
-						<button class="level l5" type="button">5</button>
-						<button class="level l6" type="button">6</button>
-					</div>
-
+	<div class="questionModal hidden" id = "questionModal">
+			<div class="questionLevel ">
+				<h4>Niveau de la question?</h4>
+				<div class="buttons">
+					<button class="level l1" type="button" data-level="1">1</button>
+					<button class="level l2" type="button" data-level="2">2</button>
+					<button class="level l3" type="button" data-level="3">3</button>
+					<button class="level l4" type="button" data-level="4">4</button>
+					<button class="level l5" type="button" data-level="5">5</button>
+					<button class="level l6" type="button" data-level="6">6</button>
 				</div>
-				<div class="question">
-					<h4>Questioninriengierinreg iengieg jji ni n?</h4>
-					<div class="questionAnswers">
-						<div>
-							<input type="checkbox" class="answer" id="answer1">
-							<label for="answer1">reponse 1</label>
-						</div>
-						<div>
-							<input type="checkbox" class="answer" id="answer2">
-							<label for="answer2">reponse 2</label>
-						</div>
-						<div>
-							<input type="checkbox" class="answer" id="answer3">
-							<label for="answer3">reponse3</label>
-						</div>
-						<div>
-							<input type="checkbox" class="answer" id="answer4">
-							<label for="answer4">reponse 4</label>
-						</div>
 
-					</div>
-					<button id="validate" class="button">Valider</button>
-				</div>
 			</div>
-		</div>
-		<div id="game">
-			<h3>
-				<span id="currentPlayer">xxxxx</span>
-				a ton tour!
-			</h3>
-			<div id="gameContainer" class="container"></div>
-			<button class="buttonPlay" id="start">Jouer</button>
-		</div>
+			<div class="question hidden " id="questionContainer">
+				<h4 id="questionLabel">Questioninriengierinreg iengieg jji ni n?</h4>
+				<div class="questionAnswers">
+					<button class="button answer">reponse</button>
+					<button class="button answer">response</button>
+					<button class="button answer">response</button>
+					<button class="button answer">reponse</button>
+				</div>
+				<button id="validate" class="button">Valider</button>
+			</div>
 	</div>
+	<div id="game">
+		<h3 id="titleInfo">
+			En attente d'autres Joueurs...
+		</h3>
+		<div id="gameContainer" class="container"></div>
+		<button class="buttonPlay" id="playButton" disabled>Jouer</button>
+	</div>
+</div>
 
 
 {% endblock %}
 
 {% block bottom_js %}
-	<script type="text/javascript" src="/js/gameManager.js"></script>
+<script type="text/javascript" src="/js/gameManager.js"></script>
 {% endblock %}
