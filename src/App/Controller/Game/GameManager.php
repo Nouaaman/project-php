@@ -127,7 +127,7 @@ class GameManager implements MessageComponentInterface
             if ($result->method == 'getQuestion') {
                 $level = (int)$result->level;
                 $question = $this->getQuestion($level);
-                $this->sendQuestion($from, $result->idGame, $question);
+                $this->sendQuestion($result->idGame, $question);
             }
         }
     }
@@ -193,29 +193,28 @@ class GameManager implements MessageComponentInterface
         }
     }
 
-     //send question to players
-     public function sendQuestion($from, $idGameToSync,object $question)
-     {
-         $response = (object)[
-             'method' => 'getQuestion',
-             'game' => $idGameToSync,
-             'question' => $question
-         ];
-         foreach ($this->games as $game) {
-             if ($game->idGame == $idGameToSync) {
-                 foreach ($game->players as $player) {
-                     foreach ($player->conn as $conn) {
-                         if ($conn != $from) {
-                             $conn->send(json_encode($response));
-                         }
-                     }
-                 }
-                 break;
-             }
-         }
-     }
+    //send question to players
+    public function sendQuestion($idGameToSync, object $question)
+    {
+        $response = (object)[
+            'method' => 'getQuestion',
+            'game' => $idGameToSync,
+            'question' => $question
+        ];
+        foreach ($this->games as $game) {
+            if ($game->idGame == $idGameToSync) {
+                foreach ($game->players as $player) {
+                    foreach ($player->conn as $conn) {
 
-    public function getQuestion($level):object
+                        $conn->send(json_encode($response));
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public function getQuestion($level): object
     {
         $questionAnswers = (object)[
             // 'question' => 
@@ -236,11 +235,9 @@ class GameManager implements MessageComponentInterface
             $question->setLevel((int)$result['level']);
             $questionAnswers->question = $question->getLabel();
         } catch (\Exception $ex) {
-            exit($ex->getMessage());    
-        
+            exit($ex->getMessage());
         } catch (\Throwable $e) {
             exit($e->getMessage());
-        
         }
 
         //get answers of the question 
@@ -251,7 +248,7 @@ class GameManager implements MessageComponentInterface
             $stmt = $connection->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll();
-            $arrayOfanswers=[];
+            $arrayOfanswers = [];
             foreach ($result as $asw) {
                 $answer = (object)[
                     'label' => $asw['label'],
@@ -261,13 +258,11 @@ class GameManager implements MessageComponentInterface
             }
             $questionAnswers->answers = $arrayOfanswers;
         } catch (\Exception $ex) {
-            exit($ex->getMessage());    
-            
+            exit($ex->getMessage());
         } catch (\Throwable $e) {
             exit($e->getMessage());
-            
         }
-        
+
         return $questionAnswers;
     }
 

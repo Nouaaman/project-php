@@ -22,7 +22,6 @@ const levelsButtons = document.querySelectorAll('.buttons .level')
 //handle click event on levels buttons
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        let clickedBtn = e.target
         let level = e.target.getAttribute('data-level');
         getRandomQuestion(level)
     })
