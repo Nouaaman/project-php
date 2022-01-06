@@ -29,6 +29,12 @@ body {
         font-size: 15px;
         padding: 12px;
         cursor: pointer;
+        border-radius: 5px;
+        transition: ease-in-out 0.4s;
+    }
+
+    .level:hover {
+        transform: scale(1.1);
     }
 
     .level.l1 {
@@ -63,7 +69,7 @@ body {
 }
 
 
-.questionModal{
+.questionModal {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -77,22 +83,10 @@ body {
     z-index: 10;
 }
 
-
-.modal {
-    background-color: rgb(255, 255, 255);
-    width: 30%;
-    height: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-
-
 .questionLevel {
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(255, 255, 255, 0.9);
 
-    background-color: rgb(223, 223, 223);
     padding: 30px 12px;
     width: 100vw;
     max-width: 360px;
@@ -105,7 +99,8 @@ body {
 
 
 .question {
-    background-color: rgb(223, 223, 223);
+    border-radius: 0 0 10px 10px;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 30px 12px;
     width: 100vw;
     max-width: 360px;
@@ -116,7 +111,7 @@ body {
     gap: 30px;
 
     .questionAnswers {
-        
+
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -126,16 +121,30 @@ body {
     }
 
     .button {
+        border-radius: 5px;
         border-style: hidden;
         font-size: 15px;
         padding: 12px;
         background-color: rgb(33, 120, 235);
         color: #fff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
+        transition: ease-in-out 0.3s;
     }
-    .button.answer{
+
+    button:hover {
+        background-color: rgb(20, 75, 148);
+
+    }
+
+    .button.answer {
         color: black;
         background-color: #fff;
+        border-radius: 5px;
+        transition: ease-in-out 0.3s;
+    }
+
+    .button.answer:hover {
+        background-color: rgb(240, 240, 240);
     }
 }
 
@@ -191,7 +200,8 @@ body {
         color: #fff;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.37);
     }
-    .buttonPlay:disabled{
+
+    .buttonPlay:disabled {
         background-color: rgb(161, 161, 161);
         color: rgb(31, 31, 31);
     }
@@ -253,7 +263,7 @@ body {
 
 }
 
-button:disabled{
+button:disabled {
     background-color: rgb(161, 161, 161);
     color: rgb(31, 31, 31);
 }
