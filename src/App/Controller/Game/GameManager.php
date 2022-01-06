@@ -286,7 +286,7 @@ class GameManager implements MessageComponentInterface
         foreach ($this->games as $game) {
             if ($game->idGame == $idGame) {
                 foreach ($game->players as $player) {
-                    if ($player->conn == $from) {
+                    if ($player->username == $from->username) {
                         $player->score = $score;
                     }
                 }
