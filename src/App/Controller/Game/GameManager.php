@@ -310,11 +310,13 @@ class GameManager implements MessageComponentInterface
                         if ($i < $nbrOfPlayers - 1) {
                             $game->players[$i]->hisTurn = false;
                             $game->players[$i + 1]->hisTurn = true;
+                            print_r('je suis rentré dans la premiere boucle lol');
                         }
                         if ($i == $nbrOfPlayers - 1) {
                             if ($game->players[$i]->hisTurn == true) {
                                 $game->players[$i]->hisTurn = false;
                                 $game->players[0]->hisTurn = true;
+                                print_r('je suis rentré dans la deuxieme boucle lol');
                             }
                         }
                     }
