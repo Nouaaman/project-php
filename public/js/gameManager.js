@@ -124,6 +124,11 @@ function selectedAnswer(e) {
         clearQuestion()
         hideQuestionModal()
     }, 3000);
+
+    
+    updateScore()
+
+    
 }
 
 function clearQuestion() {
@@ -183,6 +188,16 @@ function getRandomQuestion(level) {
 }
 
 
+
+function updateScore() {
+    const payLoad = {
+        "method": "updateScore",
+        "idGame": idGame,
+        "score": playerScore,
+        "username": usernameOfPlayer
+    }
+    wsSend(JSON.stringify(payLoad));
+}
 
 
 conn.onmessage = message => {
@@ -261,9 +276,4 @@ conn.onmessage = message => {
         }
       
     }
-}
-
-
-function updateGameState(data) {
-
 }

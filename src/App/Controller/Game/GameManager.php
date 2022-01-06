@@ -129,6 +129,21 @@ class GameManager implements MessageComponentInterface
                 $question = $this->getQuestion($level);
                 $this->sendQuestion($result->idGame, $question);
             }
+
+            /**************************** update player score **************************/
+            if ($result->method == 'updateScore') {
+                $this->updateScore($from, $result->idGame, $result->score);
+                //change turn after updating player score
+               $this->changePlayerTrun($result->idGame);
+                //sending new game state
+                foreach ($this->games as $game) {
+                    if ($game->idGame == $result->idGame) {
+                        $this->playGame($game);
+                        break;
+                    }
+                }
+                
+            }
         }
     }
 
@@ -265,6 +280,47 @@ class GameManager implements MessageComponentInterface
         }
 
         return $questionAnswers;
+    }
+
+    function updateScore($from, $idGame, $score)
+    {
+        foreach ($this->games as $game) {
+            if ($game->idGame == $idGame) {
+                foreach ($game->players as $player) {
+                    if ($player->conn == $from) {
+                        $player->score = $score;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    function changePlayerTrun($idGame)
+    {
+        $nbrOfPlayers = 0;
+        $currentPlayerTrun = 0;
+        foreach ($this->games as $game) {
+            if ($game->idGame == $idGame) {
+
+                foreach ($game->players as $player) {
+                    $nbrOfPlayers++;
+                }
+                for ($i = 0; $i < $nbrOfPlayers; $i++) {
+                    if ($game->players[$i]->hisTurn == true) {
+                        if ($i < $nbrOfPlayers - 1) {
+                            $game->players[$i]->hisTurn = false;
+                            $game->players[$i + 1]->hisTurn = true;
+                        } else {
+                            $game->players[$i]->hisTurn = true;
+                            for ($j = $i; $j > 0; $j--) {
+                                $game->players[$j]->hisTurn = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function onClose(ConnectionInterface $conn)
