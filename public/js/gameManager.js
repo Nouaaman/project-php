@@ -18,7 +18,6 @@ const questionModal = document.getElementById('questionModal')
 const playButton = document.getElementById('playButton')
 
 
-
 /**functions** */
 function generateLine(username, color) {
 
