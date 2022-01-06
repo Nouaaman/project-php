@@ -19,6 +19,7 @@ const playButton = document.getElementById('playButton')
 const levelsButtons = document.querySelectorAll('.buttons .level')
 
 
+
 //handle click event on levels buttons
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -76,13 +77,13 @@ function showQuestionAndAnswers(question) {
    let questionContainer = document.getElementById('questionContainer')
    questionContainer.classList.remove('hidden') 
    document.getElementById('questionLabel').innerText = question.question;
-    let answersContainer =  document.getElementsByClassName('questionAnswers')
+   let answersContainer =  document.getElementById('questionAnswers')
    question.answers.forEach(ans => {
         let btn = document.createElement("button")
         btn.setAttribute('data-isValid', ans.isValid);
-        btn.setAttribute('class', 'button answer');
+        btn.setAttribute('class', 'button answer'); 
         btn.innerText = ans.label
-         answersContainer.appendChild(btn)
+        answersContainer.appendChild(btn)
      }); 
 
    
