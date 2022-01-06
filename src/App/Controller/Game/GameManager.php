@@ -297,21 +297,28 @@ class GameManager implements MessageComponentInterface
 
     function changePlayerTurn($idGame)
     {
+        echo '$$$$$$$$$$$$$$$$$$$$$$$$ turn  fucntion';
         $nbrOfPlayers = 0;
         $currentPlayerTurn = 0;
         foreach ($this->games as $game) {
             if ($game->idGame == $idGame) {
+                echo '$$$$$$$$$$$$$$$$$$$$$$$$ ON GAME';
                 //count total players
                 foreach ($game->players as $player) {
                     $nbrOfPlayers++;
+                    echo '$$$$$$$$$$$$$$$$$$$$$$$$ counting players';
                 }
+                echo '$$$$$$$$$$$$$$$$$$$$$$$$ nbr of players ' . $nbrOfPlayers++;
                 for ($i = 0; $i < $nbrOfPlayers; $i++) {
+                    echo '$$$$$$$$$$$$$$$$$$$$$$$$ in for loop';
                     if ($game->players[$i]->hisTurn == true) {
+                        echo '$$$$$$$$$$$$$$$$$$$$$$$$ this player his turn';
                         if ($i < $nbrOfPlayers - 1) {
                             $game->players[$i]->hisTurn = false;
                             $game->players[$i + 1]->hisTurn = true;
                         }
                         if ($i == $nbrOfPlayers - 1) {
+                            echo '$$$$$$$$$$$$$$$$$$$$$$$$ this player is the last';
                             if ($game->players[$i]->hisTurn == true) {
                                 $game->players[$i]->hisTurn = false;
                                 $game->players[0]->hisTurn = true;
@@ -319,6 +326,7 @@ class GameManager implements MessageComponentInterface
                         }
                     }
                 }
+                break;
             }
         }
     }
