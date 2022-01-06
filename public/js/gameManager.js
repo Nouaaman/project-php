@@ -17,12 +17,16 @@ const gameContainer = document.getElementById('gameContainer')
 const questionModal = document.getElementById('questionModal')
 const playButton = document.getElementById('playButton')
 const levelsButtons = document.querySelectorAll('.buttons .level')
-
-
+const labelValidAnswer = document.getElementById('labelValidAnswer')
+const nbrOfCases = 10;
+let selecteLevel = 0
+let playerScore = 0
+let isWinner = false
 //handle click event on levels buttons
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         let level = e.target.getAttribute('data-level');
+        selectedLevel = level
         getRandomQuestion(level)
     })
 })
@@ -41,7 +45,7 @@ function generateLine(username, color) {
     let ul = document.createElement("ul")
     ul.setAttribute('class', 'cases')
     ul.setAttribute('id', 'cases')
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < nbrOfCases; i++) {
         let li = document.createElement('li')
         ul.appendChild(li)
     }
@@ -55,6 +59,10 @@ function generateLine(username, color) {
 
 function showQuestionModal() {
     questionModal.classList.remove('hidden')
+}
+
+function hideQuestionModal() {
+    questionModal.classList.add('hidden')
 }
 
 //disable buttons in the screen for a player when it's not his turn
@@ -73,24 +81,50 @@ function enableAllButtons() {
 }
 
 function showQuestionAndAnswers(question) {
-   let questionContainer = document.getElementById('questionContainer')
-   questionContainer.classList.remove('hidden') 
-   document.getElementById('questionLabel').innerText = question.question;
-    let answersContainer =  document.getElementsByClassName('questionAnswers')
-   question.answers.forEach(ans => {
+    let questionContainer = document.getElementById('questionContainer')
+    questionContainer.classList.remove('hidden')
+    document.getElementById('questionLabel').innerText = question.question;
+    let answersContainer = document.getElementById('questionAnswers')
+    question.answers.forEach(ans => {
         let btn = document.createElement("button")
         btn.setAttribute('data-isValid', ans.isValid);
         btn.setAttribute('class', 'button answer');
         btn.innerText = ans.label
-         answersContainer.appendChild(btn)
-     }); 
+        answersContainer.appendChild(btn)
+    });
 
-   
+    document.querySelectorAll('#questionAnswers button').forEach(btn => {
+        btn.addEventListener('click', selectedAnswer(e))
+    })
+}
+
+//change score according to answer and check if winner
+function selectedAnswer(e) {
+    if (e.target.getAttribute('data-isValid') == 1) {
+        playerScore += selecteLevel
+        if (playerScore > nbrOfCases) {
+            playerScore = nbrOfCases;
+            isWinner = true;
+        }
+        labelValidAnswer.innerText = 'Bonne reponse!'
+    } else {
+        playerScore -= selecteLevel
+        if (playerScore < 0) {
+            playerScore = 0;
+        }
+        labelValidAnswer.innerText = 'Mauvaise reponse.'
+    }
+
+    setTimeout(function () {
+        clearQuestion()
+        hideQuestionModal()
+    }, 3000);
 }
 
 function clearQuestion() {
     document.getElementById('questionLabel').innerText = '';
     document.querySelector('.questionAnswers').innerHTML = '';
+    labelValidAnswer.innerText = ''
 }
 
 
@@ -192,11 +226,9 @@ conn.onmessage = message => {
                 });
 
             }
-
-
         });
 
-        // wsSend(JSON.stringify(payLoad));
+
 
     }
 
