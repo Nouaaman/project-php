@@ -74,7 +74,8 @@ function enableAllButtons() {
 
 function showQuestionAndAnswers(question) {
     document.getElementById('questionLabel').innerText = question.question;
-    let answersContainer =  document.getElementById('questionAnswers')
+    let answersContainer =  document.getElementsByClassName('questionAnswers')
+    console.log(answersContainer);
     question.answers.forEach(ans => {
         let btn = document.createElement("button")
         btn.setAttribute('data-isValid', ans.isValid);
