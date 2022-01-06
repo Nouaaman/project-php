@@ -137,7 +137,7 @@ btnCreate.addEventListener("click", e => {
       color: colors[i].value,
       score: 0,
       isJoined: false,
-      hisTrun: hisTurn
+      hisTurn: hisTurn
     }
     players.push(player)
   }
