@@ -85,11 +85,20 @@ class GameManager implements MessageComponentInterface
             if ($result->method == 'join') {
                 foreach ($this->games as $game) {
                     if ($game->idGame == $result->idGame) {
+                        $i = 0;
                         foreach ($game->players as $player) {
+                           
                             if ($player->username == $result->username) {
                                 $player->conn = new \SplObjectStorage;
                                 $player->conn->attach($from);
                                 $player->isJoined = true;
+                                if ($i == 0) {
+                                    $player->hisTurn = true;
+                                }
+                                else {
+                                    $player->hisTurn = false;
+                                }
+                                $i++;
                             }
                         }
 
@@ -103,16 +112,16 @@ class GameManager implements MessageComponentInterface
             /******************** start game if all player joigned ***********************/
             if ($result->method == 'play') {
                 // $totaPlayers = $result->game->players->count();
-                $i = 0;
-                foreach ($result->game->players as $player) {
-                    //turn of first player to play
-                    if ($i == 0) {
-                        $player->hisTurn = true;
-                        $i++;
-                    } else {
-                        $player->hisTurn = false;
-                    }
-                }
+                // $i = 0;
+                // foreach ($result->game->players as $player) {
+                //     //turn of first player to play
+                //     if ($i == 0) {
+                //         $player->hisTurn = true;
+                //         $i++;
+                //     } else {
+                //         $player->hisTurn = false;
+                //     }
+                // }
                 $this->playGame($result->game);
             }
 
