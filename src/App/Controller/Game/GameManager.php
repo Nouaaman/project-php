@@ -305,7 +305,6 @@ class GameManager implements MessageComponentInterface
                 foreach ($game->players as $player) {
                     $nbrOfPlayers++;
                 }
-
                 for ($i = 0; $i < $nbrOfPlayers; $i++) {
                     if ($i < $nbrOfPlayers - 1) {
                         if ($game->players[$i]->hisTurn == true) {
