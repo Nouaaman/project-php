@@ -306,16 +306,16 @@ class GameManager implements MessageComponentInterface
                     $nbrOfPlayers++;
                 }
                 for ($i = 0; $i < $nbrOfPlayers; $i++) {
-                    if ($i < $nbrOfPlayers - 1) {
-                        if ($game->players[$i]->hisTurn == true) {
+                    if ($game->players[$i]->hisTurn == true) {
+                        if ($i < $nbrOfPlayers - 1) {
                             $game->players[$i]->hisTurn = false;
                             $game->players[$i + 1]->hisTurn = true;
                         }
-                    }
-                    if ($i == $nbrOfPlayers - 1) {
-                        if ($game->players[$i]->hisTurn == true) {
-                            $game->players[$i]->hisTurn = false;
-                            $game->players[0]->hisTurn = true;
+                        if ($i == $nbrOfPlayers - 1) {
+                            if ($game->players[$i]->hisTurn == true) {
+                                $game->players[$i]->hisTurn = false;
+                                $game->players[0]->hisTurn = true;
+                            }
                         }
                     }
                 }

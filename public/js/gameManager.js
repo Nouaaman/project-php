@@ -128,7 +128,7 @@ function selectedAnswer(e) {
     setTimeout(function () {
         clearQuestion()
         hideQuestionModal()
-    }, 3000);
+    }, 2500);
 
 
     updateScore()
@@ -285,7 +285,7 @@ conn.onmessage = message => {
             setTimeout(function () {
                 clearQuestion()
                 hideQuestionModal()
-            }, 3000);
+            }, 2000);
         }
 
     }
