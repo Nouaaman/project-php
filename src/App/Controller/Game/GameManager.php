@@ -323,6 +323,7 @@ class GameManager implements MessageComponentInterface
                                 $game->players[$nbrOfPlayers - 1]->hisTurn = false;
                                 $game->players[0]->hisTurn = true;
                             }
+                            break;
                         }
                     }
                 }
