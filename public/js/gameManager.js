@@ -37,7 +37,8 @@ levelsButtons.forEach(btn => {
 
 
 /***********functions*********/
-function generateLine(username, color) {
+//generate line for each player
+function gameUi(username, color,score) {
 
     let line = document.createElement("div")
     line.setAttribute('class', 'line');
@@ -48,6 +49,9 @@ function generateLine(username, color) {
     ul.setAttribute('id', 'cases')
     for (let i = 0; i < nbrOfCases; i++) {
         let li = document.createElement('li')
+        if(score == i+1){
+            li.classList.add('currentPosition')
+        }
         ul.appendChild(li)
     }
     line.appendChild(ul)
@@ -125,10 +129,10 @@ function selectedAnswer(e) {
         hideQuestionModal()
     }, 3000);
 
-    
+
     updateScore()
 
-    
+
 }
 
 function clearQuestion() {
@@ -215,7 +219,7 @@ conn.onmessage = message => {
         response.game.players.forEach(player => {
             nbrOfTotalPlayers++
             if (player.isJoined == true) {
-                generateLine(player.username, player.color)
+                gameUi(player.username, player.color, player.score)
                 nbrOfJoinedPlayers++
             }
 
@@ -233,7 +237,10 @@ conn.onmessage = message => {
 
     /***************** play ************ */
     if (response.method == "play") {
+
         response.game.players.forEach(player => {
+            console.log("scores :", player.username, " ", player.score)
+            playerScore = player.score
             //enbale play button to show question level then label
             if (player.hisTurn == true) {
                 titleInfo.innerText = "Le tour de : " + player.username
@@ -274,6 +281,6 @@ conn.onmessage = message => {
                 hideQuestionModal()
             }, 3000);
         }
-      
+
     }
 }
