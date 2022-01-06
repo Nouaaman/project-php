@@ -38,7 +38,7 @@ levelsButtons.forEach(btn => {
 
 /***********functions*********/
 //generate line for each player
-function gameUi(username, color,score) {
+function gameUi(username, color, score) {
 
     let line = document.createElement("div")
     line.setAttribute('class', 'line');
@@ -49,7 +49,7 @@ function gameUi(username, color,score) {
     ul.setAttribute('id', 'cases')
     for (let i = 0; i < nbrOfCases; i++) {
         let li = document.createElement('li')
-        if(score == i+1){
+        if (score == i + 1) {
             li.classList.add('currentPosition')
         }
         ul.appendChild(li)
@@ -239,6 +239,11 @@ conn.onmessage = message => {
     if (response.method == "play") {
 
         response.game.players.forEach(player => {
+            gameContainer.innerHTML = ''
+            response.game.players.forEach(player => {
+                gameUi(player.username, player.color, player.score)
+
+            });
             console.log("scores :", player.username, " ", player.score)
             playerScore = player.score
             //enbale play button to show question level then label

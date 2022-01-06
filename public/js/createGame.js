@@ -1,17 +1,16 @@
+// generate new field
+let inputs = document.querySelectorAll('.field input')
+addInputEvent()
 
-	// generate new field
-  let inputs = document.querySelectorAll('.field input')
-  addInputEvent()
+let nbrField = 2
+let addBtn = document.getElementById("add")
+addBtn.addEventListener('click', (e) => {
+  if (nbrField < 6) {
 
-	let nbrField = 2
-	let addBtn = document.getElementById("add")
-	addBtn.addEventListener('click', (e) => {
-		if (nbrField < 6) {
+    let field = document.createElement('div')
+    field.setAttribute('class', 'field')
 
-			let field = document.createElement('div')
-			field.setAttribute('class', 'field')
-
-			field.innerHTML = `
+    field.innerHTML = `
 				<div class="autocomplete">
 					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
 					<div class="autocomplete-items">
@@ -28,20 +27,20 @@
 
 				</select>
   `
-			let fields = document.querySelector('.fields')
-			fields.appendChild(field)
-			nbrField++
-			checkTheDropdownsColor();
-      addInputEvent()
-		}
-	})
+    let fields = document.querySelector('.fields')
+    fields.appendChild(field)
+    nbrField++
+    checkTheDropdownsColor();
+    addInputEvent()
+  }
+})
 
 
 
 
 //auto complete
 
-function addInputEvent(){
+function addInputEvent() {
   inputs = document.querySelectorAll('.field input')
   inputs.forEach(input => {
     input.addEventListener('input', (e) => {
@@ -51,15 +50,15 @@ function addInputEvent(){
         let usernamesResult = getUsernames(e.target.value).then(user => {
           return user
         })
-  
+
         showSuggestion(divItems, usernamesResult)
       } else {
         divItems.innerHTML = ''
       }
-  
+
     });
   })
-  
+
 }
 
 async function getUsernames(searchUser) {
@@ -127,13 +126,18 @@ btnCreate.addEventListener("click", e => {
   let colors = document.querySelectorAll('.color')
 
   let players = []
+  let hisTurn = true
   for (let i = 0; i < usernames.length; i++) {
+    if (i > 0) {
+      hisTurn = false
+    }
     const player = {
       idGame: '',
       username: usernames[i].value,
       color: colors[i].value,
       score: 0,
-      isJoined: false
+      isJoined: false,
+      hisTrun: hisTurn
     }
     players.push(player)
   }
