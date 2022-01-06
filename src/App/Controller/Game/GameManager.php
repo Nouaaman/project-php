@@ -85,23 +85,14 @@ class GameManager implements MessageComponentInterface
             if ($result->method == 'join') {
                 foreach ($this->games as $game) {
                     if ($game->idGame == $result->idGame) {
-                        $i = 0;
                         foreach ($game->players as $player) {
-                           
+
                             if ($player->username == $result->username) {
                                 $player->conn = new \SplObjectStorage;
                                 $player->conn->attach($from);
                                 $player->isJoined = true;
-                                if ($i == 0) {
-                                    $player->hisTurn = true;
-                                }
-                                else {
-                                    $player->hisTurn = false;
-                                }
-                                $i++;
                             }
                         }
-
                         $this->updateGamePlayers($game);
                         break;
                     }
@@ -143,7 +134,7 @@ class GameManager implements MessageComponentInterface
             if ($result->method == 'updateScore') {
                 $this->updateScore($from, $result->idGame, $result->score);
                 //change turn after updating player score
-                $this->changePlayerTrun($result->idGame);
+                $this->changePlayerTurn($result->idGame);
                 //sending new game state
                 foreach ($this->games as $game) {
                     if ($game->idGame == $result->idGame) {
@@ -304,7 +295,7 @@ class GameManager implements MessageComponentInterface
         }
     }
 
-    function changePlayerTrun($idGame)
+    function changePlayerTurn($idGame)
     {
         $nbrOfPlayers = 0;
         $currentPlayerTurn = 0;
