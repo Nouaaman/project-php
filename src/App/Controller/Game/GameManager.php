@@ -119,7 +119,7 @@ class GameManager implements MessageComponentInterface
 
             /**************************** sync screens ***********************/
             if ($result->method == 'sync') {
-                $this->syncScreens($from, $result->idGame, $result->phase);
+                $this->syncScreens($from, $result->idGame, $result->phase, $result->validAnswerMessage);
             }
 
 
@@ -172,12 +172,13 @@ class GameManager implements MessageComponentInterface
     }
 
     //sync screen data or phase of game for all players
-    public function syncScreens($from, $idGameToSync, $phase)
+    public function syncScreens($from, $idGameToSync, $phase, $validAnswerMessage)
     {
         $response = (object)[
             'method' => 'sync',
             'game' => $idGameToSync,
-            'phase' => $phase
+            'phase' => $phase,
+            'validAnswerMessage' => $validAnswerMessage
         ];
         foreach ($this->games as $game) {
             if ($game->idGame == $idGameToSync) {

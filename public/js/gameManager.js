@@ -18,10 +18,11 @@ const questionModal = document.getElementById('questionModal')
 const playButton = document.getElementById('playButton')
 const levelsButtons = document.querySelectorAll('.buttons .level')
 const labelValidAnswer = document.getElementById('labelValidAnswer')
-const nbrOfCases = 10;
+const nbrOfCases = 10
 let selecteLevel = 0
 let playerScore = 0
 let isWinner = false
+let labelValidAnswerMessage
 //handle click event on levels buttons
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -94,7 +95,9 @@ function showQuestionAndAnswers(question) {
     });
 
     document.querySelectorAll('#questionAnswers button').forEach(btn => {
-        btn.addEventListener('click', selectedAnswer(e))
+        btn.addEventListener('click', (e) => {
+            selectedAnswer(e)
+        })
     })
 }
 
@@ -107,14 +110,16 @@ function selectedAnswer(e) {
             isWinner = true;
         }
         labelValidAnswer.innerText = 'Bonne reponse!'
+        labelValidAnswerMessage = 'Bonne reponse!'
     } else {
         playerScore -= selecteLevel
         if (playerScore < 0) {
             playerScore = 0;
         }
         labelValidAnswer.innerText = 'Mauvaise reponse.'
+        labelValidAnswerMessage = 'Mauvaise reponse.'
     }
-
+    syncScreens('answered')
     setTimeout(function () {
         clearQuestion()
         hideQuestionModal()
@@ -159,10 +164,13 @@ function syncScreens(phase) {
     const payLoad = {
         "method": "sync",
         "idGame": idGame,
-        "phase": phase.toString()
+        "phase": phase.toString(),
+        "validAnswerMessage": labelValidAnswerMessage
     }
     wsSend(JSON.stringify(payLoad));
 }
+
+
 
 //get Random Question by level
 function getRandomQuestion(level) {
@@ -244,6 +252,14 @@ conn.onmessage = message => {
         if (response.phase == 'questionLevel') {
             showQuestionModal()
         }
+        if (response.phase == 'answered') {
+            labelValidAnswerMessage.innerText = response.validAnswerMessage
+            setTimeout(function () {
+                clearQuestion()
+                hideQuestionModal()
+            }, 3000);
+        }
+      
     }
 }
 
