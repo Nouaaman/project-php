@@ -125,10 +125,10 @@ function selectedAnswer(e) {
         hideQuestionModal()
     }, 3000);
 
-    
+
     updateScore()
 
-    
+
 }
 
 function clearQuestion() {
@@ -233,7 +233,9 @@ conn.onmessage = message => {
 
     /***************** play ************ */
     if (response.method == "play") {
+
         response.game.players.forEach(player => {
+            console.log("scores :", player.username, " ", player.score)
             //enbale play button to show question level then label
             if (player.hisTurn == true) {
                 titleInfo.innerText = "Le tour de : " + player.username
@@ -274,6 +276,6 @@ conn.onmessage = message => {
                 hideQuestionModal()
             }, 3000);
         }
-      
+
     }
 }
