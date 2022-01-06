@@ -107,6 +107,7 @@ function showQuestionAndAnswers(question) {
 
 //change score according to answer and check if winner
 function selectedAnswer(e) {
+    disableAllButtons()
     if (e.target.getAttribute('data-isValid') == 1) {
         playerScore += selecteLevel
         if (playerScore > nbrOfCases) {
