@@ -14,29 +14,25 @@
 <input type="hidden" id='username' value="{{username}}">
 <div id="page">
 
-	<div class="questionModal hidden" id = "questionModal">
-			<div class="questionLevel ">
-				<h4>Niveau de la question?</h4>
-				<div class="buttons">
-					<button class="level l1" type="button" data-level="1">1</button>
-					<button class="level l2" type="button" data-level="2">2</button>
-					<button class="level l3" type="button" data-level="3">3</button>
-					<button class="level l4" type="button" data-level="4">4</button>
-					<button class="level l5" type="button" data-level="5">5</button>
-					<button class="level l6" type="button" data-level="6">6</button>
-				</div>
+	<div class="questionModal hidden" id="questionModal">
+		<div class="questionLevel ">
+			<h4>Niveau de la question?</h4>
+			<div class="buttons">
+				<button class="level l1" type="button" data-level="1">1</button>
+				<button class="level l2" type="button" data-level="2">2</button>
+				<button class="level l3" type="button" data-level="3">3</button>
+				<button class="level l4" type="button" data-level="4">4</button>
+				<button class="level l5" type="button" data-level="5">5</button>
+				<button class="level l6" type="button" data-level="6">6</button>
+			</div>
 
+		</div>
+		<div class="question" id="questionContainer">
+			<h4 id="questionLabel"></h4>
+			<div class="questionAnswers">
 			</div>
-			<div class="question hidden " id="questionContainer">
-				<h4 id="questionLabel">Questioninriengierinreg iengieg jji ni n?</h4>
-				<div class="questionAnswers">
-					<!-- <button class="button answer">reponse</button>
-					<button class="button answer">response</button>
-					<button class="button answer">response</button>
-					<button class="button answer">reponse</button> -->
-				</div>
-				<button id="validate" class="button">Valider</button>
-			</div>
+			<button id="validate" class="button">Valider</button>
+		</div>
 	</div>
 	<div id="game">
 		<h3 id="titleInfo">

@@ -73,17 +73,17 @@ function enableAllButtons() {
 }
 
 function showQuestionAndAnswers(question) {
-    document.getElementById('questionLabel').innerText = question.question;
+   let questionContainer = document.getElementById('questionContainer')
+   questionContainer.classList.remove('hidden') 
+   document.getElementById('questionLabel').innerText = question.question;
     let answersContainer =  document.getElementsByClassName('questionAnswers')
-    console.log(answersContainer);
-    question.answers.forEach(ans => {
+   question.answers.forEach(ans => {
         let btn = document.createElement("button")
         btn.setAttribute('data-isValid', ans.isValid);
         btn.setAttribute('class', 'button answer');
         btn.innerText = ans.label
-        answersContainer.appendChild(btn)
-    });
-
+         answersContainer.appendChild(btn)
+     }); 
 
    
 }
