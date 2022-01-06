@@ -107,6 +107,7 @@ function showQuestionAndAnswers(question) {
 
 //change score according to answer and check if winner
 function selectedAnswer(e) {
+    console.log('selected level :', selecteLevel);
     disableAllButtons()
     if (e.target.getAttribute('data-isValid') == 1) {
         playerScore += selecteLevel
@@ -241,10 +242,8 @@ conn.onmessage = message => {
 
         response.game.players.forEach(player => {
             gameContainer.innerHTML = ''
-            response.game.players.forEach(player => {
-                gameUi(player.username, player.color, player.score)
+            gameUi(player.username, player.color, player.score)
 
-            });
             console.log("scores :", player.username, " ", player.score)
             playerScore = player.score
             //enbale play button to show question level then label
