@@ -8,16 +8,17 @@
 - Ratchet (WebSockets)
 - PHPMailer
 - Composer
+- MicroFramework
 
 ## Bilan : 
 ** Toute la partie administrateur fonctionne : **
 Ajout, modification, suppression d'une question, de ses réponses, et des utilisateurs
 
 
-Création d'une partie, ajout des joueurs ainsi que leur couleur
-Création d'un lien vers une partie
-Envoi du mail chez les joueurs
-Salon de jeu dynamique 
+Création d'une partie, ajout des joueurs ainsi que leur couleur,<br>
+Création d'un lien vers une partie,
+Envoi du mail chez les joueurs,
+Salon de jeu dynamique,
 
 ## Manuel d'installation : 
 Voici les identifiants pour se connecter en tant qu'admin : 
