@@ -45,7 +45,7 @@ function gameUi(username, color, score) {
     let ul = document.createElement("ul")
     ul.setAttribute('class', 'cases')
     ul.setAttribute('id', 'cases')
-    for (let i = nbrOfCases; i >= 1; i++) {
+    for (let i = nbrOfCases; i >= 1; i--) {
         let li = document.createElement('li')
         if (score == i) {
             li.classList.add('currentPosition')
