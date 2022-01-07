@@ -149,6 +149,7 @@ btnCreate.addEventListener("click", e => {
       }
 
       players.push(player)
+      
     }else{
       isValid = false
     }
