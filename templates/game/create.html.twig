@@ -1,85 +1,87 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-	{{ parent() }}Créer ou Joindre une partie
+{{ parent() }}Créer ou Joindre une partie
 {% endblock %}
 
 
 {% block css %}
-	<link rel="stylesheet/less" href="/assets/css/createGame.less">
+<link rel="stylesheet/less" href="/assets/css/createGame.less">
 
 {% endblock %}
 
 
 {% block body %}
-	<div class="container">
-		<div class="back">
-			<a href="/"><img src="/assets/img/back-100.png" alt="" class="back-btn"></a>
-		</div>
-		<div class="users box">
-			<h1>Créer une nouvelle partie</h1>
-			<p>Inserez les usernames des joueurs:</p>
-			<div class="fields">
-				<div class="field">
-					<div class="autocomplete">
-						<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
-						<div class="autocomplete-items"></div>
-					</div>
-					<select class="color" name="color">
-						<option value="#141E61">Bleu</option>
-						<option value="#E2703A">Jaune</option>
-						<option value="#950101">Rouge</option>
-						<option value="#1E5128">Vert</option>
-						<option value="#3E065F">Violet</option>
-						<option value="#461111">Brun</option>
-					</select>
-
+<div class="container">
+	<div class="back">
+		<a href="/"><img src="/assets/img/back-100.png" alt="" class="back-btn"></a>
+	</div>
+	<div class="users box">
+		<h1>Créer une nouvelle partie</h1>
+		<p>Inserez les usernames des joueurs:</p>
+		<div class="fields">
+			<div class="field">
+				<div class="autocomplete">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
+					<div class="autocomplete-items"></div>
 				</div>
-				<div class="field">
-					<div class="autocomplete">
-						<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
-						<div class="autocomplete-items"></div>
-					</div>
-					<select class="color" name="color">
-						<option value="#E2703A">Jaune</option>
-						<option value="#141E61">Bleu</option>
-						<option value="#950101">Rouge</option>
-						<option value="#1E5128">Vert</option>
-						<option value="#3E065F">Violet</option>
-						<option value="#461111">Brun</option>
-
-					</select>
-				</div>
+				<select class="color" name="color">
+					<option value="#141E61">Bleu</option>
+					<option value="#E2703A">Jaune</option>
+					<option value="#950101">Rouge</option>
+					<option value="#1E5128">Vert</option>
+					<option value="#3E065F">Violet</option>
+					<option value="#461111">Brun</option>
+				</select>
 
 			</div>
-			<img src="/assets/img/icon-add.png" id="add">
-			<button id="create" class="btn">Créer</button>
-		</div>
+			<div class="field">
+				<div class="autocomplete">
+					<input class="username" type="text" name="username" placeholder="Username" autocomplete="off">
+					<div class="autocomplete-items"></div>
+				</div>
+				<select class="color" name="color">
+					<option value="#E2703A">Jaune</option>
+					<option value="#141E61">Bleu</option>
+					<option value="#950101">Rouge</option>
+					<option value="#1E5128">Vert</option>
+					<option value="#3E065F">Violet</option>
+					<option value="#461111">Brun</option>
 
+				</select>
+			</div>
+
+		</div>
+		<img src="/assets/img/icon-add.png" id="add">
+		
+		<button id="create" class="btn">Créer</button>
+		<p id="labelMessage" style="text-align: center;"></p>
 	</div>
+
+</div>
 {% endblock %}
 
 
 {% block bottom_js %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script>
-		function checkTheDropdownsColor() {
-var arr = $('select').find(':selected');
-$('select').find('option').show();
-$.each($('select'), function () {
-var self = this;
-var selectVal = $(this).val();
-$.each(arr, function () {
-if (selectVal !== $(this).val()) {
-$(self).find('option[value="' + $(this).val() + '"]').hide()
-} else {
-$(self).find('option[value="' + $(this).val() + '"]').show()
-}
-});
-})
-};
-checkTheDropdownsColor();
-$('select').on('change', checkTheDropdownsColor);
-	</script>
-	<script type="text/javascript" src="/js/createGame.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+	function checkTheDropdownsColor() {
+		var arr = $('select').find(':selected');
+		$('select').find('option').show();
+		$.each($('select'), function() {
+			var self = this;
+			var selectVal = $(this).val();
+			$.each(arr, function() {
+				if (selectVal !== $(this).val()) {
+					$(self).find('option[value="' + $(this).val() + '"]').hide()
+				} else {
+					$(self).find('option[value="' + $(this).val() + '"]').show()
+				}
+			});
+		})
+	};
+	checkTheDropdownsColor();
+	$('select').on('change', checkTheDropdownsColor);
+</script>
+<script type="text/javascript" src="/js/createGame.js"></script>
 {% endblock %}
