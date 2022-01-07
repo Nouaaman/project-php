@@ -21,16 +21,18 @@ let selecteLevel = 0
 let playerScore = 0
 let isWinner = false
 let labelValidAnswerMessage
+let isPlayerTurn = false
+
+
 //handle click event on levels buttons
 levelsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
+        disableLevelButtons()
         let level = e.target.getAttribute('data-level');
         selecteLevel = level
         getRandomQuestion(level)
     })
 })
-
-
 
 
 
@@ -88,6 +90,13 @@ function enableAllButtons() {
     })
 }
 
+
+function disableLevelButtons() {
+    levelsButtons.forEach(btn => {
+        btn.disabled = true
+    })
+}
+
 function showQuestionAndAnswers(question) {
     let questionContainer = document.getElementById('questionContainer')
     questionContainer.classList.remove('hidden')
@@ -102,14 +111,21 @@ function showQuestionAndAnswers(question) {
     });
 
     document.querySelectorAll('#questionAnswers button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            selectedAnswer(e)
-        })
+        if (isPlayerTurn) {
+            btn.addEventListener('click', (e) => {
+                selectedAnswer(e)
+            })
+        }
+
     })
 }
 
 //change score according to answer and check if winner
 function selectedAnswer(e) {
+    //disable answers buttons
+    document.querySelectorAll('#questionAnswers button').forEach(btn => {
+        btn.disabled = true
+    })
     disableAllButtons()
     if (e.target.getAttribute('data-isValid') == 1) {
         playerScore += parseInt(selecteLevel)
@@ -208,7 +224,7 @@ function updateScore() {
     wsSend(JSON.stringify(payLoad));
 }
 
-
+/********************* onmessage ************************* */
 conn.onmessage = message => {
 
     //message.data
@@ -246,14 +262,17 @@ conn.onmessage = message => {
         response.game.players.forEach(player => {
             gameUi(player.username, player.color, player.score)
 
-            console.log("scores :", player.username, " ", player.score)
-            playerScore = parseInt(player.score)
+            if (player.username == usernameOfPlayer) {
+                playerScore = parseInt(player.score)
+            }
             //enbale play button to show question level then label
             if (player.hisTurn == true) {
                 titleInfo.innerText = "Le tour de : " + player.username
                 if (player.username == usernameOfPlayer) {
+                    isPlayerTurn = true//for generted answers buttons click event
                     enableAllButtons()
                 } else {
+                    isPlayerTurn = false//for generted answers buttons click event
                     disableAllButtons()
                 }
 
