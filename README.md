@@ -21,6 +21,10 @@ Envoi du mail chez les joueurs<br>
 Salon de jeu dynamique<br>
 
 ## Manuel d'installation : 
+Pour lancer le serveur : 
+Mac / Linux : php Server.php
+Windows : php .\Server.php
+
 Voici les identifiants pour se connecter en tant qu'admin : 
 username : AudHep  
 psw : aqwzsx
