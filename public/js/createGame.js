@@ -138,7 +138,8 @@ btnCreate.addEventListener("click", e => {
       score: 0,
       isJoined: false,
       hisTurn: hisTurn,
-      labelValidAnswerMessage: ''
+      validAnswerMessage: '',
+      isWinner:false
     }
     players.push(player)
   }
