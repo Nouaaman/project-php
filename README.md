@@ -52,3 +52,6 @@ Lorsque les joueurs ont cliqués sur le lien qu'ils ont reçus par mail, il arri
 La page se met à jour sans se rafraîchir grâce à Ratchet.
 Seul le joueur à qui c'est le tour peut joueur. Il clique sur le bouton jouer.
 Un modal avec les niveaux apparaît sur tous les écrans. Il choisit son niveau et répond à la question.
+Toute l'interaction avec la question se passe directement sur le modal. Il affiche ensuite si la réponse choisie est bonne ou mauvaise.
+Dans tous les cas, le Modal disparait automatiquement 3 secondes après avoir répondu, et c'est le tour du joueur suivant. 
+Le pion du joueur avance ou recule si la question est bonne ou mauvaise.

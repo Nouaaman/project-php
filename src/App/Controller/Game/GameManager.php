@@ -55,7 +55,7 @@ class GameManager implements MessageComponentInterface
                     array_push($usernames, $player->username);
                 }
                 array_push($this->players, $result->players);
-
+                print_r($usernames);
                 $game = (object)[
                     'idGame' => $uidGame,
                     'players' => $result->players
@@ -66,13 +66,15 @@ class GameManager implements MessageComponentInterface
                 $host = HOSTNAME;
                 $gameURL = $host . "/game?idGame=" . $uidGame;
                 echo "\n game created, URL => " . $gameURL . "\n";
-                /*  
+
                 //send mails
-                
-                $gamelink = "project-php/game?idGame=" . $uidGame;
-                echo 'link : ' . $gamelink;
-                $this->sendMail($this->getEmails($usernames), $gameURL);
-                */
+
+                echo 'link : ' . $gameURL;
+                $addresses = $this->getEmails($usernames);
+                foreach ($addresses as $adresse) {
+                    $this->sendMail($adresse, $gameURL);
+                }
+
                 //send idgame optional for test without mail
                 $response = (object)[
                     'method' => 'create',
@@ -102,7 +104,7 @@ class GameManager implements MessageComponentInterface
 
             /******************** start game if all player joigned ***********************/
             if ($result->method == 'play') {
-              
+
                 $this->playGame($result->game);
             }
 
@@ -358,39 +360,45 @@ class GameManager implements MessageComponentInterface
                 return false;
             }
         }
-
-
         return $emails;
     }
 
-    public function sendMail(array $adresses, $gameLink)
+    public function sendMail($adresse, $gameLink)
     {
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();                            // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';        // Enable SMTP authentication
-        $mail->Port = 587;     //587 is used for Outgoing Mail (SMTP) Server.
-        $mail->Username = 'alexynouaaman@gmail.com'; // your email id
-        $mail->Password = 'Admin-57160'; // your password
-        $mail->setFrom('alexynouaaman@gmail.com');
-        // $mail->addAddress('gamereceipteur@gmail.com');   // Add a recipient
-        foreach ($adresses as $address) {
+        try {
+            print_r('rentre dans la fct mail');
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();                            // Set mailer to use SMTP
+            $mail->SMTPAuth = true;
+            $mail->Port = 587;     //587 is used for Outgoing Mail (SMTP) Server.
+            $mail->Username = 'projetphpacnr@gmail.com'; // your email id
+            $mail->Password = 'LPwmce57160'; // your password
+            $mail->setFrom('alexynouaaman@gmail.com');
+            $mail->addAddress($adresse);   // Add a recipient
+            /*         foreach ($adresses as $address) {
             $mail->addAddress($address);
-        }
+        } */
 
-        $mail->isHTML(true);  // Set email format to HTML
+            $mail->isHTML(true);  // Set email format to HTML
 
-        $bodyContent = '<h1>Bienvenue</h1>';
-        $bodyContent .= '<p>Clique sur ce lien pour rejoindre la partie</p>';
-        $bodyContent .= "<a href = '{$gameLink}' >lien</a>";
-        $mail->Subject = 'Invitation Board Game';
-        $mail->Body = $bodyContent;
-        if (!$mail->send()) {
-            echo 'Message was not sent.';
-            echo 'Mailer error: ' . $mail->ErrorInfo;
-        } else {
-            echo 'Email Sent.';
+            $bodyContent = '<h1>Game ACNR</h1>';
+            $bodyContent .= "<h3>Clique <a href = '{$gameLink}' >ici</a> pour rejoindre la partie</h3>";
+            $mail->Subject = 'Invitation Board Game';
+            $mail->Body = $bodyContent;
+            $mail->SMTPSecure = 'tls';        // Enable SMTP authentication
+            $mail->Host = 'smtp.gmail.com';              // Specify main and backup SMTP servers
+            if (!$mail->send()) {
+                print_r('Message was not sent.');
+                print_r('Mailer error: ' . $mail->ErrorInfo);
+            } else {
+                print_r('Email Sent.');
+            }
+        } catch (\Exception $ex) {
+            exit($ex->getMessage());
+            return false;
+        } catch (\Throwable $e) {
+            exit($e->getMessage());
+            return false;
         }
     }
 }
