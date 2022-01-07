@@ -244,7 +244,7 @@ conn.onmessage = message => {
             gameUi(player.username, player.color, player.score)
 
             console.log("scores :", player.username, " ", player.score)
-            playerScore = player.score
+            playerScore = parseInt(player.score)
             //enbale play button to show question level then label
             if (player.hisTurn == true) {
                 titleInfo.innerText = "Le tour de : " + player.username
