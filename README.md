@@ -48,7 +48,8 @@ Tout utilisateur peut créer ne partie en cliquant sur jouer.<br>
 Il nécessite un compte pour jouer. C'est pourquoi si l'utilisateur n'est pas connecté, il est redirigé vers la page de connection pour y renseigner ses identfiants, ou pour s'inscrire.<br>
 Lorsqu'il est connecté et qu'il a cliqué sur "Jouer". Il est redirigé vers la page de création de jeu. Il y renseigne le pseudo des joueurs. Il est aidé par l'autocomplétion. Il donne à chaque joueur une couleur (qui n'est utilisable que par 1 joueur).<br>
 La partie va de 2 à 6 joueurs.<br>
-Il peut ensuite cliquer sur créer. Cela enverra un mail à chaque utilisateur qu'il a reneigné en créant la partie.
+Il peut ensuite cliquer sur créer. Cela enverra un mail à chaque utilisateur qu'il a reneigné en créant la partie.<br>
+Nous avons crée une @mail seulement pour l'utilisateur Gabin (gamereceipteur@gmail.com), l'URL sera affiché en dans la console
 Le mail contient en partie le lien de la partie.
 
 ## Partie
@@ -60,3 +61,9 @@ Un modal avec les niveaux apparaît sur tous les écrans. Il choisit son niveau 
 Toute l'interaction avec la question se passe directement sur le modal. Il affiche ensuite si la réponse choisie est bonne ou mauvaise.<br>
 Dans tous les cas, le Modal disparait automatiquement 3 secondes après avoir répondu, et c'est le tour du joueur suivant. 
 Le pion du joueur avance ou recule si la question est bonne ou mauvaise.
+
+Ne fonctionne pas:<br>
+- Fonction gagnant
+- Peut afficher plusieurs fois la même question
+- Ne supprime pas les usernames dans l'autocomplétion de la création d'une partie
+- Seulement un QCM
