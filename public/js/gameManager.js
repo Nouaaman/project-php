@@ -60,7 +60,7 @@ function gameUi(username, color, score) {
 
     let pscore = document.createElement("p");
     pscore.setAttribute('id', 'score')
-    pscore.innerText = username
+    pscore.innerText = score
     line.appendChild(pscore)
     gameContainer.appendChild(line)
 }
@@ -127,6 +127,7 @@ function selectedAnswer(e) {
         labelValidAnswer.innerText = 'Mauvaise reponse.'
         labelValidAnswerMessage = 'Mauvaise reponse.'
     }
+    selecteLevel = 0
     syncScreens('answered')
     setTimeout(function () {
         clearQuestion()
