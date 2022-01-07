@@ -57,6 +57,11 @@ function gameUi(username, color, score) {
     p.setAttribute('id', 'usernameCase')
     p.innerText = username
     line.appendChild(p)
+
+    let pscore = document.createElement("p");
+    pscore.setAttribute('id', 'score')
+    pscore.innerText = username
+    line.appendChild(pscore)
     gameContainer.appendChild(line)
 }
 
@@ -114,7 +119,7 @@ function selectedAnswer(e) {
         }
         labelValidAnswer.innerText = 'Bonne reponse!'
         labelValidAnswerMessage = 'Bonne reponse!'
-    } else {
+    } else if (e.target.getAttribute('data-isValid') == 0) {
         playerScore -= parseInt(selecteLevel)
         if (playerScore < 0) {
             playerScore = 0;
