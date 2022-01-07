@@ -8,8 +8,6 @@ if (urlParams.has('idGame')) {
     window.location = '/';
 }
 
-
-
 //global variables
 const usernameOfPlayer = document.getElementById('username').value;
 const titleInfo = document.getElementById('titleInfo')
@@ -110,20 +108,22 @@ function selectedAnswer(e) {
     console.log('selected level :', selecteLevel);
     disableAllButtons()
     if (e.target.getAttribute('data-isValid') == 1) {
-        playerScore += selecteLevel
+        playerScore += parseInt(selecteLevel)
         if (playerScore > nbrOfCases) {
-            playerScore = nbrOfCases;
+            playerScore = parseInt(nbrOfCases);
             isWinner = true;
         }
         labelValidAnswer.innerText = 'Bonne reponse!'
         labelValidAnswerMessage = 'Bonne reponse!'
+        console.log(playerScore)
     } else {
-        playerScore -= selecteLevel
+        playerScore -= parseInt(selecteLevel)
         if (playerScore < 0) {
             playerScore = 0;
         }
         labelValidAnswer.innerText = 'Mauvaise reponse.'
         labelValidAnswerMessage = 'Mauvaise reponse.'
+        console.log(playerScore)
     }
     syncScreens('answered')
     setTimeout(function () {
@@ -241,11 +241,10 @@ conn.onmessage = message => {
     if (response.method == "play") {
         gameContainer.innerHTML = ''
         response.game.players.forEach(player => {
-           
             gameUi(player.username, player.color, player.score)
 
             console.log("scores :", player.username, " ", player.score)
-            playerScore = player.score
+            playerScore = parseInt(player.score)
             //enbale play button to show question level then label
             if (player.hisTurn == true) {
                 titleInfo.innerText = "Le tour de : " + player.username
