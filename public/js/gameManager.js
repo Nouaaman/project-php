@@ -16,7 +16,7 @@ const questionModal = document.getElementById('questionModal')
 const playButton = document.getElementById('playButton')
 const levelsButtons = document.querySelectorAll('.buttons .level')
 const labelValidAnswer = document.getElementById('labelValidAnswer')
-const nbrOfCases = 10
+const nbrOfCases = 48
 let selecteLevel = 0
 let playerScore = 0
 let isWinner = false
@@ -105,7 +105,6 @@ function showQuestionAndAnswers(question) {
 
 //change score according to answer and check if winner
 function selectedAnswer(e) {
-    console.log('selected level :', selecteLevel);
     disableAllButtons()
     if (e.target.getAttribute('data-isValid') == 1) {
         playerScore += parseInt(selecteLevel)
@@ -115,7 +114,6 @@ function selectedAnswer(e) {
         }
         labelValidAnswer.innerText = 'Bonne reponse!'
         labelValidAnswerMessage = 'Bonne reponse!'
-        console.log(playerScore)
     } else {
         playerScore -= parseInt(selecteLevel)
         if (playerScore < 0) {
@@ -123,7 +121,6 @@ function selectedAnswer(e) {
         }
         labelValidAnswer.innerText = 'Mauvaise reponse.'
         labelValidAnswerMessage = 'Mauvaise reponse.'
-        console.log(playerScore)
     }
     syncScreens('answered')
     setTimeout(function () {
