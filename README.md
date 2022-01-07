@@ -65,5 +65,5 @@ Le pion du joueur avance ou recule si la question est bonne ou mauvaise.
 Ne fonctionne pas:<br>
 - Fonction gagnant
 - Peut afficher plusieurs fois la même question
-- Ne supprime pas les usernames dans l'autocomplétion de la création d'une partie
+- Ne supprime pas les usernames dans l'autocomplétion de la création d'une partie(double input event apres l'ajout d'un nouveau champs username)
 - Seulement un QCM
