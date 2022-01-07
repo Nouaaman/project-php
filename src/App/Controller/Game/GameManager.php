@@ -102,7 +102,7 @@ class GameManager implements MessageComponentInterface
 
             /******************** start game if all player joigned ***********************/
             if ($result->method == 'play') {
-
+              
                 $this->playGame($result->game);
             }
 
@@ -122,7 +122,7 @@ class GameManager implements MessageComponentInterface
 
             /**************************** update player score **************************/
             if ($result->method == 'updateScore') {
-                $this->updateScore($result);
+                $this->updateScore($result->username, $result->idGame, $result->score);
                 //change turn after updating player score
                 $this->changePlayerTurn($result->idGame);
                 //sending new game state
@@ -271,17 +271,16 @@ class GameManager implements MessageComponentInterface
         return $questionAnswers;
     }
 
-    function updateScore($result)
+    function updateScore($username, $idGame, $score)
     {
         foreach ($this->games as $game) {
-            if ($game->idGame == $result->idGame) {
+            if ($game->idGame == $idGame) {
                 foreach ($game->players as $player) {
-                    if ($player->username ==  $result->username) {
-                        $player->score = $result->score;
-                        
+                    if ($player->username == $username) {
+                        $player->score = (int)$score;
                     }
-                    break;
                 }
+                break;
             }
         }
     }
