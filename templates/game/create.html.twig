@@ -53,7 +53,7 @@
 
 		</div>
 		<img src="/assets/img/icon-add.png" id="add">
-		
+
 		<button id="create" class="btn">Créer</button>
 		<p id="labelMessage" style="text-align: center;"></p>
 	</div>
@@ -63,7 +63,10 @@
 
 
 {% block bottom_js %}
+<script type="text/javascript" src="/js/createGame.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
 <script>
 	function checkTheDropdownsColor() {
 		var arr = $('select').find(':selected');
@@ -82,6 +85,10 @@
 	};
 	checkTheDropdownsColor();
 	$('select').on('change', checkTheDropdownsColor);
+
+	setInterval(function() {
+		checkTheDropdownsColor()   
+	}, 300);
 </script>
-<script type="text/javascript" src="/js/createGame.js"></script>
+
 {% endblock %}
