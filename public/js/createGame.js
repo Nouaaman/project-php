@@ -61,6 +61,7 @@ function addInputEvent() {
 
 }
 
+
 async function getUsernames(searchUser) {
   let url = window.location.origin + "/game/searchplayer"
   const response = await fetch(url, {
@@ -117,41 +118,61 @@ let wsSend = function (data) {
   }
 }
 
-
-
-// send data
+// send data to server  create a game 
 btnCreate.addEventListener("click", e => {
 
   let usernames = document.querySelectorAll('.username')
   let colors = document.querySelectorAll('.color')
+  let labelMessage = document.querySelector('#labelMessage')
 
   let players = []
   let hisTurn = true
+  let isValid = true //check all inputs are not empty
+
   for (let i = 0; i < usernames.length; i++) {
     if (i > 0) {
       hisTurn = false
     }
-    const player = {
-      idGame: '',
-      username: usernames[i].value,
-      color: colors[i].value,
-      score: 0,
-      isJoined: false,
-      hisTurn: hisTurn,
-      validAnswerMessage: '',
-      isWinner:false
+    if (usernames[i].value &&
+      usernames[i].value.length > 0 &&
+      usernames[i].value.trim().length > 0
+    ) {
+      const player = {
+        idGame: '',
+        username: usernames[i].value,
+        color: colors[i].value,
+        score: 0,
+        isJoined: false,
+        hisTurn: hisTurn,
+        validAnswerMessage: '',
+        isWinner: false
+      }
+
+      players.push(player)
+    }else{
+      isValid = false
     }
-    players.push(player)
+
   }
 
-  const payLoad = {
-    "method": "create",
-    "players": players,
-    "currentPLayer": ''
+  if (isValid) {
+    const payLoad = {
+      "method": "create",
+      "players": players,
+      "currentPLayer": ''
+    }
+  
+    // conn.send(JSON.stringify(payLoad));
+    wsSend(JSON.stringify(payLoad))
+    labelMessage.style.color = '#66ff33'
+    labelMessage.innerText = 'Le lien de la partie a été envoyé'
   }
-
-  // conn.send(JSON.stringify(payLoad));
-  wsSend(JSON.stringify(payLoad))
+  else{
+    
+    labelMessage.style.color = '#ff6666'
+    labelMessage.innerText = 'Renseignez tous les champs'
+  }
+ 
 
 })
 
@@ -163,6 +184,8 @@ conn.onmessage = message => {
     let idGame = response.idGame;
     // alert(window.location.hostname + '/game?idGame=' + idGame);
     console.log(window.location.hostname + '/game?idGame=' + idGame);
+
+   
     // if (idGame) {
     //   window.location = '/game?idGame=' + idGame;
     // }
