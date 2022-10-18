@@ -1,5 +1,27 @@
 # project-php
 
+## 1- create and import database:
+## 2- create app.local.php file in configs folder:
+```
+<?php
+
+return [
+    'APP_ENV'=> 'dev',
+    'DB_HOST' => '',
+    'DB_NAME' => '',
+    'DB_USER' => '',
+    'DB_PASSWORD' => '',
+    'HOSTNAME' =>'localhost:8080'//for creating game URL in websocket server
+];
+
+```
+
+## 3- run commands:
+```
+php Server.php
+php -S localhost:8080 (same as HOSTNAME) -t public
+```
+
 # Technologies utilisées : 
 - PHP
 - Javascript
