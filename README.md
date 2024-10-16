@@ -1,7 +1,14 @@
-# project-php
+# Real-Time Multiplayer Quiz Game with PHP Sockets and Admin Backend
 
-## 1- create and import database:
-## 2- create app.local.php file in configs folder:
+This project is a real-time multiplayer quiz game built using PHP sockets. It allows multiple players to connect and compete in a quiz, where the player with the highest score wins. <br/>The game features:<br/>
+
+Real-time gameplay: Players receive questions simultaneously, with live scoring based on their answers.<br/>
+Multiplayer functionality: Powered by PHP sockets, enabling real-time communication between players and the server.<br/>
+Point system: The player who answers correctly and accumulates the highest score wins.<br/>
+Admin backend: An additional admin panel to manage game users, track player performance, and control game settings.<br/>
+
+## 1- Create and import the database:
+## 2- Create `app.local.php` file in the `configs` folder:
 ```
 <?php
 
@@ -22,70 +29,69 @@ php Server.php
 php -S localhost:8080 (same as HOSTNAME) -t public
 ```
 
-# Technologies utilisées : 
-- PHP
-- Javascript
-- Twig
-- Less
-- Ratchet (WebSockets)
-- PHPMailer
-- Composer
-- MicroFramework
+# Technologies Used:
+-PHP<br/>
+-JavaScript<br/>
+-Twig<br/>
+-Less<br/>
+-Ratchet (WebSockets)<br/>
+-PHPMailer<br/>
+-Composer<br/>
+-MicroFramework<br/>
 
-## Bilan : 
-** Toute la partie administrateur fonctionne : **
-Ajout, modification, suppression d'une question, de ses réponses, et des utilisateurs
+## Summary : 
+** The entire admin section is functional: **
+Add, edit, and delete questions, answers, and users<br/>
+Create a game, add players, and assign their colors<br/>
+Create a game link<br/>
+Send emails to players<br/>
+Dynamic game lobby<br/>
 
 
-Création d'une partie, ajout des joueurs ainsi que leur couleur<br>
-Création d'un lien vers une partie<br>
-Envoi du mail chez les joueurs<br>
-Salon de jeu dynamique<br>
 
-## Manuel d'installation : 
-Pour lancer le serveur : 
-Mac / Linux : php Server.php
-Windows : php .\Server.php
+## Installation Guide:: 
+To start the server:<br/>
+Mac / Linux : php Server.php<br/>
+Windows : php .\Server.php<br/>
 
-Voici les identifiants pour se connecter en tant qu'admin : 
-username : AudHep  
-psw : aqwzsx
+Here are the credentials to log in as admin:<br/>
+Username: AudHep<br/>
+Password: aqwzsx
+<br/>
+The administrator can access the admin section by clicking on their username and selecting "Admin."<br/>
+They can choose which page to navigate to, and the side panel provides easy navigation between sections.<br/>
+The "+" button in the top right corner allows adding an item.<br/>
+Operations allow modifying or deleting an item.<br/>
+Input fields are validated to prevent invalid data.<br/>
+To add a question, add it like a user. To add answers, click the "+" button next to the question label in the table.<br/>
+You can view answers by clicking "View Answers."<br/>
 
-L'administrateur a accès à la partie admin en cliquant sur son pseudo, puis "admin".<br>
-Il choisit sur quelle page il souhaite se rediriger.<br>
-Le panneau latéral permet de naviguer facilement entre les sections.<br>
-Le bouton + en haut à droite permet d'ajouter un élément.<br>
-Les opérations permettent de modifier ou supprimer un élément.<br>
-On ne peut pas rentrer n'importe quelle valeur dans un input.<br>
-Pour l'ajout d'une question, on l'ajoute normalement comme un utilisateur. Pour ajouter ses réponses, on clique sur le bouton + en face de son label dans le tableau.<br>
-On accède aux réponses en cliquant sur "Voir les réponses".<br>
+Both users and admins can update their credentials by clicking on their username and selecting "Profile."<br/>
 
-Ensuite, qu'on soit connecté en tant qu'user ou admin, on peut modifier ses identifiants, mdp... en cliquant sur son pseudo, puis profil.
+Note: A regular user cannot access the admin section.<br/>
+<br/>
+## Creating a Game
 
-Un user ne peut pas accéder à la partie admin.
+Any user can create a game by clicking on "Play."
+A user account is required to play, so if the user is not logged in, they will be redirected to the login page to sign in or register.<br/>
+Once logged in and after clicking "Play," the user will be redirected to the game creation page where they can enter player usernames with autocomplete. Each player is assigned a unique color.<br/>
+The game supports 2 to 6 players.<br/>
+After clicking "Create," an email will be sent to each user specified.<br/>
+For testing purposes, an email has been set up for the user "Gabin" (gamereceipteur@gmail.com), and the game URL will appear in the console.<br/>
+The email contains the game link.<br/>
+<br/>
+## The Game:
 
-## Création d'une partie
+When players click the link they received via email, they will join the game.<br/>
+The page updates dynamically without refreshing, thanks to Ratchet.<br/>
+Only the player whose turn it is can play, by clicking the "Play" button.<br/>
+A modal with the levels will appear on all screens. The player selects a level and answers the question.<br/>
+The interaction with the question takes place in the modal, which then displays whether the answer is correct or incorrect.<br/>
+The modal automatically disappears 3 seconds after answering, and the next player takes their turn.<br/>
+The player’s piece moves forward or backward based on the correctness of their answer.<br/>
 
-Tout utilisateur peut créer ne partie en cliquant sur jouer.<br>
-Il nécessite un compte pour jouer. C'est pourquoi si l'utilisateur n'est pas connecté, il est redirigé vers la page de connection pour y renseigner ses identfiants, ou pour s'inscrire.<br>
-Lorsqu'il est connecté et qu'il a cliqué sur "Jouer". Il est redirigé vers la page de création de jeu. Il y renseigne le pseudo des joueurs. Il est aidé par l'autocomplétion. Il donne à chaque joueur une couleur (qui n'est utilisable que par 1 joueur).<br>
-La partie va de 2 à 6 joueurs.<br>
-Il peut ensuite cliquer sur créer. Cela enverra un mail à chaque utilisateur qu'il a reneigné en créant la partie.<br>
-Nous avons crée une @mail seulement pour l'utilisateur Gabin (gamereceipteur@gmail.com), l'URL sera affiché en dans la console
-Le mail contient en partie le lien de la partie.
-
-## Partie
-
-Lorsque les joueurs ont cliqués sur le lien qu'ils ont reçus par mail, il arrivent dans la partie.<br>
-La page se met à jour sans se rafraîchir grâce à Ratchet.<br>
-Seul le joueur à qui c'est le tour peut joueur. Il clique sur le bouton jouer.<br>
-Un modal avec les niveaux apparaît sur tous les écrans. Il choisit son niveau et répond à la question.<br>
-Toute l'interaction avec la question se passe directement sur le modal. Il affiche ensuite si la réponse choisie est bonne ou mauvaise.<br>
-Dans tous les cas, le Modal disparait automatiquement 3 secondes après avoir répondu, et c'est le tour du joueur suivant. 
-Le pion du joueur avance ou recule si la question est bonne ou mauvaise.
-
-Ne fonctionne pas:<br>
-- Fonction gagnant
-- Peut afficher plusieurs fois la même question
-- Ne supprime pas les usernames dans l'autocomplétion de la création d'une partie(double input event apres l'ajout d'un nouveau champs username)
-- Seulement un QCM
+Known Issues:<br/>
+-Winner function is not yet implemented.<br/>
+-The same question may appear multiple times.<br/>
+-Usernames are not removed from the autocomplete during game creation (double input event after adding a new username field).<br/>
+-Only supports multiple-choice questions (MCQ).<br/>
